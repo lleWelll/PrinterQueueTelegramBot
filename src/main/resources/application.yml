@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Printer-Queue-Telegram-Bot
+  datasource:
+    url: ${DB_URL}/printer_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+bot:
+  name: "PrinterQueueBot"
+  token: "7865570662:AAHf6lRUrFjycZGFps9PBOHzcGFf_4I51L8"
+
+server:
+  port: 8080
