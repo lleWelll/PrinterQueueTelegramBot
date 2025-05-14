@@ -13,4 +13,12 @@ public interface Command {
 	default String getChatUsername(Update update) {
 		return update.getMessage().getChat().getUserName();
 	}
+
+	default SendMessage createSendMessage(Update update, String answer) {
+		SendMessage sendMessage = new SendMessage();
+		sendMessage.setChatId(String.valueOf(getChatId(update)));
+		sendMessage.setText(answer);
+		return sendMessage;
+	}
+
 }

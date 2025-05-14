@@ -1,4 +1,4 @@
-package org.printerbot.printerqueuetelegrambot.config;
+package org.printerbot.printerqueuetelegrambot.bot.config;
 
 import lombok.RequiredArgsConstructor;
 import org.printerbot.printerqueuetelegrambot.bot.TelegramBot;

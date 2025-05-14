@@ -1,9 +1,10 @@
 package org.printerbot.printerqueuetelegrambot.bot;
 
+import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.command.Command;
-import org.printerbot.printerqueuetelegrambot.bot.command.StartCommand;
-import org.printerbot.printerqueuetelegrambot.bot.command.UnknownCommand;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.JoinCommand;
+import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.StartCommand;
+import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.UnknownCommand;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -11,33 +12,34 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class CommandHandler {
 
 	private final Map<String, Command> commands;
 
-	public CommandHandler(Map<String, Command> commands,
-						  @Autowired StartCommand startCommand) {
+	private final Command unknownCommand;
+
+	public CommandHandler(StartCommand startCommand,
+						  JoinCommand joinCommand,
+						  UnknownCommand unknownCommand) {
 		this.commands = Map.of(
-				"/start", startCommand
+				"/start", startCommand,
+				"/join", joinCommand
 		);
+		this.unknownCommand = unknownCommand;
 	}
 
 	public SendMessage handleCommand(Update update) {
 		String messageText = update.getMessage().getText();
 		messageText = messageText.trim();
 		Command command;
-		if (commands.containsKey(messageText)) {
-			command = commands.get(messageText);
-		}
-		else {
-			command = new UnknownCommand();
-		}
+		command = commands.getOrDefault(messageText, unknownCommand);
 		return command.apply(update);
 	}
 
 	public SendMessage handleUnknownCommand(Update update) {
-		Command command = new UnknownCommand();
-		return command.apply(update);
+		log.info("Detected unknown command: {}", update);
+		return unknownCommand.apply(update);
 	}
 
 }
