@@ -44,7 +44,7 @@ public class PlasticDaoService implements DaoService<PlasticEntity, PlasticDto> 
 		return mapper.toPlasticDtoList(plasticRepository.findAll());
 	}
 
-	public List<PlasticDto> getAllAvailablePrinters() {
+	public List<PlasticDto> getAllAvailablePlastic() {
 		log.info("Getting All available PlasticDto");
 		return mapper.toPlasticDtoList(plasticRepository.findAllByAvailableTrue());
 	}

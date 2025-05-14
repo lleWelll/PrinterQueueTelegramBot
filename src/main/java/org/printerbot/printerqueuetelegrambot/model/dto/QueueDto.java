@@ -14,6 +14,6 @@ public class QueueDto {
 	private String username;
 	private LocalDateTime joinedAt;
 	private Status printingStatus;
-	private PrinterEntity printer;
-	private List<PlasticEntity> plastics;
+	private PrinterDto printer;
+	private List<PlasticDto> plastics;
 }

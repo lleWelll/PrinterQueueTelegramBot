@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.model.dao.PlasticEntity;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
 import org.printerbot.printerqueuetelegrambot.model.dao.QueueEntity;
+import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
+import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.enums.Status;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.PlasticIsNotSupportedException;
@@ -29,17 +31,11 @@ public class QueueService {
 
 	private final PlasticDaoService plasticDaoService;
 
-	public void joinQueue(String username, Long printerId, List<Long> plasticIds) {
-		log.info("Joining queue with params:\nusername: {},\nprinterId: {},\nplasticId{}", username, printerId, plasticIds);
-		PrinterEntity printer = printerDaoService.getEntityById(printerId);
-		List<PlasticEntity> plasticEntities = plasticDaoService.getAllEntitiesById(plasticIds);
-
-		if (! isPlasticSupported(printer, plasticIds)) {
-			throw new PlasticIsNotSupportedException("This plastic is not supported with printer");
-		}
-
-		QueueDto queueDto = buildQueue(username, printer, plasticEntities);
-		queueDaoService.save(queueDto);
+	public void joinQueue(String username, QueueDto dto) {
+		dto.setUsername(username);
+		dto.setPrintingStatus(Status.WAITING);
+		log.info("Joining queue with dto: {}", dto);
+		queueDaoService.save(dto);
 	}
 
 	public void leaveQueue(String username, int index) {
@@ -60,15 +56,6 @@ public class QueueService {
 				.map(PlasticEntity::getId)
 				.collect(Collectors.toSet());
 		return supportedIdSet.containsAll(plasticIds);
-	}
-
-	private QueueDto buildQueue(String username, PrinterEntity printer, List<PlasticEntity> plasticList) {
-		QueueDto q = new QueueDto();
-		q.setUsername(username);
-		q.setPrinter(printer);
-		q.setPlastics(plasticList);
-		q.setPrintingStatus(Status.WAITING);
-		return q;
 	}
 
 }

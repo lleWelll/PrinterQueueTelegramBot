@@ -12,4 +12,6 @@ public interface PlasticMapper {
 	PlasticDto toPlasticDto(PlasticEntity entity);
 
 	List<PlasticDto> toPlasticDtoList(List<PlasticEntity> entityList);
+
+	List<PlasticEntity> toPlasticEntityList(List<PlasticDto> dtoList);
 }

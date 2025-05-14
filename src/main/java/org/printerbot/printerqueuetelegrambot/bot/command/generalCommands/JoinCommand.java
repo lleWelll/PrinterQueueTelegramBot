@@ -20,16 +20,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JoinCommand implements GeneralCommand {
 
-	private final QueueService queueService;
-
 	private final PrinterDaoService  printerDaoService;
 
 	@Override
 	public SendMessage apply(Update update) {
-		SendMessage sendMessage = new SendMessage();
-		sendMessage.setChatId(getChatId(update));
-		sendMessage.setText(ConstantMessages.SELECT_PRINTER_MESSAGE.getFormattedMessage());
-		List<PrinterDto> printers = printerDaoService.getAll();
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.SELECT_PRINTER_MESSAGE.getFormattedMessage());
+		List<PrinterDto> printers = printerDaoService.getAllAvailablePrinters();
 		addKeyboard(sendMessage, printers);
 		return sendMessage;
 	}
@@ -38,7 +34,7 @@ public class JoinCommand implements GeneralCommand {
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 
-		for (PrinterDto printer : printers) {
+		for (var printer : printers) {
 			InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
 			inlineKeyboardButton.setText(printer.getBrand() + " " + printer.getModel());
 			String jsonCallback = JsonHandler.listToJson(List.of(CallbackType.PRINTER_CHOOSE.toString(), printer.getId().toString()));

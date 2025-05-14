@@ -2,9 +2,7 @@ package org.printerbot.printerqueuetelegrambot.bot;
 
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.command.Command;
-import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.JoinCommand;
-import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.StartCommand;
-import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.UnknownCommand;
+import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.*;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -21,10 +19,14 @@ public class CommandHandler {
 
 	public CommandHandler(StartCommand startCommand,
 						  JoinCommand joinCommand,
+						  PlasticCommand plasticCommand,
+						  ConfirmJoinCommand confirmJoinCommand,
 						  UnknownCommand unknownCommand) {
 		this.commands = Map.of(
 				"/start", startCommand,
-				"/join", joinCommand
+				"/join", joinCommand,
+				"/plastic", plasticCommand,
+				"/confirmJoin", confirmJoinCommand
 		);
 		this.unknownCommand = unknownCommand;
 	}

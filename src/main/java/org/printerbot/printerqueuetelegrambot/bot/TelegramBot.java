@@ -1,8 +1,8 @@
 package org.printerbot.printerqueuetelegrambot.bot;
 
 import lombok.extern.slf4j.Slf4j;
-import org.printerbot.printerqueuetelegrambot.CallbackHandler;
 import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
+import org.printerbot.printerqueuetelegrambot.bot.user.UserSessionManager;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,13 +17,20 @@ public class TelegramBot extends TelegramLongPollingBot {
 	private final CommandHandler commandHandler;
 
 	private final CallbackHandler callbackHandler;
+
+	private final UserSessionManager sessionManager;
 	private final WhiteList whiteList;
 
-	public TelegramBot(BotProperties properties, CommandHandler commandHandler, CallbackHandler callbackHandler, WhiteList whiteList) {
+	public TelegramBot(BotProperties properties,
+					   CommandHandler commandHandler,
+					   CallbackHandler callbackHandler,
+					   UserSessionManager sessionManager,
+					   WhiteList whiteList) {
 		super(properties.getToken());
 		this.properties = properties;
 		this.commandHandler = commandHandler;
 		this.callbackHandler = callbackHandler;
+		this.sessionManager = sessionManager;
 		this.whiteList = whiteList;
 	}
 

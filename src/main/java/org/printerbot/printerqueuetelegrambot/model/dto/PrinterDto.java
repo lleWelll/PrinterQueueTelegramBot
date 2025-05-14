@@ -11,5 +11,10 @@ public class PrinterDto {
 	private String model;
 	private int maxPlasticCapacity;
 	private String features;
+	private boolean available;
 	List<PlasticDto> supported_plastic;
+
+	public String getPrinterInfo() {
+		return brand + " " + model;
+	}
 }
