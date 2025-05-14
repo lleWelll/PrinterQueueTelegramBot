@@ -9,5 +9,5 @@ public enum CallbackType {
 
 	DONE,
 
-	Cancel
+	CANCEL
 }

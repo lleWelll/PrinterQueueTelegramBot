@@ -26,7 +26,7 @@ public class CallbackHandler {
 				CallbackType.PRINTER_CHOOSE, choosePrinterCallBack,
 				CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack,
 				CallbackType.DONE, doneQueueCallback,
-				CallbackType.Cancel, doneQueueCallback
+				CallbackType.CANCEL, doneQueueCallback
 		);
 	}
 

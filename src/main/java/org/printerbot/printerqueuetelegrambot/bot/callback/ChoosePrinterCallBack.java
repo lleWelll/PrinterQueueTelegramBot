@@ -30,39 +30,41 @@ public class ChoosePrinterCallBack implements Callback {
 
 	@Override
 	public SendMessage apply(String data, Update update) {
+		Long chatId = getChatId(update);
 		Long printerId = Long.valueOf(data);
+
 		PrinterDto printer = printerDaoService.getById(printerId);
-		sessionManager.addSelectedPrinter(getChatId(update), printer);
+		sessionManager.addSelectedPrinter(chatId, printer);
 
-		List<PlasticDto> plasticList = plasticDaoService.getAllAvailablePlastic();
-		PrinterDto chosenPrinter = sessionManager.getChosenPrinter(getChatId(update));
-		List<PlasticDto> filteredPlasticList = plasticList.stream().filter(chosenPrinter.getSupported_plastic()::contains).toList();
+		List<PlasticDto> availablePlastics = plasticDaoService.getAllAvailablePlastic();
+		List<PlasticDto> supportedPlastics = availablePlastics.stream()
+				.filter(printer.getSupported_plastic()::contains)
+				.toList();
 
-		String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(printer.getPrinterInfo()) +
+		String text = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(printer.getPrinterInfo()) +
 				"\n\n" +
 				ConstantMessages.SELECT_PLASTIC_MESSAGE.getFormattedMessage();
 
-		SendMessage sendMessage = createSendMessage(update, answer);
-		addKeyboard(sendMessage, filteredPlasticList);
+		SendMessage sendMessage = createSendMessage(update, text);
+		addKeyboard(sendMessage, supportedPlastics);
+
 		return sendMessage;
 	}
 
-	private void addKeyboard(SendMessage sendMessage, List<PlasticDto> plasticList) {
+	private void addKeyboard(SendMessage message, List<PlasticDto> plasticList) {
 		List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
 		for (PlasticDto plastic : plasticList) {
-			InlineKeyboardButton button = new InlineKeyboardButton();
-
-			String jsonCallback = JsonHandler.listToJson(List.of(CallbackType.PLASTIC_CHOOSE.toString(), plastic.getId().toString()));
-			button.setText(plastic.getBrand() + " " + plastic.getColor() + " " + plastic.getType());
-			button.setCallbackData(jsonCallback);
-
+			InlineKeyboardButton button = createButton(plastic.getPlasticInfo(), CallbackType.PLASTIC_CHOOSE, plastic.getId().toString());
 			rows.add(List.of(button));
 		}
+		message.setReplyMarkup(new InlineKeyboardMarkup(rows));
+	}
 
-		InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-		markup.setKeyboard(rows);
-
-		sendMessage.setReplyMarkup(markup);
+	private InlineKeyboardButton createButton(String buttonName, CallbackType type, String data) {
+		return InlineKeyboardButton.builder()
+				.text(buttonName)
+				.callbackData(JsonHandler.listToJson(List.of(type.toString(), data)))
+				.build();
 	}
 }

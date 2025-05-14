@@ -29,38 +29,37 @@ public class ChoosePlasticCallBack implements Callback {
 
 	@Override
 	public SendMessage apply(String data, Update update) {
+		Long chatId = getChatId(update);
 		Long plasticId = Long.valueOf(data);
-		PlasticDto plasticDto = plasticDaoService.getById(plasticId);
-		PrinterDto printerDto = sessionManager.getChosenPrinter(getChatId(update));
-		sessionManager.addSelectedPlastic(getChatId(update), List.of(plasticDto));
 
-		String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(plasticDto.getPlasticInfo()) +
+		PlasticDto plastic = plasticDaoService.getById(plasticId);
+		PrinterDto printer = sessionManager.getChosenPrinter(chatId);
+
+		sessionManager.addSelectedPlastic(chatId, List.of(plastic));
+
+		String confirmationMessage = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(plastic.getPlasticInfo()) +
 				"\n\n" +
-				ConstantMessages.CONFIRM_JOIN_MESSAGE.getFormattedMessage(printerDto.getPrinterInfo(), plasticDto.getPlasticInfo());
+				ConstantMessages.CONFIRM_JOIN_MESSAGE.getFormattedMessage(printer.getPrinterInfo(), plastic.getPlasticInfo());
 
-		SendMessage sendMessage = createSendMessage(update, answer);
+		SendMessage sendMessage = createSendMessage(update, confirmationMessage);
 		addKeyboard(sendMessage);
 
 		return sendMessage;
 	}
 
 	private void addKeyboard(SendMessage message) {
-		List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+		List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
-		rows.add(List.of(createButton(CallbackType.DONE, "Yes")));
-		rows.add(List.of(createButton(CallbackType.Cancel, "No")));
+		buttons.add(List.of(createButton(CallbackType.DONE, "Yes")));
+		buttons.add(List.of(createButton(CallbackType.CANCEL, "No")));
 
-		InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-		markup.setKeyboard(rows);
-
-		message.setReplyMarkup(markup);
+		message.setReplyMarkup(new InlineKeyboardMarkup(buttons));
 	}
 
 	private InlineKeyboardButton createButton(CallbackType type, String text) {
-		InlineKeyboardButton button = new InlineKeyboardButton();
-		String jsonCallback = JsonHandler.listToJson(List.of(type.toString(), text));
-		button.setText(text);
-		button.setCallbackData(jsonCallback);
-		return button;
+		return InlineKeyboardButton.builder()
+				.text(text)
+				.callbackData(JsonHandler.listToJson(List.of(type.toString(), text)))
+				.build();
 	}
 }
