@@ -1,0 +1,94 @@
+package org.printerbot.printerqueuetelegrambot.bot.user;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
+import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
+import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
+import org.printerbot.printerqueuetelegrambot.model.exceptions.QueueNotFoundException;
+import org.printerbot.printerqueuetelegrambot.model.mapper.PlasticMapper;
+import org.printerbot.printerqueuetelegrambot.model.mapper.PrinterMapper;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Component
+@RequiredArgsConstructor
+@Slf4j
+public class UserSessionManager {
+
+	private final Map<Long, QueueDto> userSession = new HashMap<>();
+
+	public void createSession(Long chatId) {
+		log.info("Creating user {} session", chatId);
+		userSession.put(chatId, new QueueDto());
+	}
+
+	public void addSelectedPrinter(Long chatId, PrinterDto printer) {
+		userSession.computeIfAbsent(chatId, id -> {
+			log.info("No session for user {}, creating new one", id);
+			return new QueueDto();
+		});
+
+		log.info("Adding printer {} to user {} session", printer, chatId);
+		userSession.get(chatId).setPrinter(printer);
+	}
+
+	public QueueDto getSession(Long chatId) {
+		QueueDto session = userSession.get(chatId);
+		if (session == null) {
+			log.warn("No session for user {}, cannot add plastic", chatId);
+			return null;
+		}
+		return session;
+	}
+
+	public void addSelectedPlastic(Long chatId, List<PlasticDto> plastic) {
+		QueueDto session = userSession.get(chatId);
+
+		if (session == null) {
+			log.warn("No session for user {}, cannot add plastic", chatId);
+			return;
+		}
+
+		if (session.getPrinter() == null) {
+			log.warn("User {} has not selected a printer yet, cannot add plastic", chatId);
+			return;
+		}
+
+		log.info("Adding plastic {} to user {} session", plastic, chatId);
+		session.setPlastics(plastic);
+	}
+
+	public PrinterDto getChosenPrinter(Long chatId) {
+		QueueDto session = userSession.get(chatId);
+
+		if (session == null) {
+			log.warn("No session for user {}", chatId);
+			return null;
+		}
+
+		return session.getPrinter();
+	}
+
+	public List<PlasticDto> getChosenPlastic(Long chatId) {
+		QueueDto session = userSession.get(chatId);
+
+		if (session == null) {
+			log.warn("No session for user {}", chatId);
+			return null;
+		}
+
+		if (session.getPrinter() == null) {
+			log.warn("User {} has not selected a printer yet", chatId);
+			return null;
+		}
+
+		return session.getPlastics();
+	}
+
+
+
+}
