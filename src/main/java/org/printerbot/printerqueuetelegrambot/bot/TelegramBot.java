@@ -18,7 +18,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 	private final CallbackHandler callbackHandler;
 
-	private final UserSessionManager sessionManager;
 	private final WhiteList whiteList;
 
 	public TelegramBot(BotProperties properties,
@@ -30,7 +29,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 		this.properties = properties;
 		this.commandHandler = commandHandler;
 		this.callbackHandler = callbackHandler;
-		this.sessionManager = sessionManager;
 		this.whiteList = whiteList;
 	}
 

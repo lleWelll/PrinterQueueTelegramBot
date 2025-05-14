@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot;
 import org.printerbot.printerqueuetelegrambot.bot.callback.Callback;
 import org.printerbot.printerqueuetelegrambot.bot.callback.ChoosePlasticCallBack;
 import org.printerbot.printerqueuetelegrambot.bot.callback.ChoosePrinterCallBack;
+import org.printerbot.printerqueuetelegrambot.bot.callback.DoneQueueCallback;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.EmptyCallbackException;
@@ -19,10 +20,13 @@ public class CallbackHandler {
 	private final Map<CallbackType, Callback> callbacks;
 
 	public CallbackHandler(ChoosePrinterCallBack choosePrinterCallBack,
-						   ChoosePlasticCallBack choosePlasticCallBack) {
+						   ChoosePlasticCallBack choosePlasticCallBack,
+						   DoneQueueCallback doneQueueCallback) {
 		this.callbacks = Map.of(
 				CallbackType.PRINTER_CHOOSE, choosePrinterCallBack,
-				CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack
+				CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack,
+				CallbackType.DONE, doneQueueCallback,
+				CallbackType.Cancel, doneQueueCallback
 		);
 	}
 
@@ -36,6 +40,5 @@ public class CallbackHandler {
 		Callback callback = callbacks.get(type);
 		return callback.apply(data, update);
 	}
-
 
 }

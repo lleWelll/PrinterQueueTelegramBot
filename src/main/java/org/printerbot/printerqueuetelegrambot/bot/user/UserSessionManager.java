@@ -26,6 +26,15 @@ public class UserSessionManager {
 		userSession.put(chatId, new QueueDto());
 	}
 
+	public void deleteSession(Long chatId) {
+		log.info("Deleting user {} session", chatId);
+		if (! userSession.containsKey(chatId)) {
+			log.info("user {} session does not exist", chatId);
+			return;
+		}
+		userSession.remove(chatId);
+	}
+
 	public void addSelectedPrinter(Long chatId, PrinterDto printer) {
 		userSession.computeIfAbsent(chatId, id -> {
 			log.info("No session for user {}, creating new one", id);

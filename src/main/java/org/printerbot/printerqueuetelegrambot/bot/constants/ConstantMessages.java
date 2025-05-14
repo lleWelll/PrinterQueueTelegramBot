@@ -6,13 +6,13 @@ public enum ConstantMessages {
 
 	SELECT_PRINTER_MESSAGE("Okay, select one of these printers"),
 
-	PRINTER_CONFIRMATION_MESSAGE("You chose %s %s"),
+	CHOOSE_CONFIRMATION_MESSAGE("You chose %s"),
 
 	ENTER_COMMAND_MESSAGE("Pls enter command %s to continue"),
 
 	SELECT_PLASTIC_MESSAGE("Now choose available plastic"),
 
-	PLASTIC_CONFIRMATION_MESSAGE("You chose %s %s %s"),
+	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\nprinter: %s\nplastic: %s\njoin queue?"),
 
 	PRINTER_IS_UNAVAILABLE_MESSAGE("Sorry, printer %s is not available right now, pls choose another or try later"),
 
@@ -24,6 +24,8 @@ public enum ConstantMessages {
 			"To view your place enter /myplace\n" +
 			"To view all queue enter /queue\n" +
 			"To leave queue enter /leave"),
+
+	QUEUE_JOIN_CANCELED("Okay, your joining queue is canceled"),
 
 	QUEUE_JOIN_ERROR("Oops, something went wrong, try again"),
 

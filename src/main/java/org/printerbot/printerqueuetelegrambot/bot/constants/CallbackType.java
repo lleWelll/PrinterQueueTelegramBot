@@ -7,5 +7,7 @@ public enum CallbackType {
 
 	PLASTIC_CHOOSE,
 
-	DONE
+	DONE,
+
+	Cancel
 }

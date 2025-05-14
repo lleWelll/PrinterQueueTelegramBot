@@ -12,4 +12,8 @@ public class PlasticDto {
 	private PlasticColor color;
 	private boolean available;
 	private String description;
+
+	public String getPlasticInfo() {
+		return brand + " " + type + " " + color;
+	}
 }
