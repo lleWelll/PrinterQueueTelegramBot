@@ -23,7 +23,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 	public TelegramBot(BotProperties properties,
 					   CommandHandler commandHandler,
 					   CallbackHandler callbackHandler,
-					   UserSessionManager sessionManager,
 					   WhiteList whiteList) {
 		super(properties.getToken());
 		this.properties = properties;

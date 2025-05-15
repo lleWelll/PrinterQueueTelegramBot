@@ -13,7 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class DoneQueueCallback implements Callback {
+public class DoneLeaveCallback implements Callback {
 
 	private final UserSessionManager sessionManager;
 
@@ -28,21 +28,20 @@ public class DoneQueueCallback implements Callback {
 			QueueDto queueDto = sessionManager.getSession(chatId);
 
 			try {
-				queueService.joinQueue(getChatUsername(update), queueDto);
-				answer = ConstantMessages.QUEUE_JOIN_CONFIRMATION.getFormattedMessage();
+				queueService.leaveQueue(queueDto);
+				answer = ConstantMessages.LEAVE_CONFIRMATION_MESSAGE.getFormattedMessage();
 			} catch (Exception e) {
-				answer = ConstantMessages.QUEUE_JOIN_ERROR.getFormattedMessage();
-				log.error("Error occurred while saving queue: {}", e.getMessage());
+				answer = ConstantMessages.ERROR.getFormattedMessage();
+				log.error("Error occurred while deleting queue: {}", e.getMessage());
 			} finally {
 				sessionManager.deleteSession(chatId);
 			}
 
-			return createSendMessage(update, answer);
 		} else {
-			log.info("Joining queue is canceled");
-			answer = ConstantMessages.QUEUE_JOIN_CANCELED.getFormattedMessage();
+			log.info("Leaving queue is canceled");
+			answer = ConstantMessages.QUEUE_LEAVE_CANCELED.getFormattedMessage();
 			sessionManager.deleteSession(chatId);
-			return createSendMessage(update, answer);
 		}
+		return createSendMessage(update, answer);
 	}
 }

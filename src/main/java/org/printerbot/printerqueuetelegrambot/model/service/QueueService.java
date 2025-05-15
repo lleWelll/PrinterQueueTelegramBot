@@ -11,6 +11,7 @@ import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.enums.Status;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.PlasticIsNotSupportedException;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.QueueNotFoundException;
+import org.printerbot.printerqueuetelegrambot.model.mapper.QueueMapper;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PlasticDaoService;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PrinterDaoService;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.QueueDaoService;
@@ -27,9 +28,7 @@ public class QueueService {
 
 	private final QueueDaoService queueDaoService;
 
-	private final PrinterDaoService printerDaoService;
-
-	private final PlasticDaoService plasticDaoService;
+	private final QueueMapper mapper;
 
 	public void joinQueue(String username, QueueDto dto) {
 		dto.setUsername(username);
@@ -38,17 +37,17 @@ public class QueueService {
 		queueDaoService.save(dto);
 	}
 
-	public void leaveQueue(String username, int index) {
-		log.info("User {} leaving queue", username);
-		List<QueueEntity> queueEntities = queueDaoService.getEntitiesByUsername(username);
-		if (index >= queueEntities.size()) {
-			throw new QueueNotFoundException("Queue entry not found: user '" + username + "' has no record at index " + index);
-		}
-		queueDaoService.remove(queueEntities.get(index));
+	public void leaveQueue(QueueDto dto) {
+		log.info("User {} leaving queue: {}", dto.getUsername(), dto.getQueueInfo());
+		queueDaoService.remove(mapper.toQueueEntity(dto));
 	}
 
 	public void modifyQueue(String username, int index) {
 
+	}
+
+	public List<QueueDto> getQueueListByUsername(String username) {
+		return queueDaoService.getByUsername(username);
 	}
 
 	private boolean isPlasticSupported(PrinterEntity printer, List<Long> plasticIds) {

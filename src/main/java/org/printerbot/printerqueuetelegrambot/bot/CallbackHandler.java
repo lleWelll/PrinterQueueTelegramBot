@@ -1,9 +1,6 @@
 package org.printerbot.printerqueuetelegrambot.bot;
 
-import org.printerbot.printerqueuetelegrambot.bot.callback.Callback;
-import org.printerbot.printerqueuetelegrambot.bot.callback.ChoosePlasticCallBack;
-import org.printerbot.printerqueuetelegrambot.bot.callback.ChoosePrinterCallBack;
-import org.printerbot.printerqueuetelegrambot.bot.callback.DoneQueueCallback;
+import org.printerbot.printerqueuetelegrambot.bot.callback.*;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.EmptyCallbackException;
@@ -21,12 +18,17 @@ public class CallbackHandler {
 
 	public CallbackHandler(ChoosePrinterCallBack choosePrinterCallBack,
 						   ChoosePlasticCallBack choosePlasticCallBack,
-						   DoneQueueCallback doneQueueCallback) {
+						   DoneJoinCallback doneJoinCallback,
+						   ChooseQueueEntryCallback chooseQueueEntryCallback,
+						   DoneLeaveCallback doneLeaveCallback) {
 		this.callbacks = Map.of(
 				CallbackType.PRINTER_CHOOSE, choosePrinterCallBack,
 				CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack,
-				CallbackType.DONE, doneQueueCallback,
-				CallbackType.CANCEL, doneQueueCallback
+				CallbackType.DONE_JOIN, doneJoinCallback,
+				CallbackType.CANCEL_JOIN, doneJoinCallback,
+				CallbackType.QUEUE_ENTRY_CHOOSE, chooseQueueEntryCallback,
+				CallbackType.DONE_LEAVE, doneLeaveCallback,
+				CallbackType.CANCEL_LEAVE, doneJoinCallback
 		);
 	}
 

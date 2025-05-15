@@ -31,11 +31,11 @@ public class QueueEntity extends EntityBaseClass {
 	@Column(name = "status")
 	private Status printingStatus;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "printer_id", nullable = false)
 	private PrinterEntity printer;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "queue_plastic",
 			joinColumns = @JoinColumn(name = "queue_id"),

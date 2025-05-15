@@ -5,9 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
-import org.printerbot.printerqueuetelegrambot.model.exceptions.QueueNotFoundException;
-import org.printerbot.printerqueuetelegrambot.model.mapper.PlasticMapper;
-import org.printerbot.printerqueuetelegrambot.model.mapper.PrinterMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -21,7 +18,7 @@ public class UserSessionManager {
 
 	private final Map<Long, QueueDto> userSession = new HashMap<>();
 
-	public void createSession(Long chatId) {
+	public void createNewSession(Long chatId) {
 		log.info("Creating user {} session", chatId);
 		userSession.put(chatId, new QueueDto());
 	}
@@ -35,6 +32,16 @@ public class UserSessionManager {
 		userSession.remove(chatId);
 	}
 
+	public void addSession(Long chatId, QueueDto dto) {
+		userSession.computeIfAbsent(chatId, id -> {
+			log.info("No session for user {}, creating new one", id);
+			return new QueueDto();
+		});
+
+		log.info("Adding new session {} to user {}", dto.getQueueInfo(), chatId);
+		userSession.put(chatId, dto);
+	}
+
 	public void addSelectedPrinter(Long chatId, PrinterDto printer) {
 		userSession.computeIfAbsent(chatId, id -> {
 			log.info("No session for user {}, creating new one", id);
@@ -44,16 +51,6 @@ public class UserSessionManager {
 		log.info("Adding printer {} to user {} session", printer, chatId);
 		userSession.get(chatId).setPrinter(printer);
 	}
-
-	public QueueDto getSession(Long chatId) {
-		QueueDto session = userSession.get(chatId);
-		if (session == null) {
-			log.warn("No session for user {}, cannot add plastic", chatId);
-			return null;
-		}
-		return session;
-	}
-
 	public void addSelectedPlastic(Long chatId, List<PlasticDto> plastic) {
 		QueueDto session = userSession.get(chatId);
 
@@ -70,6 +67,16 @@ public class UserSessionManager {
 		log.info("Adding plastic {} to user {} session", plastic, chatId);
 		session.setPlastics(plastic);
 	}
+
+	public QueueDto getSession(Long chatId) {
+		QueueDto session = userSession.get(chatId);
+		if (session == null) {
+			log.warn("No session for user {}, cannot add plastic", chatId);
+			return null;
+		}
+		return session;
+	}
+
 
 	public PrinterDto getChosenPrinter(Long chatId) {
 		QueueDto session = userSession.get(chatId);

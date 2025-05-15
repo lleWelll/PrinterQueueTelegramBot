@@ -16,4 +16,29 @@ public class QueueDto {
 	private Status printingStatus;
 	private PrinterDto printer;
 	private List<PlasticDto> plastics;
+
+	public String getQueueInfo() {
+		return new StringBuilder()
+				.append("Joined: ")
+				.append(joinedAt)
+				.append(" status: ")
+				.append(printingStatus)
+				.append(" printer: ")
+				.append(printer.getPrinterInfo())
+				.append(" plastic: ")
+				.append(getPlasticInfo())
+				.toString();
+	}
+
+	private String getPlasticInfo() {
+		StringBuilder builder = new StringBuilder();
+		int counter = 0;
+		for (var pl : plastics) {
+			builder.append(pl.getPlasticInfo());
+			if (counter < plastics.size() - 1) {
+				builder.append(", ");
+			}
+		}
+		return builder.toString();
+	}
 }

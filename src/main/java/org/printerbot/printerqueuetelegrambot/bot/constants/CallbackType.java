@@ -7,7 +7,13 @@ public enum CallbackType {
 
 	PLASTIC_CHOOSE,
 
-	DONE,
+	QUEUE_ENTRY_CHOOSE,
 
-	CANCEL
+	DONE_JOIN,
+
+	CANCEL_JOIN,
+
+	DONE_LEAVE,
+
+	CANCEL_LEAVE
 }

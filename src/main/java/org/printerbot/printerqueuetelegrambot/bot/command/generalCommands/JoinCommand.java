@@ -36,7 +36,7 @@ public class JoinCommand implements GeneralCommand {
 
 		for (var printer : printers) {
 			InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-			inlineKeyboardButton.setText(printer.getBrand() + " " + printer.getModel());
+			inlineKeyboardButton.setText(printer.getPrinterInfo());
 			String jsonCallback = JsonHandler.listToJson(List.of(CallbackType.PRINTER_CHOOSE.toString(), printer.getId().toString()));
 			inlineKeyboardButton.setCallbackData(jsonCallback);
 			keyboardButtonsRow.add(inlineKeyboardButton);

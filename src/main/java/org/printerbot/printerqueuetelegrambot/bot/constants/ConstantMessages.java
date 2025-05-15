@@ -8,17 +8,9 @@ public enum ConstantMessages {
 
 	CHOOSE_CONFIRMATION_MESSAGE("You chose %s"),
 
-	ENTER_COMMAND_MESSAGE("Pls enter command %s to continue"),
-
 	SELECT_PLASTIC_MESSAGE("Now choose available plastic"),
 
-	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\nprinter: %s\nplastic: %s\njoin queue?"),
-
-	PRINTER_IS_UNAVAILABLE_MESSAGE("Sorry, printer %s is not available right now, pls choose another or try later"),
-
-	PLASTIC_IS_UNAVAILABLE_MESSAGE("Sorry, this plastic %s is not available right now, pls choose another or try later"),
-
-	CHOSEN_MORE_PLASTIC_THAN_PRINTER_CAPACITY_MESSAGE("Sorry, you chose more plastic than printer capacity (chosen=%s, max=%s)"),
+	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\nPrinter: %s\nPlastic: %s\nJoin queue?"),
 
 	QUEUE_JOIN_CONFIRMATION("Done! You are in queue now\n" +
 			"To view your place enter /myplace\n" +
@@ -27,7 +19,17 @@ public enum ConstantMessages {
 
 	QUEUE_JOIN_CANCELED("Okay, your joining queue is canceled"),
 
-	QUEUE_JOIN_ERROR("Oops, something went wrong, try again"),
+	ERROR("Oops, something went wrong, try again"),
+
+	LEAVE_COMMAND_MESSAGE("You have %d %s in queue\nChoose what entry you want to cancel:"),
+
+	NO_QUEUE_ENTRIES_TO_LEAVE_MESSAGE("You don't have any entries in queue"),
+
+	CONFIRM_LEAVE_MESSAGE("You want to leave your queue?:\n%s"),
+
+	LEAVE_CONFIRMATION_MESSAGE("Good, your queue entry is canceled"),
+
+	QUEUE_LEAVE_CANCELED("Okay, your leaving is canceled"),
 
 	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command");
 

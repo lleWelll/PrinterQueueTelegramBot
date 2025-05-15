@@ -11,7 +11,7 @@ public interface Callback {
 	}
 
 	default String getChatUsername(Update update) {
-		return update.getCallbackQuery().getFrom().getFirstName();
+		return update.getCallbackQuery().getFrom().getUserName();
 	}
 
 	default SendMessage createSendMessage(Update update, String answer) {
