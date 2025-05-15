@@ -18,6 +18,7 @@ public class CommandHandler {
 	private final Command unknownCommand;
 
 	public CommandHandler(StartCommand startCommand,
+						  InfoCommand infoCommand,
 						  JoinCommand joinCommand,
 						  LeaveCommand leaveCommand,
 						  ShowAllQueueCommand showAllQueueCommand,
@@ -26,6 +27,7 @@ public class CommandHandler {
 		this.commands = Map.of(
 				"/start", startCommand,
 				"/help", startCommand,
+				"/info", infoCommand,
 				"/join", joinCommand,
 				"/leave", leaveCommand,
 				"/queue", showAllQueueCommand,

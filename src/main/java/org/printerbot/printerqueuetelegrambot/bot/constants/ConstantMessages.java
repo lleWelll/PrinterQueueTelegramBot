@@ -33,6 +33,8 @@ public enum ConstantMessages {
 
 	YOUR_POSITION_MESSAGE("Your position in queue: "),
 
+	GET_DESCRIPTION("%s - %s"),
+
 	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command");
 
 	private final String message;
