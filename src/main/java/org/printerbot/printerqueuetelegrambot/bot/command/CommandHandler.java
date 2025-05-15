@@ -1,10 +1,11 @@
-package org.printerbot.printerqueuetelegrambot.bot;
+package org.printerbot.printerqueuetelegrambot.bot.command;
 
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.command.Command;
 import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.*;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Map;

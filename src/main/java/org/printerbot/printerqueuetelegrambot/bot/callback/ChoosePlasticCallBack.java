@@ -7,7 +7,6 @@ import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.bot.user.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
-import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PlasticDaoService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -33,25 +32,21 @@ public class ChoosePlasticCallBack implements Callback {
 		Long plasticId = Long.valueOf(data);
 
 		PlasticDto plastic = plasticDaoService.getById(plasticId);
-		PrinterDto printer = sessionManager.getChosenPrinter(chatId);
-
 		sessionManager.addSelectedPlastic(chatId, List.of(plastic));
 
-		String confirmationMessage = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(plastic.getPlasticInfo()) +
+		String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(plastic.getPlasticInfo()) +
 				"\n\n" +
-				ConstantMessages.CONFIRM_JOIN_MESSAGE.getFormattedMessage(printer.getPrinterInfo(), plastic.getPlasticInfo());
-
-		SendMessage sendMessage = createSendMessage(update, confirmationMessage);
+				ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getFormattedMessage();
+		SendMessage sendMessage = createSendMessage(update, answer);
 		addKeyboard(sendMessage);
-
 		return sendMessage;
 	}
 
 	private void addKeyboard(SendMessage message) {
 		List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
-		buttons.add(List.of(createButton(CallbackType.DONE_JOIN, "Yes")));
-		buttons.add(List.of(createButton(CallbackType.CANCEL_JOIN, "No")));
+		buttons.add(List.of(createButton(CallbackType.SKIP, "Skip")));
+		buttons.add(List.of(createButton(CallbackType.CANCEL_JOIN, "Cancel")));
 
 		message.setReplyMarkup(new InlineKeyboardMarkup(buttons));
 	}

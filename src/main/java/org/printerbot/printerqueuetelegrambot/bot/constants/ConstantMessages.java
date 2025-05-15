@@ -3,14 +3,19 @@ package org.printerbot.printerqueuetelegrambot.bot.constants;
 public enum ConstantMessages {
 
 	HELLO_MESSAGE("Hello %s! I'm a bot for signing up for a 3D printer queue.\n\nAvailable commands:\n/join - Join the Queue\n/leave - Leave the queue\n/queue - Show all queue\n/myposition - Show your current position in queue\n/info - Get Info about available printers, plastic, admins and authors"),
+	ERROR("Oops, something went wrong, try again"),
 
 	SELECT_PRINTER_MESSAGE("Select one of these printers:"),
 
+	SELECT_PLASTIC_MESSAGE("Choose available plastic:"),
+
 	CHOOSE_CONFIRMATION_MESSAGE("You chose %s"),
 
-	SELECT_PLASTIC_MESSAGE("Now choose available plastic:"),
-
-	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\nPrinter: %s\nPlastic: %s\nJoin queue?"),
+	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\n" +
+			"Printer: %s\n" +
+			"Plastic: %s\n" +
+			"Uploaded model: %s\n" +
+			"Join queue?"),
 
 	QUEUE_JOIN_CONFIRMATION("Done! You are in queue now\n" +
 			"To view your place enter /myposition\n" +
@@ -19,7 +24,6 @@ public enum ConstantMessages {
 
 	QUEUE_JOIN_CANCELED("Okay, your joining queue is canceled"),
 
-	ERROR("Oops, something went wrong, try again"),
 
 	LEAVE_COMMAND_MESSAGE("You have %d %s in queue\nChoose what entry you want to cancel:"),
 
@@ -41,7 +45,15 @@ public enum ConstantMessages {
 
 	ADMINS_INFO("Admins:\n"),
 
-	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command");
+	UPLOAD_STL_FILE_MESSAGE("Please upload file of model in '.stl' format"),
+
+	FILE_FORMAT_IS_NOT_SUPPORTED_MESSAGE("File %s is not supported, please provide in '.stl' format"),
+
+	TRY_TO_UPLOAD_FILE_AGAIN("Upload file again"),
+
+	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command"),
+
+	UNKNOWN_DOCUMENT_MESSAGE("Provided Document format is now supported, please provide '.stl' file");
 
 	private final String message;
 

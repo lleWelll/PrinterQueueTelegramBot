@@ -22,5 +22,9 @@ whitelist:
   admins:
     - ${ADMIN_1}
 
+uploads:
+  stl:
+    path: ${STL_DIR_PATH}
+
 server:
   port: 8080

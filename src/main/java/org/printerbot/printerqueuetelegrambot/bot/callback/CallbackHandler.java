@@ -1,4 +1,4 @@
-package org.printerbot.printerqueuetelegrambot.bot;
+package org.printerbot.printerqueuetelegrambot.bot.callback;
 
 import org.printerbot.printerqueuetelegrambot.bot.callback.*;
 import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.ShowAllQueueCommand;

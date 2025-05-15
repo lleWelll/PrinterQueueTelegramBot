@@ -19,5 +19,7 @@ public enum CallbackType {
 
 	DONE_LEAVE,
 
-	CANCEL_LEAVE
+	CANCEL_LEAVE,
+
+	SKIP
 }

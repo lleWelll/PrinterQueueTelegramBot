@@ -29,7 +29,7 @@ public class ShowAllQueueCallback implements Callback {
 		StringBuilder builder = new StringBuilder();
 		int counter = 1;
 		for (var q : allQueueByPrinter) {
-			builder.append(counter).append(". ").append(q.getQueueInfoWithUsername()).append("\n");
+			builder.append(counter).append(". ").append(q.getQueueInfoWithUsername()).append("\n\n");
 			counter++;
 		}
 

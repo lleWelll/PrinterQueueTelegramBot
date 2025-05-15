@@ -31,6 +31,12 @@ public class QueueEntity extends EntityBaseClass {
 	@Column(name = "status")
 	private Status printingStatus;
 
+	@Column(length = 256, name = "stl_model_path")
+	private String stlModelPath;
+
+	@Column(length = 100, name = "stl_model_name")
+	private String stlModelName;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "printer_id", nullable = false)
 	private PrinterEntity printer;

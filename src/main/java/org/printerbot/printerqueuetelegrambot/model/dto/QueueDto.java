@@ -16,6 +16,8 @@ public class QueueDto {
 	private Status printingStatus;
 	private PrinterDto printer;
 	private List<PlasticDto> plastics;
+	private String stlModelPath;
+	private String stlModelName;
 
 	public String getQueueInfo() {
 		return new StringBuilder()
@@ -27,6 +29,8 @@ public class QueueDto {
 				.append(printer.getPrinterInfo())
 				.append(" plastic: ")
 				.append(getPlasticInfo())
+				.append(" model: ")
+				.append(stlModelName == null ? "Not uploaded" : stlModelName)
 				.toString();
 	}
 
