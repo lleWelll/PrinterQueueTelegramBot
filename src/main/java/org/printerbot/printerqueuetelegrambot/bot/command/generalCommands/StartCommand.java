@@ -1,6 +1,5 @@
 package org.printerbot.printerqueuetelegrambot.bot.command.generalCommands;
 
-import lombok.RequiredArgsConstructor;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

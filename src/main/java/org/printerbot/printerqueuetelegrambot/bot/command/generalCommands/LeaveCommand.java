@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
-import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,7 @@ public class LeaveCommand implements GeneralCommand {
 		List<QueueDto> queueEntries = queueService.getQueueListByUsername(getChatUsername(update));
 		SendMessage sendMessage;
 		if (queueEntries.isEmpty()) {
-			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_TO_LEAVE_MESSAGE.getFormattedMessage());
+			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getFormattedMessage());
 		} else if (queueEntries.size() == 1) {
 			sendMessage = createSendMessage(update, ConstantMessages.LEAVE_COMMAND_MESSAGE.getFormattedMessage(queueEntries.size(), "entry") + "\n");
 		} else {

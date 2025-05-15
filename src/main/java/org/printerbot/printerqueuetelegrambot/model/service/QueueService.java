@@ -17,6 +17,7 @@ import org.printerbot.printerqueuetelegrambot.model.service.daoService.PrinterDa
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.QueueDaoService;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,6 +31,28 @@ public class QueueService {
 
 	private final QueueMapper mapper;
 
+	public int getMyPosition(Long queueId) {
+		List<QueueDto> allQueue = getAllQueue();
+		int position = -1;
+		for (int i = 0; i < allQueue.size(); i++) {
+			var q = allQueue.get(i);
+			if (q.getId().equals(queueId)) {
+				position = i + 1;
+			}
+		}
+		if (position < 1) {
+			throw new QueueNotFoundException("This queue is does not exist");
+		}
+		return position;
+	}
+
+	public List<QueueDto> getAllQueue() {
+		List<QueueDto> queueDtoList = queueDaoService.getAll();
+		return queueDtoList.stream().sorted(
+				Comparator.comparing(QueueDto::getJoinedAt)
+		).toList();
+	}
+
 	public void joinQueue(String username, QueueDto dto) {
 		dto.setUsername(username);
 		dto.setPrintingStatus(Status.WAITING);
@@ -40,10 +63,6 @@ public class QueueService {
 	public void leaveQueue(QueueDto dto) {
 		log.info("User {} leaving queue: {}", dto.getUsername(), dto.getQueueInfo());
 		queueDaoService.remove(mapper.toQueueEntity(dto));
-	}
-
-	public void modifyQueue(String username, int index) {
-
 	}
 
 	public List<QueueDto> getQueueListByUsername(String username) {

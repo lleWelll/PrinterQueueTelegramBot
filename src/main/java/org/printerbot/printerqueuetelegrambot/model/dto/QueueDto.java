@@ -30,6 +30,15 @@ public class QueueDto {
 				.toString();
 	}
 
+	public String getQueueInfoWithUsername() {
+		return new StringBuilder()
+				.append("User: ")
+				.append(username)
+				.append(" ")
+				.append(getQueueInfo())
+				.toString();
+	}
+
 	private String getPlasticInfo() {
 		StringBuilder builder = new StringBuilder();
 		int counter = 0;
