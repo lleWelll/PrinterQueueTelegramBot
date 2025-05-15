@@ -28,6 +28,7 @@ public class QueueDaoService implements DaoService<QueueEntity, QueueDto> {
 		return findById(id);
 	}
 
+
 	public List<QueueEntity> getEntitiesByUsername(String username) {
 		log.info("Getting all QueueEntities with username {}", username);
 		return queueRepository.findAllByUsername(username);
@@ -44,15 +45,17 @@ public class QueueDaoService implements DaoService<QueueEntity, QueueDto> {
 		return mapper.toQueueDtoList(queueRepository.findAllByUsername(username));
 	}
 
-	public List<QueueDto> getByPrinter(PrinterEntity printer) {
-		log.info("Getting all QueueDto with printer {}", printer.getId());
-		return mapper.toQueueDtoList(queueRepository.findAllByPrinter(printer));
-	}
+
 
 	@Override
 	public List<QueueDto> getAll() {
 		log.info("Getting all queue");
 		return mapper.toQueueDtoList(queueRepository.findAll());
+	}
+
+	public List<QueueEntity> getAllByPrinterId(PrinterEntity printerEntity) {
+		log.info("Getting all queue by printer: {}", printerEntity);
+		return queueRepository.findAllByPrinter(printerEntity);
 	}
 
 	@Override

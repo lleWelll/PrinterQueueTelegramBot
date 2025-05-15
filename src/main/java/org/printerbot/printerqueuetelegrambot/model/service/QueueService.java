@@ -4,16 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.model.dao.PlasticEntity;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
-import org.printerbot.printerqueuetelegrambot.model.dao.QueueEntity;
-import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
-import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.enums.Status;
-import org.printerbot.printerqueuetelegrambot.model.exceptions.PlasticIsNotSupportedException;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.QueueNotFoundException;
 import org.printerbot.printerqueuetelegrambot.model.mapper.QueueMapper;
-import org.printerbot.printerqueuetelegrambot.model.service.daoService.PlasticDaoService;
-import org.printerbot.printerqueuetelegrambot.model.service.daoService.PrinterDaoService;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.QueueDaoService;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +25,7 @@ public class QueueService {
 
 	private final QueueMapper mapper;
 
-	public int getMyPosition(Long queueId) {
-		List<QueueDto> allQueue = getAllQueue();
+	public int getMyPosition(Long queueId, List<QueueDto> allQueue) {
 		int position = -1;
 		for (int i = 0; i < allQueue.size(); i++) {
 			var q = allQueue.get(i);
@@ -44,6 +37,10 @@ public class QueueService {
 			throw new QueueNotFoundException("This queue is does not exist");
 		}
 		return position;
+	}
+
+	public List<QueueDto> getAllQueueByPrinter(PrinterEntity printer) {
+		return mapper.toQueueDtoList(queueDaoService.getAllByPrinterId(printer));
 	}
 
 	public List<QueueDto> getAllQueue() {

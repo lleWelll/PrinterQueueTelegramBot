@@ -55,6 +55,7 @@ public class LeaveCommand implements GeneralCommand {
 			InlineKeyboardButton button = createButton(entry.getJoinedAt().toString(), CallbackType.QUEUE_ENTRY_CHOOSE, entry.getId().toString());
 			rows.add(List.of(button));
 		}
+		rows.add(List.of(createButton("Cancel", CallbackType.CANCEL_LEAVE, "No")));
 		message.setReplyMarkup(new InlineKeyboardMarkup(rows));
 	}
 

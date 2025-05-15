@@ -4,11 +4,11 @@ public enum ConstantMessages {
 
 	HELLO_MESSAGE("Hello %s! I'm a bot for signing up for a 3D printer queue.\n\nAvailable commands:\n/join - Join the Queue\n/leave - Leave the queue\n/queue - Show all queue\n/myposition - Show your current position in queue"),
 
-	SELECT_PRINTER_MESSAGE("Okay, select one of these printers"),
+	SELECT_PRINTER_MESSAGE("Select one of these printers:"),
 
 	CHOOSE_CONFIRMATION_MESSAGE("You chose %s"),
 
-	SELECT_PLASTIC_MESSAGE("Now choose available plastic"),
+	SELECT_PLASTIC_MESSAGE("Now choose available plastic:"),
 
 	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\nPrinter: %s\nPlastic: %s\nJoin queue?"),
 
