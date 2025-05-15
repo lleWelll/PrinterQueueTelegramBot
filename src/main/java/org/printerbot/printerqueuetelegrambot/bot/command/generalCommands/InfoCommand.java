@@ -1,6 +1,7 @@
 package org.printerbot.printerqueuetelegrambot.bot.command.generalCommands;
 
 import lombok.RequiredArgsConstructor;
+import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
@@ -20,6 +21,8 @@ public class InfoCommand implements GeneralCommand {
 
 	private final PlasticDaoService plasticDaoService;
 
+	private final WhiteList whiteList;
+
 	@Override
 	public SendMessage apply(Update update) {
 		List<PrinterDto> allAvailablePrinters = printerDaoService.getAllAvailablePrinters();
@@ -29,7 +32,7 @@ public class InfoCommand implements GeneralCommand {
 				.append("Available Printers:\n");
 		for(var pr : allAvailablePrinters) {
 			builder.append(" • ")
-					.append(ConstantMessages.GET_DESCRIPTION.getFormattedMessage(
+					.append(ConstantMessages.INFO.getFormattedMessage(
 					pr.getPrinterInfo(),
 					pr.getFeatures()
 			)).append("\n");
@@ -38,10 +41,22 @@ public class InfoCommand implements GeneralCommand {
 		builder.append("\nAvailable Plastic:\n");
 		for (var pl : allAvailablePlastic) {
 			builder.append(" • ")
-					.append(ConstantMessages.GET_DESCRIPTION.getFormattedMessage(
+					.append(ConstantMessages.INFO.getFormattedMessage(
 					pl.getPlasticInfo(),
 					pl.getDescription()
 			)).append("\n");
+		}
+
+		builder.append("\n")
+				.append(ConstantMessages.AUTHOR_INFO.getFormattedMessage())
+				.append("\n\n")
+				.append(ConstantMessages.ADMINS_INFO.getFormattedMessage());
+
+		for (var admin : whiteList.getAdmins()) {
+			builder.append(" • ")
+					.append("@")
+					.append(admin)
+					.append("\n");
 		}
 
 		return createSendMessage(update, builder.toString());

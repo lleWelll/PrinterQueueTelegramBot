@@ -21,7 +21,6 @@ bot:
 whitelist:
   admins:
     - ${ADMIN_1}
-    - ${ADMIN_2}
 
 server:
   port: 8080
