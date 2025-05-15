@@ -23,12 +23,14 @@ public class CallbackHandler {
 						   ChooseQueueEntryCallback chooseQueueEntryCallback,
 						   DoneLeaveCallback doneLeaveCallback,
 						   ShowAllQueueCallback showAllQueueCallback,
-						   MyPositionCallback myPositionCallback) {
+						   MyPositionCallback myPositionCallback,
+						   JoinConfirmationCallback joinConfirmationCallback) {
 		this.callbacks = Map.of(
 				CallbackType.PRINTER_CHOOSE, choosePrinterCallBack,
 				CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack,
 				CallbackType.DONE_JOIN, doneJoinCallback,
 				CallbackType.CANCEL_JOIN, doneJoinCallback,
+				CallbackType.SKIP, joinConfirmationCallback,
 				CallbackType.QUEUE_ENTRY_CHOOSE, chooseQueueEntryCallback,
 				CallbackType.DONE_LEAVE, doneLeaveCallback,
 				CallbackType.CANCEL_LEAVE, doneLeaveCallback,

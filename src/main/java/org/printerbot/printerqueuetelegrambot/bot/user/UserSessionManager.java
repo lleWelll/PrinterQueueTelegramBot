@@ -42,6 +42,7 @@ public class UserSessionManager {
 		userSession.put(chatId, dto);
 	}
 
+
 	public void addSelectedPrinter(Long chatId, PrinterDto printer) {
 		userSession.computeIfAbsent(chatId, id -> {
 			log.info("No session for user {}, creating new one", id);
@@ -66,6 +67,19 @@ public class UserSessionManager {
 
 		log.info("Adding plastic {} to user {} session", plastic, chatId);
 		session.setPlastics(plastic);
+	}
+
+	public void addUploadedModelFile(Long chatId, String fileName, String filePath) {
+		QueueDto session = userSession.get(chatId);
+
+		if (session == null) {
+			log.warn("No session for user {}, cannot file", chatId);
+			return;
+		}
+
+		log.info("Adding File {}, {} to user {} session", fileName, filePath, chatId);
+		session.setStlModelName(fileName);
+		session.setStlModelPath(filePath);
 	}
 
 	public QueueDto getSession(Long chatId) {
