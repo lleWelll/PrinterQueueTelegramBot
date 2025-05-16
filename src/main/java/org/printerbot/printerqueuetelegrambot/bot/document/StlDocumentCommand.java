@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.callback.JoinConfirmationCallback;
 import org.printerbot.printerqueuetelegrambot.bot.config.BotProperties;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
-import org.printerbot.printerqueuetelegrambot.bot.user.UserSessionManager;
+import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
-import org.printerbot.printerqueuetelegrambot.bot.user.UserSessionManager;
+import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PlasticDaoService;

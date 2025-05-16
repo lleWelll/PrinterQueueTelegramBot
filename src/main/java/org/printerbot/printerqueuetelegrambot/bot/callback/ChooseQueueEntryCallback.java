@@ -3,7 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.callback;
 import lombok.RequiredArgsConstructor;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
-import org.printerbot.printerqueuetelegrambot.bot.user.UserSessionManager;
+import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.QueueDaoService;

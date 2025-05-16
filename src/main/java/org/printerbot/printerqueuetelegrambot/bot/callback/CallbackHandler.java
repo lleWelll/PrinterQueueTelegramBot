@@ -1,7 +1,5 @@
 package org.printerbot.printerqueuetelegrambot.bot.callback;
 
-import org.printerbot.printerqueuetelegrambot.bot.callback.*;
-import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.ShowAllQueueCommand;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.EmptyCallbackException;
