@@ -23,8 +23,17 @@ public class JoinConfirmationCallback implements Callback{
 
 	@Override
 	public SendMessage apply(String data, Update update) {
+		Long chatId;
+		if (data.equals("Skip")) {
+			chatId = getChatId(update);
+		} else {
+			chatId = Long.valueOf(data);
+		}
 
-		QueueDto session = sessionManager.getSession(getChatId(update));
+		QueueDto session = sessionManager.getSession(chatId);
+		if (session == null) {
+			return new SendMessage(chatId.toString(), ConstantMessages.ERROR.getFormattedMessage());
+		}
 
 		String confirmationMessage = ConstantMessages.CONFIRM_JOIN_MESSAGE.getFormattedMessage(
 				session.getPrinter().getPrinterInfo(),
@@ -32,7 +41,7 @@ public class JoinConfirmationCallback implements Callback{
 				session.getStlModelName() == null ? "Not uploaded" : session.getStlModelName()
 		);
 
-		SendMessage sendMessage = createSendMessage(update, confirmationMessage);
+		SendMessage sendMessage = new SendMessage(chatId.toString(), confirmationMessage);
 		addKeyboard(sendMessage);
 		return sendMessage;
 	}
