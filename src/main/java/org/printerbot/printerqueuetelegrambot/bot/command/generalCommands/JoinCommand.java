@@ -5,7 +5,6 @@ import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
-import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PrinterDaoService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

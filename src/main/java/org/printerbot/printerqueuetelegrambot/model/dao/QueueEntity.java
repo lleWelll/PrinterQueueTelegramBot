@@ -23,6 +23,9 @@ public class QueueEntity extends EntityBaseClass {
 	@Column(nullable = false, length = 100, name = "user")
 	private String username;
 
+	@Column(nullable = false, name = "chat_id")
+	private Long chatId;
+
 	@CreationTimestamp
 	@Column(name = "join_time")
 	private LocalDateTime joinedAt;

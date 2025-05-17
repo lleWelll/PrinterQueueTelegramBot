@@ -6,12 +6,14 @@ import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
 import org.printerbot.printerqueuetelegrambot.model.enums.Status;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
 public class QueueDto {
 	private Long id;
 	private String username;
+	private Long chatId;
 	private LocalDateTime joinedAt;
 	private Status printingStatus;
 	private PrinterDto printer;
@@ -21,16 +23,16 @@ public class QueueDto {
 
 	public String getQueueInfo() {
 		return new StringBuilder()
-				.append("Joined: ")
-				.append(joinedAt)
-				.append(" status: ")
-				.append(printingStatus)
-				.append(" printer: ")
+				.append("Printer: ")
 				.append(printer.getPrinterInfo())
 				.append(" plastic: ")
 				.append(getPlasticInfo())
 				.append(" model: ")
 				.append(stlModelName == null ? "Not uploaded" : stlModelName)
+				.append(" joined: ")
+				.append(getFormattedJoinedAt())
+				.append(" status: ")
+				.append(printingStatus)
 				.toString();
 	}
 
@@ -41,6 +43,11 @@ public class QueueDto {
 				.append(" ")
 				.append(getQueueInfo())
 				.toString();
+	}
+
+	public String getFormattedJoinedAt() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
+		return joinedAt.format(formatter);
 	}
 
 	private String getPlasticInfo() {

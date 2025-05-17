@@ -50,10 +50,10 @@ public class QueueService {
 		).toList();
 	}
 
-	public void joinQueue(String username, QueueDto dto) {
+	public void joinQueue(String username, Long chatId, QueueDto dto) {
 		dto.setUsername(username);
+		dto.setChatId(chatId);
 		dto.setPrintingStatus(Status.WAITING);
-		log.info("Joining queue with dto: {}", dto);
 		queueDaoService.save(dto);
 	}
 

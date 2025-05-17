@@ -28,7 +28,7 @@ public class DoneJoinCallback implements Callback {
 			QueueDto queueDto = sessionManager.getSession(chatId);
 
 			try {
-				queueService.joinQueue(getChatUsername(update), queueDto);
+				queueService.joinQueue(getChatUsername(update), chatId, queueDto);
 				answer = ConstantMessages.QUEUE_JOIN_CONFIRMATION.getFormattedMessage();
 			} catch (Exception e) {
 				answer = ConstantMessages.ERROR.getFormattedMessage();

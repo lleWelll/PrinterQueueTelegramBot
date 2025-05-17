@@ -2,6 +2,7 @@ package org.printerbot.printerqueuetelegrambot.bot.callback;
 
 import lombok.RequiredArgsConstructor;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.constants.Emoji;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
@@ -23,17 +24,28 @@ public class MyPositionCallback implements Callback {
 	@Override
 	public SendMessage apply(String data, Update update) {
 		Long printerId = Long.valueOf(data);
-
 		PrinterEntity printer = printerDaoService.getEntityById(printerId);
 		List<QueueDto> allQueueByPrinter = queueService.getAllQueueByPrinter(printer);
 
-		StringBuilder builder = new StringBuilder(ConstantMessages.YOUR_POSITION_MESSAGE.getFormattedMessage() + "\n");
+		String username = getChatUsername(update);
+		StringBuilder builder = new StringBuilder(ConstantMessages.YOUR_POSITION_MESSAGE.getFormattedMessage()).append("\n");
 
-		for (var q : allQueueByPrinter) {
-			if (q.getUsername().equals(getChatUsername(update))) {
-				builder.append(queueService.getMyPosition(q.getId(), allQueueByPrinter)).append(" - ").append(q.getQueueInfoWithUsername()).append("\n");
+		boolean hasMatch = false;
+		for (QueueDto q : allQueueByPrinter) {
+			if (username.equals(q.getUsername())) {
+				int position = queueService.getMyPosition(q.getId(), allQueueByPrinter);
+				builder.append(Emoji.getEmojiByNumber(position))
+						.append(" ")
+						.append(q.getQueueInfoWithUsername())
+						.append("\n");
+				hasMatch = true;
 			}
 		}
+
+		if (!hasMatch) {
+			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getFormattedMessage());
+		}
+
 		return createSendMessage(update, builder.toString());
 	}
 }

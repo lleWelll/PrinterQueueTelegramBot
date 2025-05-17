@@ -1,6 +1,7 @@
 package org.printerbot.printerqueuetelegrambot.bot.callback;
 
 import lombok.RequiredArgsConstructor;
+import org.printerbot.printerqueuetelegrambot.bot.constants.Emoji;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
@@ -29,7 +30,7 @@ public class ShowAllQueueCallback implements Callback {
 		StringBuilder builder = new StringBuilder();
 		int counter = 1;
 		for (var q : allQueueByPrinter) {
-			builder.append(counter).append(". ").append(q.getQueueInfoWithUsername()).append("\n\n");
+			builder.append(Emoji.getEmojiByNumber(counter)).append(" ").append(q.getQueueInfoWithUsername()).append("\n\n");
 			counter++;
 		}
 

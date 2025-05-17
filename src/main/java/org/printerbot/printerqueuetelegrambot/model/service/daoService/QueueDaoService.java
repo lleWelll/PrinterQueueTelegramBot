@@ -71,8 +71,8 @@ public class QueueDaoService implements DaoService<QueueEntity, QueueDto> {
 
 	@Override
 	public void save(QueueDto queueDto) {
-		log.info("Saving QueueDto: {}", queueDto);
 		queueDto.setId(null);
+		log.info("Saving QueueDto: {}", queueDto);
 		queueRepository.save(mapper.toQueueEntity(queueDto));
 	}
 

@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.command.generalCommands;
 import lombok.RequiredArgsConstructor;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.constants.Emoji;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
@@ -42,7 +43,7 @@ public class LeaveCommand implements GeneralCommand {
 		StringBuilder sendMessageBuilder = new StringBuilder(sendMessage.getText());
 		int counter = 1;
 		for (var entry: queueEntries) {
-			sendMessageBuilder.append("\n").append(counter).append(". ").append(entry.getQueueInfo());
+			sendMessageBuilder.append("\n").append(Emoji.getEmojiByNumber(counter)).append(" ").append(entry.getQueueInfo());
 			counter++;
 		}
 		sendMessage.setText(sendMessageBuilder.toString());
@@ -51,9 +52,11 @@ public class LeaveCommand implements GeneralCommand {
 	private void addKeyboard(SendMessage message, List<QueueDto> queueEntries) {
 		List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
+		int counter = 1;
 		for (var entry : queueEntries) {
-			InlineKeyboardButton button = createButton(entry.getJoinedAt().toString(), CallbackType.QUEUE_ENTRY_CHOOSE, entry.getId().toString());
+			InlineKeyboardButton button = createButton(Emoji.getEmojiByNumber(counter), CallbackType.QUEUE_ENTRY_CHOOSE, entry.getId().toString());
 			rows.add(List.of(button));
+			counter++;
 		}
 		rows.add(List.of(createButton("Cancel", CallbackType.CANCEL_LEAVE, "No")));
 		message.setReplyMarkup(new InlineKeyboardMarkup(rows));

@@ -29,7 +29,7 @@ public enum ConstantMessages {
 
 	NO_QUEUE_ENTRIES_MESSAGE("You don't have any entries in queue"),
 
-	CONFIRM_LEAVE_MESSAGE("You want to leave your queue?:\n%s"),
+	CONFIRM_LEAVE_MESSAGE("You want to leave your queue?\n%s"),
 
 	LEAVE_CONFIRMATION_MESSAGE("Good, your queue entry is canceled"),
 

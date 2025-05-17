@@ -36,16 +36,19 @@ public class MyPositionCommand implements Command {
 		List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 
 		for (var printer : printers) {
-			InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-			inlineKeyboardButton.setText(printer.getPrinterInfo());
-			String jsonCallback = JsonHandler.listToJson(List.of(CallbackType.PRINTER_CHOOSE_POSITION.toString(), printer.getId().toString()));
-			inlineKeyboardButton.setCallbackData(jsonCallback);
-			keyboardButtonsRow.add(inlineKeyboardButton);
+			keyboardButtonsRow.add(createButton(printer.getPrinterInfo(), CallbackType.PRINTER_CHOOSE_POSITION, printer.getId().toString()));
 		}
 
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 		rowList.add(keyboardButtonsRow);
 		inlineKeyboardMarkup.setKeyboard(rowList);
 		message.setReplyMarkup(inlineKeyboardMarkup);
+	}
+
+	private InlineKeyboardButton createButton(String buttonName, CallbackType type, String data) {
+		return InlineKeyboardButton.builder()
+				.text(buttonName)
+				.callbackData(JsonHandler.listToJson(List.of(type.toString(), data)))
+				.build();
 	}
 }
