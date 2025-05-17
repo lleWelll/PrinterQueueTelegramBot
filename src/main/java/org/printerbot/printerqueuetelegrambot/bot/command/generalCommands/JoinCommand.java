@@ -23,7 +23,7 @@ public class JoinCommand implements GeneralCommand {
 
 	@Override
 	public SendMessage apply(Update update) {
-		SendMessage sendMessage = createSendMessage(update, ConstantMessages.SELECT_PRINTER_MESSAGE.getFormattedMessage());
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.SELECT_PRINTER_MESSAGE.getMessage());
 		List<PrinterDto> printers = printerDaoService.getAllAvailablePrinters();
 		addKeyboard(sendMessage, printers);
 		return sendMessage;

@@ -34,9 +34,9 @@ public class ChoosePlasticCallBack implements Callback {
 		PlasticDto plastic = plasticDaoService.getById(plasticId);
 		sessionManager.addSelectedPlastic(chatId, List.of(plastic));
 
-		String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getFormattedMessage(plastic.getPlasticInfo()) +
+		String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(plastic.getPlasticInfo()) +
 				"\n\n" +
-				ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getFormattedMessage();
+				ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getMessage();
 		SendMessage sendMessage = createSendMessage(update, answer);
 		addKeyboard(sendMessage);
 		return sendMessage;

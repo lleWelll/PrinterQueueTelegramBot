@@ -29,7 +29,7 @@ public class StlDocumentCommand implements DocumentCommand {
 
 		QueueDto session = sessionManager.getSession(getChatId(update));
 		if (session == null) {
-			return createSendMessage(update, ConstantMessages.ERROR.getFormattedMessage());
+			return createSendMessage(update, ConstantMessages.ERROR.getMessage());
 		}
 		sessionManager.addUploadedModelFile(getChatId(update), getFileName(update), fileUrl);
 

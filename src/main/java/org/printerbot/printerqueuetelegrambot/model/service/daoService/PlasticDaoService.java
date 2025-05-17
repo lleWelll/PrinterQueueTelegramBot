@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PlasticDaoService implements DaoService<PlasticEntity, PlasticDto> {
+public class  PlasticDaoService implements DaoService<PlasticEntity, PlasticDto> {
 
 	private final PlasticRepository plasticRepository;
 
@@ -72,7 +72,7 @@ public class PlasticDaoService implements DaoService<PlasticEntity, PlasticDto> 
 
 	private PlasticEntity findById(Long id) {
 		return plasticRepository.findById(id).orElseThrow(
-				() -> new PlasticNotFoundException("PlasticEntity with id " + id + "is not found")
+				() -> new PlasticNotFoundException("PlasticEntity with id " + id + " is not found")
 		);
 	}
 }

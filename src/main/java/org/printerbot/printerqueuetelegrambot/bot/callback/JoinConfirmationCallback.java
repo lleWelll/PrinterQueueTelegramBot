@@ -32,10 +32,10 @@ public class JoinConfirmationCallback implements Callback{
 
 		QueueDto session = sessionManager.getSession(chatId);
 		if (session == null) {
-			return new SendMessage(chatId.toString(), ConstantMessages.ERROR.getFormattedMessage());
+			return new SendMessage(chatId.toString(), ConstantMessages.ERROR.getMessage());
 		}
 
-		String confirmationMessage = ConstantMessages.CONFIRM_JOIN_MESSAGE.getFormattedMessage(
+		String confirmationMessage = ConstantMessages.CONFIRM_JOIN_MESSAGE.getMessage(
 				session.getPrinter().getPrinterInfo(),
 				session.getPlastics().get(0).getPlasticInfo(),
 				session.getStlModelName() == null ? "Not uploaded" : session.getStlModelName()

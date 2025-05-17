@@ -32,7 +32,7 @@ public class InfoCommand implements GeneralCommand {
 				.append("Available Printers:\n");
 		for(var pr : allAvailablePrinters) {
 			builder.append(" • ")
-					.append(ConstantMessages.INFO.getFormattedMessage(
+					.append(ConstantMessages.INFO.getMessage(
 					pr.getPrinterInfo(),
 					pr.getFeatures()
 			)).append("\n");
@@ -41,16 +41,16 @@ public class InfoCommand implements GeneralCommand {
 		builder.append("\nAvailable Plastic:\n");
 		for (var pl : allAvailablePlastic) {
 			builder.append(" • ")
-					.append(ConstantMessages.INFO.getFormattedMessage(
+					.append(ConstantMessages.INFO.getMessage(
 					pl.getPlasticInfo(),
 					pl.getDescription()
 			)).append("\n");
 		}
 
 		builder.append("\n")
-				.append(ConstantMessages.AUTHOR_INFO.getFormattedMessage())
+				.append(ConstantMessages.AUTHOR_INFO.getMessage())
 				.append("\n\n")
-				.append(ConstantMessages.ADMINS_INFO.getFormattedMessage());
+				.append(ConstantMessages.ADMINS_INFO.getMessage());
 
 		for (var admin : whiteList.getAdmins()) {
 			builder.append(" • ")

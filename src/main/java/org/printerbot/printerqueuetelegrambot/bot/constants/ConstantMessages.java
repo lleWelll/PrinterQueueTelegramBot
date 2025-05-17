@@ -39,7 +39,7 @@ public enum ConstantMessages {
 
 	INFO("%s - %s"),
 
-	AUTHOR_INFO("Author: @lleWelll"),
+	AUTHOR_INFO("Author: @llewelll"),
 
 	GITHUB_INFO("Github: https://github.com/lleWelll/PrinterQueueTelegramBot"),
 
@@ -51,6 +51,14 @@ public enum ConstantMessages {
 
 	TRY_TO_UPLOAD_FILE_AGAIN("Upload file again"),
 
+	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: "),
+
+	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id} {availability:true/false}\nFor example: /setavailability printer 1 true"),
+
+	NEW_AVAILABILITY_SET_SUCCESSFULLY("New availability set successfully"),
+
+	NOT_ENOUGH_RIGHTS_MESSAGE("Sorry, you don't have enough rights to use this command"),
+
 	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command"),
 
 	UNKNOWN_DOCUMENT_MESSAGE("Provided Document format is now supported, please provide '.stl' file");
@@ -61,7 +69,7 @@ public enum ConstantMessages {
 		this.message = message;
 	}
 
-	public String getFormattedMessage(Object... args) {
+	public String getMessage(Object... args) {
 		return String.format(message, args);
 	}
 }

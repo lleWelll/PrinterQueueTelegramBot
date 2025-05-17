@@ -29,9 +29,9 @@ public class DoneLeaveCallback implements Callback {
 
 			try {
 				queueService.leaveQueue(queueDto);
-				answer = ConstantMessages.LEAVE_CONFIRMATION_MESSAGE.getFormattedMessage();
+				answer = ConstantMessages.LEAVE_CONFIRMATION_MESSAGE.getMessage();
 			} catch (Exception e) {
-				answer = ConstantMessages.ERROR.getFormattedMessage();
+				answer = ConstantMessages.ERROR.getMessage();
 				log.error("Error occurred while deleting queue: {}", e.getMessage());
 			} finally {
 				sessionManager.deleteSession(chatId);
@@ -39,7 +39,7 @@ public class DoneLeaveCallback implements Callback {
 
 		} else {
 			log.info("Leaving queue is canceled");
-			answer = ConstantMessages.QUEUE_LEAVE_CANCELED.getFormattedMessage();
+			answer = ConstantMessages.QUEUE_LEAVE_CANCELED.getMessage();
 			sessionManager.deleteSession(chatId);
 		}
 		return createSendMessage(update, answer);

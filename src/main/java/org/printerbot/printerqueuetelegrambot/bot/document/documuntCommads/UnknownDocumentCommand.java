@@ -11,6 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class UnknownDocumentCommand implements DocumentCommand {
 	@Override
 	public SendMessage apply(Update update, File file) {
-		return createSendMessage(update, ConstantMessages.UNKNOWN_DOCUMENT_MESSAGE.getFormattedMessage());
+		return createSendMessage(update, ConstantMessages.UNKNOWN_DOCUMENT_MESSAGE.getMessage());
 	}
 }

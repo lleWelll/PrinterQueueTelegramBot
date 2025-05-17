@@ -6,10 +6,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
-public class UnknownCommand implements GeneralCommand {
+public class NoPermissionCommand implements GeneralCommand {
 	@Override
 	public SendMessage apply(Update update) {
-		String answer = ConstantMessages.UNKNOWN_COMMAND_MESSAGE.getMessage();
-		return createSendMessage(update, answer);
+		return createSendMessage(update, ConstantMessages.NOT_ENOUGH_RIGHTS_MESSAGE.getMessage());
 	}
 }

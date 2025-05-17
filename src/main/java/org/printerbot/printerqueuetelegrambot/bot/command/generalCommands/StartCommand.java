@@ -10,11 +10,11 @@ public class StartCommand implements GeneralCommand {
 	@Override
 	public SendMessage apply(Update update) {
 		String username = getChatUsername(update);
-		String answer = ConstantMessages.HELLO_MESSAGE.getFormattedMessage(username) +
+		String answer = ConstantMessages.HELLO_MESSAGE.getMessage(username) +
 				"\n\n" +
-				ConstantMessages.AUTHOR_INFO.getFormattedMessage() +
+				ConstantMessages.AUTHOR_INFO.getMessage() +
 				"\n\n" +
-				ConstantMessages.GITHUB_INFO.getFormattedMessage();
+				ConstantMessages.GITHUB_INFO.getMessage();
 		return createSendMessage(update, answer);
 	}
 

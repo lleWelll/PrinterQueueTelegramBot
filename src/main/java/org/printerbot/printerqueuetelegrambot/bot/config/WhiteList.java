@@ -13,6 +13,6 @@ public class WhiteList {
 	private List<String> admins;
 
 	public boolean isUserAdmin(String username) {
-		return admins.contains(username);
+		return admins.contains(username.toLowerCase());
 	}
 }

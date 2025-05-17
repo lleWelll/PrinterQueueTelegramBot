@@ -5,8 +5,6 @@ import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
-import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
-import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PrinterDaoService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -25,7 +23,7 @@ public class ShowAllQueueCommand implements GeneralCommand {
 
 	@Override
 	public SendMessage apply(Update update) {
-		SendMessage sendMessage = createSendMessage(update, ConstantMessages.SELECT_PRINTER_MESSAGE.getFormattedMessage());
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.SELECT_PRINTER_MESSAGE.getMessage());
 		List<PrinterDto> printers = printerDaoService.getAllAvailablePrinters();
 		addKeyboard(sendMessage, printers);
 		return sendMessage;

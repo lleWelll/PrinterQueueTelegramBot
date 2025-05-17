@@ -27,11 +27,11 @@ public class LeaveCommand implements GeneralCommand {
 		List<QueueDto> queueEntries = queueService.getQueueListByUsername(getChatUsername(update));
 		SendMessage sendMessage;
 		if (queueEntries.isEmpty()) {
-			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getFormattedMessage());
+			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getMessage());
 		} else if (queueEntries.size() == 1) {
-			sendMessage = createSendMessage(update, ConstantMessages.LEAVE_COMMAND_MESSAGE.getFormattedMessage(queueEntries.size(), "entry") + "\n");
+			sendMessage = createSendMessage(update, ConstantMessages.LEAVE_COMMAND_MESSAGE.getMessage(queueEntries.size(), "entry") + "\n");
 		} else {
-			sendMessage = createSendMessage(update, ConstantMessages.LEAVE_COMMAND_MESSAGE.getFormattedMessage(queueEntries.size(), "entries") + "\n");
+			sendMessage = createSendMessage(update, ConstantMessages.LEAVE_COMMAND_MESSAGE.getMessage(queueEntries.size(), "entries") + "\n");
 		}
 
 		addQueueInfo(sendMessage, queueEntries);

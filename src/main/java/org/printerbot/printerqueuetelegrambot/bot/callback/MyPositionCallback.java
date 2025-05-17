@@ -28,7 +28,7 @@ public class MyPositionCallback implements Callback {
 		List<QueueDto> allQueueByPrinter = queueService.getAllQueueByPrinter(printer);
 
 		String username = getChatUsername(update);
-		StringBuilder builder = new StringBuilder(ConstantMessages.YOUR_POSITION_MESSAGE.getFormattedMessage()).append("\n");
+		StringBuilder builder = new StringBuilder(ConstantMessages.YOUR_POSITION_MESSAGE.getMessage()).append("\n");
 
 		boolean hasMatch = false;
 		for (QueueDto q : allQueueByPrinter) {
@@ -43,7 +43,7 @@ public class MyPositionCallback implements Callback {
 		}
 
 		if (!hasMatch) {
-			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getFormattedMessage());
+			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getMessage());
 		}
 
 		return createSendMessage(update, builder.toString());

@@ -67,7 +67,7 @@ public class PrinterDaoService implements DaoService<PrinterEntity, PrinterDto> 
 
 	private PrinterEntity findById(Long id) {
 		return printerRepository.findById(id).orElseThrow(
-				() -> new PrinterNotFoundException("PrinterEntity with id " + id + "is not found")
+				() -> new PrinterNotFoundException("PrinterEntity with id " + id + " is not found")
 		);
 	}
 }

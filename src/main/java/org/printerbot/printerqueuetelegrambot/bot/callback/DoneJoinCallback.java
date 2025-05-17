@@ -29,9 +29,9 @@ public class DoneJoinCallback implements Callback {
 
 			try {
 				queueService.joinQueue(getChatUsername(update), chatId, queueDto);
-				answer = ConstantMessages.QUEUE_JOIN_CONFIRMATION.getFormattedMessage();
+				answer = ConstantMessages.QUEUE_JOIN_CONFIRMATION.getMessage();
 			} catch (Exception e) {
-				answer = ConstantMessages.ERROR.getFormattedMessage();
+				answer = ConstantMessages.ERROR.getMessage();
 				log.error("Error occurred while saving queue: {}", e.getMessage());
 			} finally {
 				sessionManager.deleteSession(chatId);
@@ -39,7 +39,7 @@ public class DoneJoinCallback implements Callback {
 
 		} else {
 			log.info("Joining queue is canceled");
-			answer = ConstantMessages.QUEUE_JOIN_CANCELED.getFormattedMessage();
+			answer = ConstantMessages.QUEUE_JOIN_CANCELED.getMessage();
 			sessionManager.deleteSession(chatId);
 		}
 		return createSendMessage(update, answer);

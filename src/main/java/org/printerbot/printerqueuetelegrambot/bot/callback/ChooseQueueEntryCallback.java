@@ -29,7 +29,7 @@ public class ChooseQueueEntryCallback implements Callback {
 		QueueDto queueDto = queueDaoService.getById(Long.valueOf(data));
 		userSessionManager.addSession(getChatId(update), queueDto);
 		SendMessage sendMessage = createSendMessage(update,
-				ConstantMessages.CONFIRM_LEAVE_MESSAGE.getFormattedMessage(queueDto.getQueueInfo()));
+				ConstantMessages.CONFIRM_LEAVE_MESSAGE.getMessage(queueDto.getQueueInfo()));
 		addKeyboard(sendMessage);
 		return sendMessage;
 	}
