@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 @RequiredArgsConstructor
-public class AddPrinterFeaturesExpectedCommand implements ExpectedCommand {
+public class PrinterFeaturesExpectedCommand implements ExpectedCommand {
 
 	private final BotStateStorage botStateStorage;
 

@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AddPrinterMaxPlasticExpectedCommand implements ExpectedCommand {
+public class MaxPlasticExpectedCommand implements ExpectedCommand {
 
 	private final BotStateStorage botStateStorage;
 

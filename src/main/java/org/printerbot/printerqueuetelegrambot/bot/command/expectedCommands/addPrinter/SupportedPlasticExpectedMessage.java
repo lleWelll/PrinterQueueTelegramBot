@@ -21,7 +21,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AddSupportedPlasticExpectedMessage implements ExpectedCommand {
+public class SupportedPlasticExpectedMessage implements ExpectedCommand {
 
 	private final BotStateStorage botStateStorage;
 

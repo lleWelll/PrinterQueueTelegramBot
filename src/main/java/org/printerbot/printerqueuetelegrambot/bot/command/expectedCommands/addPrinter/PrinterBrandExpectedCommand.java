@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 @RequiredArgsConstructor
-public class AddPrinterModelExpectedCommand implements ExpectedCommand {
+public class PrinterBrandExpectedCommand implements ExpectedCommand {
 
 	private final BotStateStorage botStateStorage;
 
@@ -21,9 +21,10 @@ public class AddPrinterModelExpectedCommand implements ExpectedCommand {
 	@Override
 	public SendMessage apply(Update update) {
 		Long chatId = getChatId(update);
-		String model = update.getMessage().getText().trim();
-		printerSessionManager.addModel(chatId, model);
-		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_FEATURES);
-		return createSendMessage(update, ConstantMessages.ADDPRINTER_FEATUES_MESSAGE.getMessage());
+		String brand = update.getMessage().getText().trim();
+		printerSessionManager.createNewSession(chatId);
+		printerSessionManager.addBrand(chatId, brand);
+		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_MODEL);
+		return createSendMessage(update, ConstantMessages.ADDPRINTER_MODEL_MESSAGE.getMessage());
 	}
 }
