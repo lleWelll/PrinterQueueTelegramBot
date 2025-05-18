@@ -13,6 +13,23 @@ public class PlasticDto {
 	private boolean available;
 	private String description;
 
+	public String getPlasticFullInfo() {
+		return new StringBuilder()
+				.append("Id: ")
+				.append(id)
+				.append(" brand: ")
+				.append(brand)
+				.append(" type: ")
+				.append(type)
+				.append(" color: ")
+				.append(color)
+				.append(" available: ")
+				.append(available)
+				.append(" description: ")
+				.append(description)
+				.toString();
+	}
+
 	public String getPlasticInfoWithId() {
 		return id + " " + getPlasticInfo();
 	}

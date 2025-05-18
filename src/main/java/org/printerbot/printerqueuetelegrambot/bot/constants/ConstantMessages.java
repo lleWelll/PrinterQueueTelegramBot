@@ -55,6 +55,10 @@ public enum ConstantMessages {
 
 	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id:int} {availability:boolean}\nFor example: /setavailability printer 1 true"),
 
+	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printerId:int}\nFor example: /removeprinter 1"),
+
+	REMOVE_PRINTER_COMMAND_CONFIRMATION_MESSAGE("Printer removed successfully"),
+
 	ADDPRINTER_BRAND_MESSAGE("Enter printer brand, for example 'Bambulab'"),
 
 	ADDPRINTER_MODEL_MESSAGE("Enter printer model, for example 'X1-C'"),

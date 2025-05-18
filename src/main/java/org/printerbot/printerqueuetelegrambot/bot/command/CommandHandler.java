@@ -1,9 +1,7 @@
 package org.printerbot.printerqueuetelegrambot.bot.command;
 
 import lombok.extern.slf4j.Slf4j;
-import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.AddPrinterCommand;
-import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.AdminCommand;
-import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.SetAvailabilityCommand;
+import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.*;
 import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.*;
 import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
 import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
@@ -34,8 +32,11 @@ public class CommandHandler {
 						   LeaveCommand leaveCommand,
 						   ShowAllQueueCommand showAllQueueCommand,
 						   MyPositionCommand myPositionCommand,
+						   GetAllPrinterInfoCommand getAllPrinterInfoCommand,
+						   GetAllPlasticInfo getAllPlasticInfo,
 						   SetAvailabilityCommand setAvailabilityCommand,
 						   AddPrinterCommand addPrinterCommand,
+						   RemovePrinterCommand removePrinterCommand,
 						   UnknownCommand unknownCommand,
 						   NoPermissionCommand noPermissionCommand) {
 		this.generalCommands = Map.of(
@@ -48,8 +49,11 @@ public class CommandHandler {
 				"/myposition", myPositionCommand
 		);
 		this.adminCommands = Map.of(
+				"/getprinters", getAllPrinterInfoCommand,
+				"/getplastic", getAllPlasticInfo,
 				"/setavailable", setAvailabilityCommand,
-				"/addprinter", addPrinterCommand
+				"/addprinter", addPrinterCommand,
+				"/removeprinter", removePrinterCommand
 		);
 		this.whiteList = whiteList;
 		this.unknownCommand = unknownCommand;

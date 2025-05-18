@@ -53,10 +53,7 @@ public class MaxPlasticExpectedCommand implements ExpectedCommand {
 	private String getAllPlasticInfo() {
 		StringBuilder builder = new StringBuilder("All Plastic:\n");
 		for (var pl : plasticDaoService.getAll()) {
-			builder.append(ConstantMessages.INFO.getMessage(
-					pl.getPlasticInfoWithId(),
-					pl.getDescription()
-			)).append("\n");
+			builder.append(pl.getPlasticFullInfo()).append("\n");
 		}
 		return builder.toString();
 	}
