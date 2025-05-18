@@ -1,6 +1,7 @@
 package org.printerbot.printerqueuetelegrambot.bot.command;
 
 import lombok.extern.slf4j.Slf4j;
+import org.printerbot.printerqueuetelegrambot.bot.command.expectedCommands.addPlastic.*;
 import org.printerbot.printerqueuetelegrambot.bot.command.expectedCommands.addPrinter.*;
 import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.springframework.stereotype.Component;
@@ -21,14 +22,24 @@ public class ExpectedCommandHandler {
 								  PrinterFeaturesExpectedCommand printerFeaturesExpectedCommand,
 								  PrinterAvailabilityExpectedMessage printerAvailabilityExpectedMessage,
 								  MaxPlasticExpectedCommand maxPlasticExpectedCommand,
-								  SupportedPlasticExpectedMessage supportedPlasticExpectedMessage) {
-		this.expectedMessageCommands = Map.of(
-				BotState.WAITING_PRINTER_BRAND, addPrinterBrandExpectedCommand,
-				BotState.WAITING_PRINTER_MODEL, printerModelExpectedCommand,
-				BotState.WAITING_PRINTER_FEATURES, printerFeaturesExpectedCommand,
-				BotState.WAITING_PRINTER_AVAILABILITY, printerAvailabilityExpectedMessage,
-				BotState.WAITING_PRINTER_MAX_PLASTIC_CAPACITY, maxPlasticExpectedCommand,
-				BotState.WAITING_PRINTER_SUPPORTED_PLASTIC, supportedPlasticExpectedMessage
+								  SupportedPlasticExpectedMessage supportedPlasticExpectedMessage,
+								  PlasticBrandExpectedCommand plasticBrandExpectedCommand,
+								  PlasticTypeExpectedCommand plasticTypeExpectedCommand,
+								  PlasticColorExpectedCommand plasticColorExpectedCommand,
+								  PlasticDescriptionExpectedCommand plasticDescriptionExpectedCommand,
+								  PlasticAvailabilityExpectedCommand plasticAvailabilityExpectedCommand) {
+		this.expectedMessageCommands = Map.ofEntries(
+				Map.entry(BotState.WAITING_PRINTER_BRAND, addPrinterBrandExpectedCommand),
+				Map.entry(BotState.WAITING_PRINTER_MODEL, printerModelExpectedCommand),
+				Map.entry(BotState.WAITING_PRINTER_FEATURES, printerFeaturesExpectedCommand),
+				Map.entry(BotState.WAITING_PRINTER_AVAILABILITY, printerAvailabilityExpectedMessage),
+				Map.entry(BotState.WAITING_PRINTER_MAX_PLASTIC_CAPACITY, maxPlasticExpectedCommand),
+				Map.entry(BotState.WAITING_PRINTER_SUPPORTED_PLASTIC, supportedPlasticExpectedMessage),
+				Map.entry(BotState.WAITING_PLASTIC_BRAND, plasticBrandExpectedCommand),
+				Map.entry(BotState.WAITING_PLASTIC_TYPE, plasticTypeExpectedCommand),
+				Map.entry(BotState.WAITING_PLASTIC_COLOR, plasticColorExpectedCommand),
+				Map.entry(BotState.WAITING_PLASTIC_AVAILABILITY, plasticAvailabilityExpectedCommand),
+				Map.entry(BotState.WAITING_PLASTIC_DESCRIPTION, plasticDescriptionExpectedCommand)
 		);
 	}
 

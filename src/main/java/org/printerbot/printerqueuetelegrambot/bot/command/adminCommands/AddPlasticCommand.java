@@ -10,14 +10,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 @RequiredArgsConstructor
-public class AddPrinterCommand implements AdminCommand {
+public class AddPlasticCommand implements AdminCommand {
 
 	private final BotStateStorage botStateStorage;
 
 	@Override
 	public SendMessage apply(Update update) {
 		Long chatId = getChatId(update);
-		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_BRAND);
-		return createSendMessage(update, ConstantMessages.ADDPRINTER_BRAND_MESSAGE.getMessage());
+		botStateStorage.setState(chatId, BotState.WAITING_PLASTIC_BRAND);
+		return createSendMessage(update, ConstantMessages.ADDPLASTIC_BRAND_MESSAGE.getMessage());
 	}
 }

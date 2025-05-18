@@ -51,13 +51,17 @@ public enum ConstantMessages {
 
 	TRY_TO_UPLOAD_FILE_AGAIN("Upload file again"),
 
-	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: %S"),
+	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: %s"),
 
 	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id:int} {availability:boolean}\nFor example: /setavailability printer 1 true"),
 
 	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printerId:int}\nFor example: /removeprinter 1"),
 
+	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plasticId:int}\nForExample: /removeplastic 1"),
+
 	REMOVE_PRINTER_COMMAND_CONFIRMATION_MESSAGE("Printer removed successfully"),
+
+	REMOVE_PLASTIC_COMMAND_CONFIRMATION_MESSAGE("Plastic removed successfully"),
 
 	ADDPRINTER_BRAND_MESSAGE("Enter printer brand, for example 'Bambulab'"),
 
@@ -72,6 +76,18 @@ public enum ConstantMessages {
 	ADD_PRINTER_AVAILABILITY_MESSAGE("Enter printer's availability, For example 'true'/'false"),
 
 	ADDPRINTER_CONFIRMATION_MESSAGE("Printer added successfully"),
+
+	ADDPLASTIC_BRAND_MESSAGE("Enter plastic brand\nFor example 'Bambulab'"),
+
+	ADDPLASTIC_TYPE_MESSAGE("Enter plastic type\nFor example 'PLA'"),
+
+	ADDPLASTIC_COLOR_MESSAGE("Enter plastic color\nFor example 'RED'"),
+
+	ADDPLASTIC_AVAILABLE_MESSAGE("Enter plastics availability\nFor example 'true'/'false"),
+
+	ADDPLASTIC_DESCRIPTION("Enter plastic description"),
+
+	ADDPLASTIC_CONFIRMATION_MESSAGE("Plastic added successfully"),
 
 	NEW_AVAILABILITY_SET_SUCCESSFULLY("New availability set successfully"),
 
