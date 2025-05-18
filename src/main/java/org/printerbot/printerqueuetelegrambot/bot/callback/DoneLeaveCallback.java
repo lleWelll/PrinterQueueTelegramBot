@@ -25,7 +25,7 @@ public class DoneLeaveCallback implements Callback {
 		Long chatId = getChatId(update);
 
 		if (data.equals("Yes")) {
-			QueueDto queueDto = sessionManager.getSession(chatId);
+			QueueDto queueDto = sessionManager.getQueueSession(chatId);
 
 			try {
 				queueService.leaveQueue(queueDto);

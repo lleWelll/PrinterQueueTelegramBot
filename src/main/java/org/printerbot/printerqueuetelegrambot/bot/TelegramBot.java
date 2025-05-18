@@ -3,9 +3,12 @@ package org.printerbot.printerqueuetelegrambot.bot;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.callback.CallbackHandler;
 import org.printerbot.printerqueuetelegrambot.bot.command.CommandHandler;
+import org.printerbot.printerqueuetelegrambot.bot.command.ExpectedCommandHandler;
 import org.printerbot.printerqueuetelegrambot.bot.config.BotProperties;
 import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
+import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads.DocumentHandler;
+import org.printerbot.printerqueuetelegrambot.bot.util.BotStateStorage;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
@@ -19,28 +22,33 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class TelegramBot extends TelegramLongPollingBot {
 
 	private final BotProperties properties;
+	private final BotStateStorage botStateStorage;
 	private final CommandHandler commandHandler;
 	private final CallbackHandler callbackHandler;
 	private final DocumentHandler documentHandler;
-	private final WhiteList whiteList;
+	private final ExpectedCommandHandler expectedCommandHandler;
 
 	public TelegramBot(BotProperties properties,
+					   BotStateStorage botStateStorage,
 					   CommandHandler commandHandler,
 					   CallbackHandler callbackHandler,
 					   DocumentHandler documentHandler,
-					   WhiteList whiteList) {
+					   ExpectedCommandHandler expectedCommandHandler) {
 		super(properties.getToken());
 		this.properties = properties;
+		this.botStateStorage = botStateStorage;
 		this.commandHandler = commandHandler;
 		this.callbackHandler = callbackHandler;
 		this.documentHandler = documentHandler;
-		this.whiteList = whiteList;
+		this.expectedCommandHandler = expectedCommandHandler;
 	}
 
 	@Override
 	public void onUpdateReceived(Update update) {
 		if (update.hasMessage() && update.hasMessage()) {
-			if (update.getMessage().hasDocument()) {
+			if (botStateStorage.getState(update.getMessage().getChatId()) != BotState.NONE) {
+				sendMessage(expectedCommandHandler.handleCommand(update, getBotState(update)));
+			} else if (update.getMessage().hasDocument()) {
 				sendMessage(documentHandler.handleDocument(update, getFile(update)));
 			} else if (update.getMessage().hasText() && update.getMessage().getText().startsWith("/")) {
 				sendMessage(commandHandler.handleCommand(update));
@@ -77,5 +85,9 @@ public class TelegramBot extends TelegramLongPollingBot {
 			log.error(e.getMessage());
 			throw new RuntimeException(e);
 		}
+	}
+
+	private BotState getBotState(Update update) {
+		return botStateStorage.getState(update.getMessage().getChatId());
 	}
 }

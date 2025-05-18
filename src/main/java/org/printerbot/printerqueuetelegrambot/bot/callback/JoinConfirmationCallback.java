@@ -30,7 +30,7 @@ public class JoinConfirmationCallback implements Callback{
 			chatId = Long.valueOf(data);
 		}
 
-		QueueDto session = sessionManager.getSession(chatId);
+		QueueDto session = sessionManager.getQueueSession(chatId);
 		if (session == null) {
 			return new SendMessage(chatId.toString(), ConstantMessages.ERROR.getMessage());
 		}

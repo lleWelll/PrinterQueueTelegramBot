@@ -1,5 +1,6 @@
 package org.printerbot.printerqueuetelegrambot.bot.command;
 
+import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -19,6 +20,10 @@ public interface Command {
 		sendMessage.setChatId(String.valueOf(getChatId(update)));
 		sendMessage.setText(answer);
 		return sendMessage;
+	}
+
+	default SendMessage createSyntaxErrorMessage(Update update, String syntaxMessage) {
+		return createSendMessage(update, ConstantMessages.INCORRECT_COMMAND_SYNTAX_MESSAGE.getMessage(syntaxMessage.toLowerCase()));
 	}
 
 }

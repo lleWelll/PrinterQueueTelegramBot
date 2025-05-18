@@ -51,9 +51,23 @@ public enum ConstantMessages {
 
 	TRY_TO_UPLOAD_FILE_AGAIN("Upload file again"),
 
-	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: "),
+	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: %S"),
 
-	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id} {availability:true/false}\nFor example: /setavailability printer 1 true"),
+	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id:int} {availability:boolean}\nFor example: /setavailability printer 1 true"),
+
+	ADDPRINTER_BRAND_MESSAGE("Enter printer brand, for example 'Bambulab'"),
+
+	ADDPRINTER_MODEL_MESSAGE("Enter printer model, for example 'X1-C'"),
+
+	ADDPRINTER_FEATUES_MESSAGE("Enter printer features"),
+
+	ADDPRINTER_MAX_PLASTIC_MESSAGE("Enter printer's max plastic capacity, for example 2"),
+
+	ADDPRINTER_SUPPORTED_PLASTIC_MESSAGE("Enter printer's supported plastic\nIt should plasticId and written in format: 1, 2, 3, 4"),
+
+	ADD_PRINTER_AVAILABILITY_MESSAGE("Enter printer's availability, For example 'true'/'false"),
+
+	ADDPRINTER_CONFIRMATION_MESSAGE("Printer added successfully"),
 
 	NEW_AVAILABILITY_SET_SUCCESSFULLY("New availability set successfully"),
 

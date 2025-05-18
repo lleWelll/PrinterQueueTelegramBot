@@ -13,6 +13,10 @@ public class PlasticDto {
 	private boolean available;
 	private String description;
 
+	public String getPlasticInfoWithId() {
+		return id + " " + getPlasticInfo();
+	}
+
 	public String getPlasticInfo() {
 		return brand + " " + type + " " + color;
 	}

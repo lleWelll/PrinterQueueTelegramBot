@@ -27,7 +27,7 @@ public class StlDocumentCommand implements DocumentCommand {
 	public SendMessage apply(Update update, File file) {
 		String fileUrl = file.getFileUrl(botProperties.getToken());
 
-		QueueDto session = sessionManager.getSession(getChatId(update));
+		QueueDto session = sessionManager.getQueueSession(getChatId(update));
 		if (session == null) {
 			return createSendMessage(update, ConstantMessages.ERROR.getMessage());
 		}

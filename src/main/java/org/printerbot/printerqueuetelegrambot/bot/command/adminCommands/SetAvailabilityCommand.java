@@ -22,7 +22,7 @@ public class SetAvailabilityCommand implements AdminCommand {
 
 	@Override
 	public SendMessage apply(Update update) {
-		String[] parts = update.getMessage().getText().split("\\s+", 4);
+		String[] parts = splitMessage(update, 4);
 		String type;
 		long id;
 		boolean availability;
@@ -34,7 +34,7 @@ public class SetAvailabilityCommand implements AdminCommand {
 			updateEntity(type, id, availability);
 		} catch (PrinterNotFoundException | PlasticNotFoundException | IllegalArgumentException | IndexOutOfBoundsException  e) {
 			log.error(e.getMessage());
-			return createErrorMessage(update);
+			return createSyntaxErrorMessage(update, ConstantMessages.SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE.getMessage());
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return createSendMessage(update, ConstantMessages.ERROR.getMessage());
@@ -43,24 +43,11 @@ public class SetAvailabilityCommand implements AdminCommand {
 		return createSendMessage(update, ConstantMessages.NEW_AVAILABILITY_SET_SUCCESSFULLY.getMessage());
 	}
 
-	private boolean parseAvailability(String value) {
-		return switch (value.toLowerCase()) {
-			case "true" -> true;
-			case "false" -> false;
-			default -> throw new IllegalArgumentException("Undefined availability: " + value);
-		};
-	}
-
 	private void updateEntity(String type, long id, boolean availability) {
 		switch (type) {
 			case "printer" -> printerDaoService.updateEntity(id, e -> e.setAvailable(availability));
 			case "plastic" -> plasticDaoService.updateEntity(id, e -> e.setAvailable(availability));
 			default -> throw new IllegalArgumentException("Undefined type: " + type);
 		}
-	}
-
-	private SendMessage createErrorMessage(Update update) {
-		return createSendMessage(update, ConstantMessages.INCORRECT_COMMAND_SYNTAX_MESSAGE.getMessage() +
-				ConstantMessages.SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE.getMessage());
 	}
 }

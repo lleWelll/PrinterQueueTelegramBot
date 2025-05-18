@@ -1,10 +1,12 @@
 package org.printerbot.printerqueuetelegrambot.bot.command;
 
 import lombok.extern.slf4j.Slf4j;
+import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.AddPrinterCommand;
 import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.AdminCommand;
 import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.SetAvailabilityCommand;
 import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.*;
 import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
+import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -33,6 +35,7 @@ public class CommandHandler {
 						   ShowAllQueueCommand showAllQueueCommand,
 						   MyPositionCommand myPositionCommand,
 						   SetAvailabilityCommand setAvailabilityCommand,
+						   AddPrinterCommand addPrinterCommand,
 						   UnknownCommand unknownCommand,
 						   NoPermissionCommand noPermissionCommand) {
 		this.generalCommands = Map.of(
@@ -45,7 +48,8 @@ public class CommandHandler {
 				"/myposition", myPositionCommand
 		);
 		this.adminCommands = Map.of(
-				"/setavailable", setAvailabilityCommand
+				"/setavailable", setAvailabilityCommand,
+				"/addprinter", addPrinterCommand
 		);
 		this.whiteList = whiteList;
 		this.unknownCommand = unknownCommand;
@@ -66,8 +70,12 @@ public class CommandHandler {
 		return command.apply(update);
 	}
 
+
 	public SendMessage handleUnknownCommand(Update update) {
-		log.info("Detected unknown command: {}", update);
+		log.info("Detected unknown command: {} from user {}, chatId: {}",
+				update.getMessage().getText(),
+				update.getMessage().getChat().getUserName(),
+				update.getMessage().getChatId());
 		return unknownCommand.apply(update);
 	}
 

@@ -16,44 +16,44 @@ import java.util.Map;
 @Slf4j
 public class UserSessionManager {
 
-	private final Map<Long, QueueDto> userSession = new HashMap<>();
+	private final Map<Long, QueueDto> queueSession = new HashMap<>();
 
 	public void createNewSession(Long chatId) {
 		log.info("Creating user {} session", chatId);
-		userSession.put(chatId, new QueueDto());
+		queueSession.put(chatId, new QueueDto());
 	}
 
 	public void deleteSession(Long chatId) {
 		log.info("Deleting user {} session", chatId);
-		if (! userSession.containsKey(chatId)) {
+		if (! queueSession.containsKey(chatId)) {
 			log.info("user {} session does not exist", chatId);
 			return;
 		}
-		userSession.remove(chatId);
+		queueSession.remove(chatId);
 	}
 
 	public void addSession(Long chatId, QueueDto dto) {
-		userSession.computeIfAbsent(chatId, id -> {
+		queueSession.computeIfAbsent(chatId, id -> {
 			log.info("No session for user {}, creating new one", id);
 			return new QueueDto();
 		});
 
 		log.info("Adding new session {} to user {}", dto.getQueueInfo(), chatId);
-		userSession.put(chatId, dto);
+		queueSession.put(chatId, dto);
 	}
 
 
 	public void addSelectedPrinter(Long chatId, PrinterDto printer) {
-		userSession.computeIfAbsent(chatId, id -> {
+		queueSession.computeIfAbsent(chatId, id -> {
 			log.info("No session for user {}, creating new one", id);
 			return new QueueDto();
 		});
 
 		log.info("Adding printer {} to user {} session", printer, chatId);
-		userSession.get(chatId).setPrinter(printer);
+		queueSession.get(chatId).setPrinter(printer);
 	}
 	public void addSelectedPlastic(Long chatId, List<PlasticDto> plastic) {
-		QueueDto session = userSession.get(chatId);
+		QueueDto session = queueSession.get(chatId);
 
 		if (session == null) {
 			log.warn("No session for user {}, cannot add plastic", chatId);
@@ -70,7 +70,7 @@ public class UserSessionManager {
 	}
 
 	public void addUploadedModelFile(Long chatId, String fileName, String filePath) {
-		QueueDto session = userSession.get(chatId);
+		QueueDto session = queueSession.get(chatId);
 
 		if (session == null) {
 			log.warn("No session for user {}, cannot file", chatId);
@@ -82,8 +82,8 @@ public class UserSessionManager {
 		session.setStlModelPath(filePath);
 	}
 
-	public QueueDto getSession(Long chatId) {
-		QueueDto session = userSession.get(chatId);
+	public QueueDto getQueueSession(Long chatId) {
+		QueueDto session = queueSession.get(chatId);
 		if (session == null) {
 			log.warn("No session for user {}, cannot add plastic", chatId);
 			return null;
@@ -93,7 +93,7 @@ public class UserSessionManager {
 
 
 	public PrinterDto getChosenPrinter(Long chatId) {
-		QueueDto session = userSession.get(chatId);
+		QueueDto session = queueSession.get(chatId);
 
 		if (session == null) {
 			log.warn("No session for user {}", chatId);
@@ -104,7 +104,7 @@ public class UserSessionManager {
 	}
 
 	public List<PlasticDto> getChosenPlastic(Long chatId) {
-		QueueDto session = userSession.get(chatId);
+		QueueDto session = queueSession.get(chatId);
 
 		if (session == null) {
 			log.warn("No session for user {}", chatId);

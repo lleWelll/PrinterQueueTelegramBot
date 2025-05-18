@@ -25,7 +25,7 @@ public class DoneJoinCallback implements Callback {
 		Long chatId = getChatId(update);
 
 		if (data.equals("Yes")) {
-			QueueDto queueDto = sessionManager.getSession(chatId);
+			QueueDto queueDto = sessionManager.getQueueSession(chatId);
 
 			try {
 				queueService.joinQueue(getChatUsername(update), chatId, queueDto);
