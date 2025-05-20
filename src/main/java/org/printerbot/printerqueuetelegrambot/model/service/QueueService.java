@@ -32,8 +32,12 @@ public class QueueService {
 	private final QueueMapper mapper;
 
 	@Transactional
-	public void next() throws IndexOutOfBoundsException {
-		List<QueueDto> allQueue = getAllQueue();
+	public void next(Long printerId) throws IndexOutOfBoundsException {
+		log.info("Processing next method");
+		List<QueueDto> allQueue = getAllQueue().stream()
+				.filter(dto -> dto.getPrinter().getId().equals(printerId))
+				.toList();
+
 		QueueDto first = allQueue.get(0);
 		QueueDto second = allQueue.get(1);
 
@@ -42,6 +46,13 @@ public class QueueService {
 		queueArchiveDaoService.save(mapper.toQueueArchiveDto(first));
 
 		queueDaoService.updateEntity(second.getId(), (entity) -> entity.setPrintingStatus(Status.PRINTING));
+	}
+
+	public QueueDto getFirst(Long printerId) {
+		log.info("Getting first queueDto");
+		return getAllQueue().stream().filter(dto -> dto.getPrinter().getId().equals(printerId)).findFirst().orElseThrow(
+				() -> new QueueNotFoundException("Queue is empty")
+		);
 	}
 
 	public int getMyPosition(Long queueId, List<QueueDto> allQueue) {

@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.constants;
 public enum ConstantMessages {
 
 	HELLO_MESSAGE("Hello %s! I'm a bot for signing up for a 3D printer queue.\n\nAvailable commands:\n/join - Join the Queue\n/leave - Leave the queue\n/queue - Show all queue\n/myposition - Show your current position in queue\n/info - Get Info about available printers, plastic, admins and authors"),
+
 	ERROR("Oops, something went wrong, try again"),
 
 	SELECT_PRINTER_MESSAGE("Select one of these printers:"),
@@ -36,6 +37,8 @@ public enum ConstantMessages {
 	QUEUE_LEAVE_CANCELED("Okay, your leaving is canceled"),
 
 	YOUR_POSITION_MESSAGE("Your position in queue: "),
+
+	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next Person:"),
 
 	INFO("%s - %s"),
 
