@@ -38,4 +38,20 @@ public class PrinterEntity extends EntityBaseClass {
 			inverseJoinColumns = @JoinColumn(name = "plastic_id")
 	)
 	private List<PlasticEntity> supported_plastic;
+
+	public void addPlastic(PlasticEntity plasticEntity) {
+		supported_plastic.add(plasticEntity);
+	}
+
+	public void addPlastic(List<PlasticEntity> plasticEntities) {
+		supported_plastic.addAll(plasticEntities);
+	}
+
+	public void removePlastic(PlasticEntity plasticEntity) {
+		supported_plastic.remove(plasticEntity);
+	}
+
+	public void removePlastic(List<PlasticEntity> plasticEntities) {
+		supported_plastic.removeAll(plasticEntities);
+	}
 }

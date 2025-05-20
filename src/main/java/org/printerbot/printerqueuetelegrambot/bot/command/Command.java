@@ -26,4 +26,8 @@ public interface Command {
 		return createSendMessage(update, ConstantMessages.INCORRECT_COMMAND_SYNTAX_MESSAGE.getMessage(syntaxMessage.toLowerCase()));
 	}
 
+	default SendMessage createErrorMessage(Update update) {
+		return createSendMessage(update, ConstantMessages.ERROR.getMessage());
+	}
+
 }

@@ -39,6 +39,7 @@ public class CommandHandler {
 						   RemovePrinterCommand removePrinterCommand,
 						   AddPlasticCommand addPlasticCommand,
 						   RemovePlasticCommand removePlasticCommand,
+						   ModifyPrinterCommand modifyPrinterCommand,
 						   UnknownCommand unknownCommand,
 						   NoPermissionCommand noPermissionCommand) {
 		this.generalCommands = Map.of(
@@ -57,7 +58,8 @@ public class CommandHandler {
 				"/addprinter", addPrinterCommand,
 				"/removeprinter", removePrinterCommand,
 				"/addplastic", addPlasticCommand,
-				"/removeplastic", removePlasticCommand
+				"/removeplastic", removePlasticCommand,
+				"/modifyprinter", modifyPrinterCommand
 		);
 		this.whiteList = whiteList;
 		this.unknownCommand = unknownCommand;

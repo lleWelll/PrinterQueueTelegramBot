@@ -22,18 +22,20 @@ public class CallbackHandler {
 						   DoneLeaveCallback doneLeaveCallback,
 						   ShowAllQueueCallback showAllQueueCallback,
 						   MyPositionCallback myPositionCallback,
-						   JoinConfirmationCallback joinConfirmationCallback) {
-		this.callbacks = Map.of(
-				CallbackType.PRINTER_CHOOSE, choosePrinterCallBack,
-				CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack,
-				CallbackType.DONE_JOIN, doneJoinCallback,
-				CallbackType.CANCEL_JOIN, doneJoinCallback,
-				CallbackType.SKIP, joinConfirmationCallback,
-				CallbackType.QUEUE_ENTRY_CHOOSE, chooseQueueEntryCallback,
-				CallbackType.DONE_LEAVE, doneLeaveCallback,
-				CallbackType.CANCEL_LEAVE, doneLeaveCallback,
-				CallbackType.PRINTER_CHOOSE_SHOW, showAllQueueCallback,
-				CallbackType.PRINTER_CHOOSE_POSITION, myPositionCallback
+						   JoinConfirmationCallback joinConfirmationCallback,
+						   PrinterModifyCallback modifyCallback) {
+		this.callbacks = Map.ofEntries(
+				Map.entry(CallbackType.PRINTER_CHOOSE, choosePrinterCallBack),
+				Map.entry(CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack),
+				Map.entry(CallbackType.DONE_JOIN, doneJoinCallback),
+				Map.entry(CallbackType.CANCEL_JOIN, doneJoinCallback),
+				Map.entry(CallbackType.SKIP, joinConfirmationCallback),
+				Map.entry(CallbackType.QUEUE_ENTRY_CHOOSE, chooseQueueEntryCallback),
+				Map.entry(CallbackType.DONE_LEAVE, doneLeaveCallback),
+				Map.entry(CallbackType.CANCEL_LEAVE, doneLeaveCallback),
+				Map.entry(CallbackType.PRINTER_CHOOSE_SHOW, showAllQueueCallback),
+				Map.entry(CallbackType.PRINTER_CHOOSE_POSITION, myPositionCallback),
+				Map.entry(CallbackType.PRINTER_MODIFY, modifyCallback)
 		);
 	}
 

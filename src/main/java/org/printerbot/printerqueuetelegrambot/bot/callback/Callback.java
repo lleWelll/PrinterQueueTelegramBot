@@ -1,5 +1,6 @@
 package org.printerbot.printerqueuetelegrambot.bot.callback;
 
+import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -19,5 +20,9 @@ public interface Callback {
 		sendMessage.setChatId(String.valueOf(getChatId(update)));
 		sendMessage.setText(answer);
 		return sendMessage;
+	}
+
+	default SendMessage createErrorMessage(Update update) {
+		return createSendMessage(update, ConstantMessages.ERROR.getMessage());
 	}
 }

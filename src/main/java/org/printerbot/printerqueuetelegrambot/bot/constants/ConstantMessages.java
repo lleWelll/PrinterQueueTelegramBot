@@ -53,15 +53,25 @@ public enum ConstantMessages {
 
 	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: %s"),
 
-	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id:int} {availability:boolean}\nFor example: /setavailability printer 1 true"),
+	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id} {availability:true/false}\nFor example: /setavailability printer 1 true"),
 
-	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printerId:int}\nFor example: /removeprinter 1"),
+	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printerId}\nFor example: /removeprinter 1"),
 
-	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plasticId:int}\nForExample: /removeplastic 1"),
+	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plasticId}\nForExample: /removeplastic 1"),
+
+	MODIFY_PRINTER_COMMAND_SYNTAX_MESSAGE("/modifyprinter {printerId}\nFor example /modifyprinter 1"),
+
+	MODIFY_PLASTIC_COMMAND_SYNTAX_MESSAGE("/modifyplastic {plasticId}\nFor example /modifyplastic 1"),
 
 	REMOVE_PRINTER_COMMAND_CONFIRMATION_MESSAGE("Printer removed successfully"),
 
 	REMOVE_PLASTIC_COMMAND_CONFIRMATION_MESSAGE("Plastic removed successfully"),
+
+	MODIFY_PRINTER_CONFIRMATION_MESSAGE("Printer modified successfully"),
+
+	MODIFY_PLASTIC_CONFIRMATION_MESSAGE("Plastic modified successfully"),
+
+	CHOOSE_PROPERTY_MESSAGE("Choose what property you want to change:"),
 
 	ADDPRINTER_BRAND_MESSAGE("Enter printer brand, for example 'Bambulab'"),
 
