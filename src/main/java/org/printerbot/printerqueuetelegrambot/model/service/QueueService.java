@@ -4,12 +4,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.model.dao.PlasticEntity;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
+import org.printerbot.printerqueuetelegrambot.model.dao.QueueEntity;
+import org.printerbot.printerqueuetelegrambot.model.dto.QueueArchiveDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.enums.Status;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.QueueNotFoundException;
 import org.printerbot.printerqueuetelegrambot.model.mapper.QueueMapper;
+import org.printerbot.printerqueuetelegrambot.model.service.daoService.QueueArchiveDaoService;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.QueueDaoService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +27,22 @@ public class QueueService {
 
 	private final QueueDaoService queueDaoService;
 
+	private final QueueArchiveDaoService queueArchiveDaoService;
+
 	private final QueueMapper mapper;
+
+	@Transactional
+	public void next() throws IndexOutOfBoundsException {
+		List<QueueDto> allQueue = getAllQueue();
+		QueueDto first = allQueue.get(0);
+		QueueDto second = allQueue.get(1);
+
+		queueDaoService.updateEntity(first.getId(), (entity) -> entity.setPrintingStatus(Status.DONE));
+		queueDaoService.removeById(first.getId());
+		queueArchiveDaoService.save(mapper.toQueueArchiveDto(first));
+
+		queueDaoService.updateEntity(second.getId(), (entity) -> entity.setPrintingStatus(Status.PRINTING));
+	}
 
 	public int getMyPosition(Long queueId, List<QueueDto> allQueue) {
 		int position = -1;
@@ -47,6 +66,13 @@ public class QueueService {
 		List<QueueDto> queueDtoList = queueDaoService.getAll();
 		return queueDtoList.stream().sorted(
 				Comparator.comparing(QueueDto::getJoinedAt)
+		).toList();
+	}
+
+	public List<QueueArchiveDto> getAllArchive() {
+		List<QueueArchiveDto> queueArchiveDtoList = queueArchiveDaoService.getAll();
+		return queueArchiveDtoList.stream().sorted(
+				Comparator.comparing(QueueArchiveDto::getJoinedAt)
 		).toList();
 	}
 

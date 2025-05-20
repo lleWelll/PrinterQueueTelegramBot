@@ -45,8 +45,6 @@ public class QueueDaoService implements DaoService<QueueEntity, QueueDto> {
 		return mapper.toQueueDtoList(queueRepository.findAllByUsername(username));
 	}
 
-
-
 	@Override
 	public List<QueueDto> getAll() {
 		log.info("Getting all queue");
@@ -86,7 +84,7 @@ public class QueueDaoService implements DaoService<QueueEntity, QueueDto> {
 
 	private QueueEntity findById(Long id) {
 		return queueRepository.findById(id).orElseThrow(
-				() -> new QueueNotFoundException("Printer with id " + id + "is not found")
+				() -> new QueueNotFoundException("Queue with id " + id + "is not found")
 		);
 	}
 }
