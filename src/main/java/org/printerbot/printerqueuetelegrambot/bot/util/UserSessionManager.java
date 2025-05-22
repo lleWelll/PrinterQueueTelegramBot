@@ -85,7 +85,7 @@ public class UserSessionManager {
 	public QueueDto getQueueSession(Long chatId) {
 		QueueDto session = queueSession.get(chatId);
 		if (session == null) {
-			log.warn("No session for user {}, cannot add plastic", chatId);
+			log.warn("No session for user {}", chatId);
 			return null;
 		}
 		return session;

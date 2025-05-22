@@ -43,10 +43,7 @@ public class DoneJoinCallback implements Callback {
 		} else {
 			log.info("Joining queue is canceled");
 			answer = ConstantMessages.QUEUE_JOIN_CANCELED.getMessage();
-			String uploadedFilePath = sessionManager.getUploadedModelFile(chatId);
-			if (uploadedFilePath != null) {
-				fileManager.deleteFile(uploadedFilePath);
-			}
+			fileManager.deleteFile(sessionManager.getQueueSession(chatId));
 			sessionManager.deleteSession(chatId);
 		}
 		return createSendMessage(update, answer);

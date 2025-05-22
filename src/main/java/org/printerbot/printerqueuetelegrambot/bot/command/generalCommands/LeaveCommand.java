@@ -43,7 +43,7 @@ public class LeaveCommand implements GeneralCommand {
 		StringBuilder sendMessageBuilder = new StringBuilder(sendMessage.getText());
 		int counter = 1;
 		for (var entry: queueEntries) {
-			sendMessageBuilder.append("\n").append(Emoji.getEmojiByNumber(counter)).append(" ").append(entry.getQueueInfo());
+			sendMessageBuilder.append("\n\n").append(Emoji.getEmojiByNumber(counter)).append(" ").append(entry.getQueueInfo());
 			counter++;
 		}
 		sendMessage.setText(sendMessageBuilder.toString());

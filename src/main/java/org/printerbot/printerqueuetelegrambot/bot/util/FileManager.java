@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.config.BotProperties;
+import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.File;
 
@@ -24,7 +25,21 @@ public class FileManager {
 		Path filePath = Path.of(path);
 		try {
 			Files.delete(filePath);
-			log.info("File on path {} deleted", path);
+			log.info("File on path {} deleted", filePath);
+		} catch (IOException e) {
+			log.error(e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void deleteFile(QueueDto queueDto) {
+		if (queueDto == null || queueDto.getStlModelPath() == null) {
+			return;
+		}
+		Path filePath = Path.of(queueDto.getStlModelPath());
+		try {
+			Files.delete(filePath);
+			log.info("File on path {} deleted", filePath);
 		} catch (IOException e) {
 			log.error(e.getMessage());
 			throw new RuntimeException(e);

@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.callback;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
@@ -19,6 +20,8 @@ public class DoneLeaveCallback implements Callback {
 
 	private final QueueService queueService;
 
+	private final FileManager fileManager;
+
 	@Override
 	public SendMessage apply(String data, Update update) {
 		String answer;
@@ -29,6 +32,7 @@ public class DoneLeaveCallback implements Callback {
 
 			try {
 				queueService.leaveQueue(queueDto);
+				fileManager.deleteFile(queueDto);
 				answer = ConstantMessages.LEAVE_CONFIRMATION_MESSAGE.getMessage();
 			} catch (Exception e) {
 				answer = ConstantMessages.ERROR.getMessage();
