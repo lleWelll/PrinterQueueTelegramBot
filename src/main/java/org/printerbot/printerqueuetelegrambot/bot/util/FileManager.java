@@ -16,9 +16,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -72,21 +75,23 @@ public class FileManager {
 
 	public String downloadFile(File file, String fileName, String fileExtension) {
 		String fileTelegramPath = file.getFileUrl(botProperties.getToken());
-		String fileServerPath;
+		Path serverPath;
+		LocalDate currentDate = LocalDate.now();
 
 		try (InputStream in = new URL(fileTelegramPath).openStream()) {
+			String uploadPath = createDirectoryIfNotExists(Path.of(botProperties.getStlPath() + currentDate));
+
 			fileName = renameFileIfExists(fileName, fileExtension);
-			Path serverPath = Path.of(botProperties.getStlPath(), fileName);
+			serverPath = Path.of(uploadPath, fileName);
 
 			Files.copy(in, serverPath, StandardCopyOption.REPLACE_EXISTING);
-			fileServerPath = botProperties.getStlPath() + fileName;
-			log.info("file '{}' downloaded in: {} ",fileName, fileServerPath);
+			log.info("file '{}' downloaded in: {} ",fileName, serverPath);
 		} catch (IOException e) {
 			log.error(e.getMessage());
 			throw new RuntimeException(e);
 		}
 
-		return fileServerPath;
+		return serverPath.toString();
 	}
 
 	private String renameFileIfExists(String fileName, String extension) {
@@ -103,5 +108,17 @@ public class FileManager {
 	private String extractFileNameFromLocalPath(String localPath) {
 		int lastIndexOfSlash = localPath.lastIndexOf("/");
 		return localPath.substring(lastIndexOfSlash);
+	}
+
+	private String createDirectoryIfNotExists(Path path) {
+		try {
+			return Files.createDirectory(path).toString();
+		} catch (FileAlreadyExistsException e) {
+			log.info("Directory {} already exists, {}", path, e.getMessage());
+			return path.toString();
+		} catch (IOException e) {
+			log.error(e.getMessage());
+			throw new RuntimeException(e);
+		}
 	}
 }
