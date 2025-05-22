@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-cards-table
+      author: lleWell
+      changes:
+        - createTable:
+            tableName: printers
+            columns:
+              - column:
+                  name: printer_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: brand
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: model
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: maximum_plastic_quantity
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: features
+                  type: TEXT
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: available
+                  type: TINYINT(1)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+              - column:
+                  name: last_update_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

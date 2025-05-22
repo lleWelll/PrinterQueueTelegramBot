@@ -42,9 +42,10 @@ public class SupportedPlasticExpectedMessage implements ExpectedCommand {
 			printerSessionManager.deleteSession(chatId);
 		} catch (PlasticNotFoundException e) {
 			log.error("Error occurred when getting plastic: {}", e.getMessage());
+			return createSyntaxErrorMessage(update,"Expected: 1, 2, 3");
 		} catch (IllegalArgumentException e) {
 			log.error("Error occurred when parsing String to Long {}", e.getMessage());
-			return createSyntaxErrorMessage(update,"1, 2, 3");
+			return createSyntaxErrorMessage(update,"Expected: 1, 2, 3");
 		} catch (Exception e) {
 			log.error("Error occurred: {}", e.getMessage());
 			return createSendMessage(update, ConstantMessages.ERROR.getMessage());

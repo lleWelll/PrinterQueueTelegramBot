@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-table-queue
+      author: lleWell
+      changes:
+        - createTable:
+            tableName: queue
+            columns:
+              - column:
+                  name: queue_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: chat_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: join_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: printer_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stl_model_name
+                  type: VARCHAR(100)
+              - column:
+                  name: stl_model_path
+                  type: VARCHAR(256)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: last_update_at
+                  type: TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: queue
+            baseColumnNames: printer_id
+            referencedTableName: printers
+            referencedColumnNames: printer_id
+            constraintName: fk_queue_printer
