@@ -32,6 +32,6 @@ public class PlasticTypeExpectedCommand implements ExpectedCommand {
 			return createSyntaxErrorMessage(update, "Another type. This type of plastic is not found");
 		}
 		botStateStorage.setState(chatId, BotState.WAITING_PLASTIC_COLOR);
-		return createSendMessage(update, ConstantMessages.ADDPLASTIC_COLOR_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PLASTIC_COLOR_MESSAGE.getMessage());
 	}
 }

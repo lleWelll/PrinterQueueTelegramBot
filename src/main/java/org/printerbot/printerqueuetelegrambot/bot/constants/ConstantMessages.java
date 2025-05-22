@@ -2,125 +2,114 @@ package org.printerbot.printerqueuetelegrambot.bot.constants;
 
 public enum ConstantMessages {
 
-	HELLO_MESSAGE("Hello %s! I'm a bot for signing up for a 3D printer queue.\n\nAvailable commands:\n/join - Join the Queue\n/leave - Leave the queue\n/queue - Show all queue\n/myposition - Show your current position in queue\n/info - Get Info about available printers, plastic, admins and authors"),
+	// Greetings and Help
+	HELLO_MESSAGE("Hello %s! I am a bot to manage the 3D printer queue.\n\n" +
+			"Available commands:\n" +
+			"/join - Join the queue\n" +
+			"/leave - Leave the queue\n" +
+			"/queue - Show entire queue\n" +
+			"/myposition - Show your position in the queue\n" +
+			"/info - Show information about printers, plastics, admins, and authors"),
 
-	ERROR("Oops, something went wrong, try again"),
+	ERROR("Oops, something went wrong. Please try again."),
 
-	SELECT_PRINTER_MESSAGE("Select one of these printers:"),
+	// Printer and Plastic Selection
+	SELECT_PRINTER_MESSAGE("Select a printer:"),
+	SELECT_PLASTIC_MESSAGE("Select a plastic type:"),
+	CHOOSE_CONFIRMATION_MESSAGE("You selected %s."),
 
-	SELECT_PLASTIC_MESSAGE("Choose available plastic:"),
+	CHOOSE_PRINTER_MODIFY_PROPERTY("Select what property to modify:"),
 
-	CHOOSE_CONFIRMATION_MESSAGE("You chose %s"),
-
-	CONFIRM_JOIN_MESSAGE("Confirmation of queue:\n" +
+	// Join Confirmation
+	CONFIRM_JOIN_MESSAGE("Confirm joining the queue:\n" +
 			"Printer: %s\n" +
 			"Plastic: %s\n" +
-			"Uploaded model: %s\n" +
-			"Join queue?"),
+			"Uploaded model: %s\n\n" +
+			"Proceed?"),
+	QUEUE_JOIN_CONFIRMATION("You have joined the queue.\n" +
+			"Use /myposition to see your position.\n" +
+			"Use /queue to see the full queue.\n" +
+			"Use /leave to leave the queue."),
+	QUEUE_JOIN_CANCELED("Join request canceled."),
 
-	QUEUE_JOIN_CONFIRMATION("Done! You are in queue now\n" +
-			"To view your place enter /myposition\n" +
-			"To view all queue enter /queue\n" +
-			"To leave queue enter /leave"),
+	// Leave Confirmation
+	LEAVE_COMMAND_MESSAGE("You have %d entries in the queue.\n" +
+			"Enter the number of the entry to cancel:"),
+	NO_QUEUE_ENTRIES_MESSAGE("You have no entries in the queue."),
+	CONFIRM_LEAVE_MESSAGE("Confirm removal of this entry?\n%s"),
+	LEAVE_CONFIRMATION_MESSAGE("Your queue entry has been removed."),
+	QUEUE_LEAVE_CANCELED("Leave request canceled."),
+	REMOVING_CONFIRMATION_MESSAGE("Queue entry with id '%s' removed successfully."),
 
-	QUEUE_JOIN_CANCELED("Okay, your joining queue is canceled"),
+	// Queue Status
+	YOUR_POSITION_MESSAGE("Your position in the queue: %d"),
+	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next in queue: %s"),
+	QUEUE_IS_EMPTY_MESSAGE("The queue is empty."),
 
-
-	LEAVE_COMMAND_MESSAGE("You have %d %s in queue\nChoose what entry you want to cancel:"),
-
-	NO_QUEUE_ENTRIES_MESSAGE("You don't have any entries in queue"),
-
-	CONFIRM_LEAVE_MESSAGE("You want to leave your queue?\n%s"),
-
-	LEAVE_CONFIRMATION_MESSAGE("Good, your queue entry is canceled"),
-
-	REMOVING_CONFIRMATION_MESSAGE("Entry removed"),
-
-	QUEUE_LEAVE_CANCELED("Okay, your leaving is canceled"),
-
-	YOUR_POSITION_MESSAGE("Your position in queue: "),
-
-	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next Person:"),
-
-	QUEUE_IS_EMPTY_MESSAGE("Queue is empty"),
-
+	// Information
 	INFO("%s - %s"),
-
 	AUTHOR_INFO("Author: @llewelll"),
+	GITHUB_INFO("GitHub: https://github.com/lleWelll/PrinterQueueTelegramBot"),
+	ADMINS_INFO("Admins:\n%s"),
 
-	GITHUB_INFO("Github: https://github.com/lleWelll/PrinterQueueTelegramBot"),
+	// File Upload
+	UPLOAD_STL_FILE_MESSAGE("Please upload a model file in .stl format."),
+	FILE_FORMAT_IS_NOT_SUPPORTED_MESSAGE("File %s is not supported. Use .stl format."),
+	TRY_TO_UPLOAD_FILE_AGAIN("Please upload the file again."),
 
-	ADMINS_INFO("Admins:\n"),
+	// Commands Syntax
+	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command. Use: %s"),
+	SET_AVAILABILITY_SYNTAX("Usage: /setavailability {printer|plastic} {id} {true|false}\n" +
+			"Example: /setavailability printer 1 true"),
+	ARCHIVED_FILE_SYNTAX("Usage: /archivedfile {archived_queue_id}\n" +
+			"Example: /archivedfile 1"),
+	MESSAGE_COMMAND_SYNTAX_MESSAGE("Usage: /message {queue_id} {text}\n" +
+			"Example: /message 1 Your model is ready."),
+	REMOVE_QUEUE_SYNTAX_MESSAGE("Usage: /remove {queue_id}\n" +
+			"Example: /remove 1"),
+	REMOVE_PRINTER_SYNTAX("Usage: /removeprinter {printer_id}\n" +
+			"Example: /removeprinter 1"),
+	REMOVE_PLASTIC_SYNTAX("Usage: /removeplastic {plastic_id}\n" +
+			"Example: /removeplastic 1"),
 
-	UPLOAD_STL_FILE_MESSAGE("Please upload file of model in '.stl' format"),
+	// Modify Entities
+	MODIFY_PRINTER_SYNTAX("Usage: /modifyprinter {printer_id}\n" +
+			"Example: /modifyprinter 1"),
+	MODIFY_PLASTIC_SYNTAX("Usage: /modifyplastic {plastic_id}\n" +
+			"Example: /modifyplastic 1"),
+	REMOVE_PRINTER_CONFIRMATION_MESSAGE("Printer successfully removed."),
+	REMOVE_PLASTIC_CONFIRMATION_MESSAGE("Plastic successfully removed."),
+	MODIFY_PRINTER_CONFIRMATION_MESSAGE("Printer successfully modified."),
+	MODIFY_PLASTIC_CONFIRMATION_MESSAGE("Plastic successfully modified."),
 
-	FILE_FORMAT_IS_NOT_SUPPORTED_MESSAGE("File %s is not supported, please provide in '.stl' format"),
+	// Add Entities
+	ADD_PRINTER_BRAND_MESSAGE("Enter printer brand (e.g., 'Bambulab'):"),
+	ADD_PRINTER_MODEL_MESSAGE("Enter printer model (e.g., 'X1-C'):"),
+	ADD_PRINTER_FEATURES_MESSAGE("Enter printer features:"),
+	ADD_PRINTER_MAX_PLASTIC_MESSAGE("Enter printer max plastic capacity (e.g., 2):"),
+	ADD_PRINTER_SUPPORTED_PLASTIC_MESSAGE("Enter supported plastic IDs (comma-separated, e.g., 1,2,3):"),
+	ADD_PRINTER_AVAILABILITY_MESSAGE("Enter printer availability ('true' or 'false'):"),
+	ADD_PRINTER_CONFIRMATION_MESSAGE("Printer successfully added."),
 
-	TRY_TO_UPLOAD_FILE_AGAIN("Upload file again"),
+	ADD_PLASTIC_BRAND_MESSAGE("Enter plastic brand (e.g., 'Bambulab'):"),
+	ADD_PLASTIC_TYPE_MESSAGE("Enter plastic type (e.g., 'PLA'):"),
+	ADD_PLASTIC_COLOR_MESSAGE("Enter plastic color (e.g., 'RED'):"),
+	ADD_PLASTIC_AVAILABILITY_MESSAGE("Enter plastic availability ('true' or 'false'):"),
+	ADD_PLASTIC_DESCRIPTION_MESSAGE("Enter plastic description:"),
+	ADD_PLASTIC_CONFIRMATION_MESSAGE("Plastic successfully added."),
 
-	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command, please write: %s"),
+	// Availability Update
+	NEW_AVAILABILITY_SET_SUCCESSFULLY("Availability updated successfully."),
 
-	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id} {availability:true/false}\nFor example: /setavailability printer 1 true"),
+	// Rights and Errors
+	NOT_ENOUGH_RIGHTS_MESSAGE("You do not have permission to use this command."),
 
-	ARCHIVED_FILE_COMMAND_SYNTAX_MESSAGE("/archivedfile {archived_Queue_Id}\nFor example: /archivedfile 1"),
+	// Archived File Retrieval
+	GETTING_ARCHIVED_DOCUMENT("Retrieving archived document for queue: %s"),
 
-	MESSAGE_COMMAND_SYNTAX_MESSAGE("/message {queue_id} {message}\nFor example: /message 1 Hello, Your model is printed"),
-
-	REMOVE_QUEUE_SYNTAX_MESSAGE("/remove {queue_id}\nFor example: /remove 1"),
-
-	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printer_Id}\nFor example: /removeprinter 1"),
-
-	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plastic_Id}\nForExample: /removeplastic 1"),
-
-	MODIFY_PRINTER_COMMAND_SYNTAX_MESSAGE("/modifyprinter {printer_Id}\nFor example /modifyprinter 1"),
-
-	MODIFY_PLASTIC_COMMAND_SYNTAX_MESSAGE("/modifyplastic {plastic_Id}\nFor example /modifyplastic 1"),
-
-	REMOVE_PRINTER_COMMAND_CONFIRMATION_MESSAGE("Printer removed successfully"),
-
-	REMOVE_PLASTIC_COMMAND_CONFIRMATION_MESSAGE("Plastic removed successfully"),
-
-	MODIFY_PRINTER_CONFIRMATION_MESSAGE("Printer modified successfully"),
-
-	MODIFY_PLASTIC_CONFIRMATION_MESSAGE("Plastic modified successfully"),
-
-	CHOOSE_PROPERTY_MESSAGE("Choose what property you want to change:"),
-
-	ADDPRINTER_BRAND_MESSAGE("Enter printer brand, for example 'Bambulab'"),
-
-	ADDPRINTER_MODEL_MESSAGE("Enter printer model, for example 'X1-C'"),
-
-	ADDPRINTER_FEATUES_MESSAGE("Enter printer features"),
-
-	ADDPRINTER_MAX_PLASTIC_MESSAGE("Enter printer's max plastic capacity, for example 2"),
-
-	ADDPRINTER_SUPPORTED_PLASTIC_MESSAGE("Enter printer's supported plastic\nIt should plasticId and written in format: 1, 2, 3, 4"),
-
-	ADD_PRINTER_AVAILABILITY_MESSAGE("Enter printer's availability, For example 'true'/'false"),
-
-	ADDPRINTER_CONFIRMATION_MESSAGE("Printer added successfully"),
-
-	ADDPLASTIC_BRAND_MESSAGE("Enter plastic brand\nFor example 'Bambulab'"),
-
-	ADDPLASTIC_TYPE_MESSAGE("Enter plastic type\nFor example 'PLA'"),
-
-	ADDPLASTIC_COLOR_MESSAGE("Enter plastic color\nFor example 'RED'"),
-
-	ADDPLASTIC_AVAILABLE_MESSAGE("Enter plastics availability\nFor example 'true'/'false"),
-
-	ADDPLASTIC_DESCRIPTION("Enter plastic description"),
-
-	ADDPLASTIC_CONFIRMATION_MESSAGE("Plastic added successfully"),
-
-	NEW_AVAILABILITY_SET_SUCCESSFULLY("New availability set successfully"),
-
-	NOT_ENOUGH_RIGHTS_MESSAGE("Sorry, you don't have enough rights to use this command"),
-
-	GETTING_ARCHIVED_DOCUMENT("Getting uploaded document of archived queue: %s"),
-
-	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command"),
-
-	UNKNOWN_DOCUMENT_MESSAGE("Provided Document format is now supported, please provide '.stl' file");
+	// Unknown Commands and Documents
+	UNKNOWN_COMMAND_MESSAGE("Unknown command. Use /help to see available commands."),
+	UNKNOWN_DOCUMENT_MESSAGE("Unsupported document format. Please upload a .stl file.");
 
 	private final String message;
 

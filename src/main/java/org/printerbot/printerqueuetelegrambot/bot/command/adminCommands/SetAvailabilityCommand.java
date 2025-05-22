@@ -34,7 +34,7 @@ public class SetAvailabilityCommand implements AdminCommand {
 			updateEntity(type, id, availability);
 		} catch (PrinterNotFoundException | PlasticNotFoundException | IllegalArgumentException | IndexOutOfBoundsException  e) {
 			log.error(e.getMessage());
-			return createSyntaxErrorMessage(update, ConstantMessages.SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE.getMessage());
+			return createSyntaxErrorMessage(update, ConstantMessages.SET_AVAILABILITY_SYNTAX.getMessage());
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return createSendMessage(update, ConstantMessages.ERROR.getMessage());

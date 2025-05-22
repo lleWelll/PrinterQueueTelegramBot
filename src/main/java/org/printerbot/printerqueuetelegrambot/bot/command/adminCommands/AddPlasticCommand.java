@@ -18,6 +18,6 @@ public class AddPlasticCommand implements AdminCommand {
 	public SendMessage apply(Update update) {
 		Long chatId = getChatId(update);
 		botStateStorage.setState(chatId, BotState.WAITING_PLASTIC_BRAND);
-		return createSendMessage(update, ConstantMessages.ADDPLASTIC_BRAND_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PLASTIC_BRAND_MESSAGE.getMessage());
 	}
 }

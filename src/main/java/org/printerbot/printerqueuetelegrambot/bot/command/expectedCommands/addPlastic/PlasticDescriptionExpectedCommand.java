@@ -39,6 +39,6 @@ public class PlasticDescriptionExpectedCommand implements ExpectedCommand {
 		}
 
 		botStateStorage.setState(chatId, BotState.NONE);
-		return createSendMessage(update, ConstantMessages.ADDPLASTIC_CONFIRMATION_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PLASTIC_CONFIRMATION_MESSAGE.getMessage());
 	}
 }

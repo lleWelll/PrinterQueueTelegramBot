@@ -41,32 +41,32 @@ public class PrinterModifyCallback implements Callback {
 			case "Brand" -> {
 				botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_BRAND_MOD);
 				printerSessionManager.addSession(getChatId(update), printer);
-				yield createSendMessage(update, ConstantMessages.ADDPRINTER_BRAND_MESSAGE.getMessage());
+				yield createSendMessage(update, ConstantMessages.ADD_PRINTER_BRAND_MESSAGE.getMessage());
 			}
 			case "Model" -> {
 				botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_MODEL_MOD);
 				printerSessionManager.addSession(getChatId(update), printer);
-				yield createSendMessage(update, ConstantMessages.ADDPRINTER_MODEL_MESSAGE.getMessage());
+				yield createSendMessage(update, ConstantMessages.ADD_PRINTER_MODEL_MESSAGE.getMessage());
 			}
 			case "Features" -> {
 				botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_FEATURES_MOD);
 				printerSessionManager.addSession(getChatId(update), printer);
-				yield createSendMessage(update, ConstantMessages.ADDPRINTER_FEATUES_MESSAGE.getMessage());
+				yield createSendMessage(update, ConstantMessages.ADD_PRINTER_FEATURES_MESSAGE.getMessage());
 			}
 			case "MaxPlasticCapacity" -> {
 				botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_MAX_PLASTIC_CAPACITY_MOD);
 				printerSessionManager.addSession(getChatId(update), printer);
-				yield createSendMessage(update, ConstantMessages.ADDPRINTER_MAX_PLASTIC_MESSAGE.getMessage());
+				yield createSendMessage(update, ConstantMessages.ADD_PRINTER_MAX_PLASTIC_MESSAGE.getMessage());
 			}
 			case "AddSupportedPlastic" -> {
 				botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_ADD_SUPPORTED_PLASTIC_MOD);
 				printerSessionManager.addSession(getChatId(update), printer);
-				yield createSendMessage(update, ConstantMessages.ADDPRINTER_SUPPORTED_PLASTIC_MESSAGE.getMessage());
+				yield createSendMessage(update, ConstantMessages.ADD_PRINTER_SUPPORTED_PLASTIC_MESSAGE.getMessage());
 			}
 			case "RemoveSupportedPlastic" -> {
 				botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_REMOVE_SUPPORTED_PLASTIC_MOD);
 				printerSessionManager.addSession(getChatId(update), printer);
-				yield createSendMessage(update, ConstantMessages.ADDPRINTER_SUPPORTED_PLASTIC_MESSAGE.getMessage());
+				yield createSendMessage(update, ConstantMessages.ADD_PRINTER_SUPPORTED_PLASTIC_MESSAGE.getMessage());
 			}
 			default -> createErrorMessage(update);
 		};

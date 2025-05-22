@@ -51,7 +51,7 @@ public class SupportedPlasticExpectedMessage implements ExpectedCommand {
 		}
 
 		botStateStorage.setState(chatId, BotState.NONE);
-		return createSendMessage(update, ConstantMessages.ADDPRINTER_CONFIRMATION_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PRINTER_CONFIRMATION_MESSAGE.getMessage());
 	}
 
 	private List<PlasticDto> parseSupportedPlastic(String value) {

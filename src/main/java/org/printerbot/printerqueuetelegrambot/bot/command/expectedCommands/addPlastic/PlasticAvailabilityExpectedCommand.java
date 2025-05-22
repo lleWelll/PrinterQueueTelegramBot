@@ -33,7 +33,7 @@ public class PlasticAvailabilityExpectedCommand implements ExpectedCommand {
 		}
 
 		botStateStorage.setState(chatId, BotState.WAITING_PLASTIC_DESCRIPTION);
-		return createSendMessage(update, ConstantMessages.ADDPLASTIC_DESCRIPTION.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PLASTIC_AVAILABILITY_MESSAGE.getMessage());
 	}
 	boolean parseAvailability(String value) {
 		return switch (value.toLowerCase()) {

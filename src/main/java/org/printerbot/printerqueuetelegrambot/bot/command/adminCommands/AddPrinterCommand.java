@@ -18,6 +18,6 @@ public class AddPrinterCommand implements AdminCommand {
 	public SendMessage apply(Update update) {
 		Long chatId = getChatId(update);
 		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_BRAND);
-		return createSendMessage(update, ConstantMessages.ADDPRINTER_BRAND_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PRINTER_BRAND_MESSAGE.getMessage());
 	}
 }

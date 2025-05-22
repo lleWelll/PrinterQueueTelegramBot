@@ -25,6 +25,6 @@ public class PrinterBrandExpectedCommand implements ExpectedCommand {
 		printerSessionManager.createNewSession(chatId);
 		printerSessionManager.addBrand(chatId, brand);
 		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_MODEL);
-		return createSendMessage(update, ConstantMessages.ADDPRINTER_MODEL_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.ADD_PRINTER_MODEL_MESSAGE.getMessage());
 	}
 }

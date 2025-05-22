@@ -35,7 +35,7 @@ public class GetFileFromArchiveCommand implements AdminCommand {
 			botStateStorage.setState(getChatId(update), BotState.SENDING_DOCUMENT);
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			return createSyntaxErrorMessage(update, ConstantMessages.ARCHIVED_FILE_COMMAND_SYNTAX_MESSAGE.getMessage());
+			return createSyntaxErrorMessage(update, ConstantMessages.ARCHIVED_FILE_SYNTAX.getMessage());
 		}
 
 		return createSendMessage(update, ConstantMessages.GETTING_ARCHIVED_DOCUMENT.getMessage(queueId.toString()));

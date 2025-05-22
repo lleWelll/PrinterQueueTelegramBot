@@ -25,8 +25,8 @@ public class RemovePrinterCommand implements AdminCommand {
 			printerDaoService.removeById(printerId);
 		} catch (PrinterNotFoundException| IllegalArgumentException | IndexOutOfBoundsException e) {
 			log.error("Error occurred when removing printer");
-			return createSyntaxErrorMessage(update, ConstantMessages.REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE.getMessage());
+			return createSyntaxErrorMessage(update, ConstantMessages.REMOVE_PRINTER_SYNTAX.getMessage());
 		}
-		return createSendMessage(update, ConstantMessages.REMOVE_PRINTER_COMMAND_CONFIRMATION_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.REMOVE_PRINTER_CONFIRMATION_MESSAGE.getMessage());
 	}
 }

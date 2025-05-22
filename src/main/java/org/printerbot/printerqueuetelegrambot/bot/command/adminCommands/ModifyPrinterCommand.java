@@ -34,11 +34,11 @@ public class ModifyPrinterCommand implements AdminCommand {
 			PrinterDto printer = printerDaoService.getById(printerId);
 			sendMessage = createSendMessage(update,
 					ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(printer.getFullInfo()) +
-					"\n\n" + ConstantMessages.CHOOSE_PROPERTY_MESSAGE.getMessage());
+					"\n\n" + ConstantMessages.CHOOSE_PRINTER_MODIFY_PROPERTY.getMessage());
 			addKeyboard(sendMessage, printerId);
 		} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
 			log.info(e.getMessage());
-			return createSyntaxErrorMessage(update, ConstantMessages.MODIFY_PRINTER_COMMAND_SYNTAX_MESSAGE.getMessage());
+			return createSyntaxErrorMessage(update, ConstantMessages.MODIFY_PRINTER_SYNTAX.getMessage());
 		}
 		return sendMessage;
 	}

@@ -25,7 +25,7 @@ public class RemoveQueueCommand implements AdminCommand {
 		try {
 			Long queueId = Long.valueOf(parts[1]);
 			queueService.leaveQueue(queueDaoService.getById(queueId));
-			return createSendMessage(update, ConstantMessages.REMOVING_CONFIRMATION_MESSAGE.getMessage());
+			return createSendMessage(update, ConstantMessages.REMOVING_CONFIRMATION_MESSAGE.getMessage(queueId));
 		} catch (QueueNotFoundException | IndexOutOfBoundsException e) {
 			log.error(e.getMessage());
 			return createSyntaxErrorMessage(update, ConstantMessages.REMOVE_QUEUE_SYNTAX_MESSAGE.getMessage());

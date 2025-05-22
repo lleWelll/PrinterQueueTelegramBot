@@ -25,8 +25,8 @@ public class RemovePlasticCommand implements AdminCommand {
 			plasticDaoService.removeById(printerId);
 		} catch (PrinterNotFoundException | IllegalArgumentException | IndexOutOfBoundsException e) {
 			log.error("Error occurred when removing printer");
-			return createSyntaxErrorMessage(update, ConstantMessages.REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE.getMessage());
+			return createSyntaxErrorMessage(update, ConstantMessages.REMOVE_PLASTIC_SYNTAX.getMessage());
 		}
-		return createSendMessage(update, ConstantMessages.REMOVE_PLASTIC_COMMAND_CONFIRMATION_MESSAGE.getMessage());
+		return createSendMessage(update, ConstantMessages.REMOVE_PLASTIC_CONFIRMATION_MESSAGE.getMessage());
 	}
 }
