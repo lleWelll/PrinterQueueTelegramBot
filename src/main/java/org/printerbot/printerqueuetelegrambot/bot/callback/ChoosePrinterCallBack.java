@@ -43,7 +43,7 @@ public class ChoosePrinterCallBack implements Callback {
 
 		String text = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(printer.getPrinterInfo()) +
 				"\n\n" +
-				ConstantMessages.SELECT_PLASTIC_MESSAGE.getMessage();
+				ConstantMessages.SELECT_PLASTIC_MESSAGE.getMessage(printer.getMaxPlasticCapacity());
 
 		SendMessage sendMessage = createSendMessage(update, text);
 		addKeyboard(sendMessage, supportedPlastics);

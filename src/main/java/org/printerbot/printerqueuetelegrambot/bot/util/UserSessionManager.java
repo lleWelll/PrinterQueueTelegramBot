@@ -52,7 +52,7 @@ public class UserSessionManager {
 		log.info("Adding printer {} to user {} session", printer, chatId);
 		queueSession.get(chatId).setPrinter(printer);
 	}
-	public void addSelectedPlastic(Long chatId, List<PlasticDto> plastic) {
+	public void addSelectedPlastic(Long chatId, PlasticDto plastic) {
 		QueueDto session = queueSession.get(chatId);
 
 		if (session == null) {
@@ -66,7 +66,7 @@ public class UserSessionManager {
 		}
 
 		log.info("Adding plastic {} to user {} session", plastic, chatId);
-		session.setPlastics(plastic);
+		session.getPlastics().add(plastic);
 	}
 
 	public void addUploadedModelFile(Long chatId, String fileName, String filePath) {

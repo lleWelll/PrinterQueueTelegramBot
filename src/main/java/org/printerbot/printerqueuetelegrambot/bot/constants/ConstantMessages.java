@@ -15,7 +15,7 @@ public enum ConstantMessages {
 
 	// Printer and Plastic Selection
 	SELECT_PRINTER_MESSAGE("Select a printer:"),
-	SELECT_PLASTIC_MESSAGE("Select a plastic type:"),
+	SELECT_PLASTIC_MESSAGE("Select a plastic type (Maximum for chosen printer - %s):"),
 	CHOOSE_CONFIRMATION_MESSAGE("You selected %s."),
 
 	CHOOSE_PRINTER_MODIFY_PROPERTY("Select what property to modify:"),
@@ -50,7 +50,7 @@ public enum ConstantMessages {
 	INFO("%s - %s"),
 	AUTHOR_INFO("Author: @llewelll"),
 	GITHUB_INFO("GitHub: https://github.com/lleWelll/PrinterQueueTelegramBot"),
-	ADMINS_INFO("Admins:\n%s"),
+	ADMINS_INFO("Admins:\n"),
 
 	// File Upload
 	UPLOAD_STL_FILE_MESSAGE("Please upload a model file in .stl format."),

@@ -7,6 +7,7 @@ import org.printerbot.printerqueuetelegrambot.model.enums.Status;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,6 +21,10 @@ public class QueueDto {
 	private List<PlasticDto> plastics;
 	private String stlModelPath;
 	private String stlModelName;
+
+	public QueueDto() {
+		plastics = new ArrayList<>();
+	}
 
 	public String getQueueInfo() {
 		return new StringBuilder()

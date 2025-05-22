@@ -7,6 +7,7 @@ import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.dto.PlasticDto;
+import org.printerbot.printerqueuetelegrambot.model.dto.PrinterDto;
 import org.printerbot.printerqueuetelegrambot.model.service.daoService.PlasticDaoService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -28,17 +29,31 @@ public class ChoosePlasticCallBack implements Callback {
 
 	@Override
 	public SendMessage apply(String data, Update update) {
+		SendMessage sendMessage = null;
 		Long chatId = getChatId(update);
 		Long plasticId = Long.valueOf(data);
 
-		PlasticDto plastic = plasticDaoService.getById(plasticId);
-		sessionManager.addSelectedPlastic(chatId, List.of(plastic));
+		PrinterDto printer = sessionManager.getChosenPrinter(chatId);
+		List<PlasticDto> selected = sessionManager.getChosenPlastic(chatId);
+		int maxCapacity = printer.getMaxPlasticCapacity();
 
-		String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(plastic.getPlasticInfo()) +
-				"\n\n" +
-				ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getMessage();
-		SendMessage sendMessage = createSendMessage(update, answer);
-		addKeyboard(sendMessage);
+		if (selected.size() < maxCapacity) {
+			PlasticDto plastic = plasticDaoService.getById(plasticId);
+			sessionManager.addSelectedPlastic(chatId, plastic);
+			int capacityLeft = printer.getMaxPlasticCapacity() - sessionManager.getChosenPlastic(chatId).size();
+			sendMessage = new SendMessage(chatId.toString(),
+					ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(plastic.getPlasticInfo())
+							+ "\n" + capacityLeft + " left");
+		}
+
+		if (selected.size() == maxCapacity) {
+			PlasticDto lastPlastic = selected.get(selected.size() - 1);
+			String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(lastPlastic.getPlasticInfo()) +
+					"\n\n" +
+					ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getMessage();
+			sendMessage = createSendMessage(update, answer);
+			addKeyboard(sendMessage);
+		}
 		return sendMessage;
 	}
 
