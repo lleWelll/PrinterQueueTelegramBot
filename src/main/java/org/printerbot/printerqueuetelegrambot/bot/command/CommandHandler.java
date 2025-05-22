@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.command.adminCommands.*;
 import org.printerbot.printerqueuetelegrambot.bot.command.generalCommands.*;
 import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
-import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -25,24 +24,28 @@ public class CommandHandler {
 
 	private final WhiteList whiteList;
 
-	public CommandHandler( WhiteList whiteList,
-						   StartCommand startCommand,
-						   InfoCommand infoCommand,
-						   JoinCommand joinCommand,
-						   LeaveCommand leaveCommand,
-						   ShowAllQueueCommand showAllQueueCommand,
-						   MyPositionCommand myPositionCommand,
-						   GetAllPrinterInfoCommand getAllPrinterInfoCommand,
-						   GetAllPlasticInfo getAllPlasticInfo,
-						   SetAvailabilityCommand setAvailabilityCommand,
-						   AddPrinterCommand addPrinterCommand,
-						   RemovePrinterCommand removePrinterCommand,
-						   AddPlasticCommand addPlasticCommand,
-						   RemovePlasticCommand removePlasticCommand,
-						   ModifyPrinterCommand modifyPrinterCommand,
-						   NextCommand nextCommand,
-						   UnknownCommand unknownCommand,
-						   NoPermissionCommand noPermissionCommand) {
+	public CommandHandler(WhiteList whiteList,
+						  StartCommand startCommand,
+						  InfoCommand infoCommand,
+						  JoinCommand joinCommand,
+						  LeaveCommand leaveCommand,
+						  ShowAllQueueCommand showAllQueueCommand,
+						  MyPositionCommand myPositionCommand,
+
+						  GetAllPrinterInfoCommand getAllPrinterInfoCommand,
+						  GetAllPlasticInfoCommand getAllPlasticInfoCommand,
+						  GetArchiveCommand getAllArchiveCommand,
+						  SetAvailabilityCommand setAvailabilityCommand,
+						  AddPrinterCommand addPrinterCommand,
+						  RemovePrinterCommand removePrinterCommand,
+						  AddPlasticCommand addPlasticCommand,
+						  RemovePlasticCommand removePlasticCommand,
+						  ModifyPrinterCommand modifyPrinterCommand,
+						  NextCommand nextCommand,
+						  GetFileFromArchiveCommand getFileFromArchiveCommand,
+
+						  UnknownCommand unknownCommand,
+						  NoPermissionCommand noPermissionCommand) {
 		this.generalCommands = Map.of(
 				"/start", startCommand,
 				"/help", startCommand,
@@ -52,16 +55,18 @@ public class CommandHandler {
 				"/queue", showAllQueueCommand,
 				"/myposition", myPositionCommand
 		);
-		this.adminCommands = Map.of(
-				"/getprinters", getAllPrinterInfoCommand,
-				"/getplastic", getAllPlasticInfo,
-				"/setavailable", setAvailabilityCommand,
-				"/addprinter", addPrinterCommand,
-				"/removeprinter", removePrinterCommand,
-				"/addplastic", addPlasticCommand,
-				"/removeplastic", removePlasticCommand,
-				"/modifyprinter", modifyPrinterCommand,
-				"/next", nextCommand
+		this.adminCommands = Map.ofEntries(
+				Map.entry("/printers", getAllPrinterInfoCommand),
+				Map.entry("/plastic", getAllPlasticInfoCommand),
+				Map.entry("/archive", getAllArchiveCommand),
+				Map.entry("/setavailable", setAvailabilityCommand),
+				Map.entry("/addprinter", addPrinterCommand),
+				Map.entry("/removeprinter", removePrinterCommand),
+				Map.entry("/addplastic", addPlasticCommand),
+				Map.entry("/removeplastic", removePlasticCommand),
+				Map.entry("/modifyprinter", modifyPrinterCommand),
+				Map.entry("/next", nextCommand),
+				Map.entry("/archivedfile", getFileFromArchiveCommand)
 		);
 		this.whiteList = whiteList;
 		this.unknownCommand = unknownCommand;

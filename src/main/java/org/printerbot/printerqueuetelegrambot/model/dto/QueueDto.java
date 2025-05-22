@@ -45,6 +45,17 @@ public class QueueDto {
 				.toString();
 	}
 
+	public String getFullQueueInfo() {
+		return new StringBuilder()
+				.append("Id: ")
+				.append(id)
+				.append(" username: @")
+				.append(username)
+				.append(" ")
+				.append(getQueueInfoWithUsername())
+				.toString();
+	}
+
 	public String getFormattedJoinedAt() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
 		return joinedAt.format(formatter);

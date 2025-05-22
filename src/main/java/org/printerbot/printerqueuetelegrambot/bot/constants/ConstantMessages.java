@@ -60,6 +60,8 @@ public enum ConstantMessages {
 
 	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id} {availability:true/false}\nFor example: /setavailability printer 1 true"),
 
+	ARCHIVED_FILE_COMMAND_SYNTAX_MESSAGE("/archivedfile {archivedQueueId}\nFor example, /archivedfile 1"),
+
 	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printerId}\nFor example: /removeprinter 1"),
 
 	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plasticId}\nForExample: /removeplastic 1"),
@@ -107,6 +109,8 @@ public enum ConstantMessages {
 	NEW_AVAILABILITY_SET_SUCCESSFULLY("New availability set successfully"),
 
 	NOT_ENOUGH_RIGHTS_MESSAGE("Sorry, you don't have enough rights to use this command"),
+
+	GETTING_ARCHIVED_DOCUMENT("Getting uploaded document of archived queue: %s"),
 
 	UNKNOWN_COMMAND_MESSAGE("Sorry, I don't know this command"),
 

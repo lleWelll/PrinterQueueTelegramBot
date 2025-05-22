@@ -67,23 +67,17 @@ public class TelegramBot extends TelegramLongPollingBot {
 	private void handleCallback(Update update) {
 		CallbackQuery cq = update.getCallbackQuery();
 		Long chatId = cq.getMessage().getChatId();
+		log.info("Got callback \"{}\" from {}", cq, chatId);
 
 		sendMessage(callbackHandler.handleCallback(update));
-
-		if (botStateStorage.getState(chatId) == BotState.SENDING_DOCUMENT) {
-			String lastPath = fileManager.getLastAccessedFilePath();
-			if (lastPath != null) {
-				sendDocument(fileManager.getLastAccessedDocument(chatId.toString()));
-			} else {
-				log.info("Path to file is not found for user: {}", chatId);
-			}
-			botStateStorage.setState(chatId, BotState.NONE);
-		}
+		getFile(chatId);
 	}
 
 	private void handleMessage(Update update) {
 		Message msg = update.getMessage();
 		Long chatId = msg.getChatId();
+		log.info("Got message \"{}\" from {}", msg, chatId);
+
 		BotState state = botStateStorage.getState(chatId);
 
 		if (state != BotState.NONE) {
@@ -96,9 +90,23 @@ public class TelegramBot extends TelegramLongPollingBot {
 		}
 		else if (msg.hasText() && msg.getText().startsWith("/")) {
 			sendMessage(commandHandler.handleCommand(update));
+			getFile(chatId);
 		}
 		else {
 			sendMessage(commandHandler.handleUnknownCommand(update));
+		}
+	}
+
+	private void getFile(Long chatId) {
+		if (botStateStorage.getState(chatId) == BotState.SENDING_DOCUMENT) {
+			String lastPath = fileManager.getLastAccessedFilePath();
+			if (lastPath != null) {
+				sendDocument(fileManager.getLastAccessedDocument(chatId.toString()));
+			} else {
+				log.info("Path to file is not found for user: {}", chatId);
+			}
+			botStateStorage.setState(chatId, BotState.NONE);
+			fileManager.setLastAccessedFilePath(null);
 		}
 	}
 

@@ -32,10 +32,19 @@ public class QueueArchiveDto {
 
 	public String getQueueInfoWithUsername() {
 		return new StringBuilder()
-				.append("User: ")
+				.append("User: @")
 				.append(username)
 				.append(" ")
 				.append(getQueueInfo())
+				.toString();
+	}
+
+	public String getFullQueueInfo() {
+		return new StringBuilder()
+				.append("Id: ")
+				.append(id)
+				.append(" ")
+				.append(getQueueInfoWithUsername())
 				.toString();
 	}
 

@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 @RequiredArgsConstructor
-public class GetAllPlasticInfo implements AdminCommand{
+public class GetAllPlasticInfoCommand implements AdminCommand{
 
 	private final PlasticDaoService plasticDaoService;
 
