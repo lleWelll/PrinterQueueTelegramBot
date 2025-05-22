@@ -17,14 +17,11 @@ spring:
 bot:
   name: "PrinterQueueBot"
   token: "7865570662:AAHf6lRUrFjycZGFps9PBOHzcGFf_4I51L8"
+  stlPath: ${STL_DIR_PATH}
 
 whitelist:
   admins:
     - ${ADMIN_1}
-
-uploads:
-  stl:
-    path: ${STL_DIR_PATH}
 
 server:
   port: 8080

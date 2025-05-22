@@ -26,6 +26,9 @@ public class ShowAllQueueCallback implements Callback {
 
 		PrinterEntity printer = printerDaoService.getEntityById(printerId);
 		List<QueueDto> allQueueByPrinter = queueService.getAllQueueByPrinter(printer);
+		if (allQueueByPrinter.isEmpty()) {
+			return createSendMessage(update, "Queue is empty");
+		}
 
 		StringBuilder builder = new StringBuilder();
 		int counter = 1;

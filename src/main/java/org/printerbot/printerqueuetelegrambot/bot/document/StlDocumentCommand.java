@@ -3,8 +3,8 @@ package org.printerbot.printerqueuetelegrambot.bot.document;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.callback.JoinConfirmationCallback;
-import org.printerbot.printerqueuetelegrambot.bot.config.BotProperties;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Slf4j
 public class StlDocumentCommand implements DocumentCommand {
 
-	private final BotProperties botProperties;
+	private final FileManager fileManager;
 
 	private final UserSessionManager sessionManager;
 
@@ -25,15 +25,14 @@ public class StlDocumentCommand implements DocumentCommand {
 
 	@Override
 	public SendMessage apply(Update update, File file) {
-		String fileUrl = file.getFileUrl(botProperties.getToken());
+		String filePath = fileManager.downloadFile(file, getFileName(update), ".stl");
 
 		QueueDto session = sessionManager.getQueueSession(getChatId(update));
 		if (session == null) {
 			return createSendMessage(update, ConstantMessages.ERROR.getMessage());
 		}
-		sessionManager.addUploadedModelFile(getChatId(update), getFileName(update), fileUrl);
+		sessionManager.addUploadedModelFile(getChatId(update), getFileName(update), filePath);
 
 		return joinConfirmationCallback.apply(getChatId(update).toString(), update);
 	}
-
 }

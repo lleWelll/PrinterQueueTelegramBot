@@ -119,6 +119,15 @@ public class UserSessionManager {
 		return session.getPlastics();
 	}
 
+	public String getUploadedModelFile(Long chatId) {
+		QueueDto session = queueSession.get(chatId);
 
+		if (session == null) {
+			log.warn("No session for user {}", chatId);
+			return null;
+		}
+
+		return session.getStlModelPath();
+	}
 
 }

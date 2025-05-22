@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.callback;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
@@ -18,6 +19,8 @@ public class DoneJoinCallback implements Callback {
 	private final UserSessionManager sessionManager;
 
 	private final QueueService queueService;
+
+	private final FileManager fileManager;
 
 	@Override
 	public SendMessage apply(String data, Update update) {
@@ -40,6 +43,10 @@ public class DoneJoinCallback implements Callback {
 		} else {
 			log.info("Joining queue is canceled");
 			answer = ConstantMessages.QUEUE_JOIN_CANCELED.getMessage();
+			String uploadedFilePath = sessionManager.getUploadedModelFile(chatId);
+			if (uploadedFilePath != null) {
+				fileManager.deleteFile(uploadedFilePath);
+			}
 			sessionManager.deleteSession(chatId);
 		}
 		return createSendMessage(update, answer);
