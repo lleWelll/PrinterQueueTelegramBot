@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    env_file:
+      - secret.env
+    volumes:
+      - mysql_data:/var/lib/mysql/data
+
+  app:
+    build: .
+    env_file:
+      - secret.env
+    environment:
+      SPRING_DATASOURCE_URL: ${DB_URL}/printer_db
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      STL_DIR_PATH: ${STL_DIR_PATH}
+      ADMIN_1: ${ADMIN_1}
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
