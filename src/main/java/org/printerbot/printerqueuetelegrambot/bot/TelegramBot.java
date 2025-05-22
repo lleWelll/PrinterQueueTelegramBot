@@ -10,6 +10,7 @@ import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads.DocumentHandler;
 import org.printerbot.printerqueuetelegrambot.bot.util.BotStateStorage;
 import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
+import org.printerbot.printerqueuetelegrambot.bot.util.MessageBuffer;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
@@ -29,6 +30,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 	private final BotProperties properties;
 	private final BotStateStorage botStateStorage;
 	private final FileManager fileManager;
+	private final MessageBuffer messageBuffer;
 	private final CommandHandler commandHandler;
 	private final CallbackHandler callbackHandler;
 	private final DocumentHandler documentHandler;
@@ -37,6 +39,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 	public TelegramBot(BotProperties properties,
 					   BotStateStorage botStateStorage,
 					   FileManager fileManager,
+					   MessageBuffer messageBuffer,
+
 					   CommandHandler commandHandler,
 					   CallbackHandler callbackHandler,
 					   DocumentHandler documentHandler,
@@ -45,6 +49,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 		this.properties = properties;
 		this.botStateStorage = botStateStorage;
 		this.fileManager = fileManager;
+		this.messageBuffer = messageBuffer;
+
 		this.commandHandler = commandHandler;
 		this.callbackHandler = callbackHandler;
 		this.documentHandler = documentHandler;
@@ -91,6 +97,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 		else if (msg.hasText() && msg.getText().startsWith("/")) {
 			sendMessage(commandHandler.handleCommand(update));
 			getFile(chatId);
+			sendAllMessages();
 		}
 		else {
 			sendMessage(commandHandler.handleUnknownCommand(update));
@@ -107,6 +114,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 			}
 			botStateStorage.setState(chatId, BotState.NONE);
 			fileManager.setLastAccessedFilePath(null);
+		}
+	}
+
+	private void sendAllMessages() {
+		while (messageBuffer.getSize() != 0) {
+			sendMessage(messageBuffer.getMessage());
 		}
 	}
 

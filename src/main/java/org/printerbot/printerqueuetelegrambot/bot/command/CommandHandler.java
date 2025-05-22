@@ -45,6 +45,7 @@ public class CommandHandler {
 						  RemoveQueueCommand removeQueueCommand,
 						  ModifyPrinterCommand modifyPrinterCommand,
 						  NextCommand nextCommand,
+						  MessageCommand messageCommand,
 
 						  UnknownCommand unknownCommand,
 						  NoPermissionCommand noPermissionCommand) {
@@ -72,7 +73,8 @@ public class CommandHandler {
 				Map.entry("/modifyprinter", modifyPrinterCommand),
 
 				Map.entry("/next", nextCommand),
-				Map.entry("/remove", removeQueueCommand)
+				Map.entry("/remove", removeQueueCommand),
+				Map.entry("/message", messageCommand)
 		);
 		this.whiteList = whiteList;
 		this.unknownCommand = unknownCommand;
