@@ -28,22 +28,22 @@ public class QueueDto {
 
 	public String getQueueInfo() {
 		return new StringBuilder()
-				.append("Printer: ")
+				.append("<b>Printer:</b> ")
 				.append(printer.getPrinterInfo())
-				.append(" plastic: ")
+				.append(" <b>plastic:</b> ")
 				.append(getPlasticInfo())
-				.append(" model: ")
+				.append(" <b>model:</b> ")
 				.append(stlModelName == null ? "Not uploaded" : stlModelName)
-				.append(" joined: ")
+				.append(" <b>joined:</b> ")
 				.append(getFormattedJoinedAt())
-				.append(" status: ")
+				.append(" <b>status:</b> ")
 				.append(printingStatus)
 				.toString();
 	}
 
 	public String getQueueInfoWithUsername() {
 		return new StringBuilder()
-				.append(" username: @")
+				.append(" <b>username:</b> @")
 				.append(username)
 				.append(" ")
 				.append(getQueueInfo())
@@ -52,7 +52,7 @@ public class QueueDto {
 
 	public String getFullQueueInfo() {
 		return new StringBuilder()
-				.append("Id: ")
+				.append("<b>Id:</b> ")
 				.append(id)
 				.append(" ")
 				.append(getQueueInfoWithUsername())

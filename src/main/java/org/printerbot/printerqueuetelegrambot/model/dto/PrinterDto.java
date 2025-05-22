@@ -16,19 +16,19 @@ public class PrinterDto {
 
 	public String getFullInfo() {
 		return new StringBuilder()
-				.append("Id: ")
+				.append("<b>Id:</b> ")
 				.append(id)
-				.append(" brand: ")
+				.append(" <b>brand:</b> ")
 				.append(brand)
-				.append(" model: ")
+				.append(" <b>model:</b> ")
 				.append(model)
-				.append(" features: ")
+				.append(" <b>features:</b> ")
 				.append(features)
-				.append(" available: ")
+				.append(" <b>available:</b> ")
 				.append(available)
-				.append(" maxPlasticCapacity: ")
+				.append(" <b>maxPlasticCapacity:</b> ")
 				.append(maxPlasticCapacity)
-				.append(" supportedPlastic: ")
+				.append(" <b>supportedPlastic:</b> ")
 				.append(supported_plastic.stream().map(PlasticDto::getPlasticInfoWithId).toList())
 				.toString();
 	}

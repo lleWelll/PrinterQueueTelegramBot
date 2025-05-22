@@ -3,13 +3,7 @@ package org.printerbot.printerqueuetelegrambot.bot.constants;
 public enum ConstantMessages {
 
 	// Greetings and Help
-	HELLO_MESSAGE("Hello %s! I am a bot to manage the 3D printer queue.\n\n" +
-			"Available commands:\n" +
-			"/join - Join the queue\n" +
-			"/leave - Leave the queue\n" +
-			"/queue - Show entire queue\n" +
-			"/myposition - Show your position in the queue\n" +
-			"/info - Show information about printers, plastics, admins, and authors"),
+	HELLO_MESSAGE("Hello %s. I am a bot to manage the 3D printer queue.\n\n"),
 
 	ERROR("Oops, something went wrong. Please try again."),
 
@@ -33,7 +27,7 @@ public enum ConstantMessages {
 	QUEUE_JOIN_CANCELED("Join request canceled."),
 
 	// Leave Confirmation
-	LEAVE_COMMAND_MESSAGE("You have %d entries in the queue.\n" +
+	LEAVE_COMMAND_MESSAGE("You have <b>%d<b> entries in the queue.\n" +
 			"Enter the number of the entry to cancel:"),
 	NO_QUEUE_ENTRIES_MESSAGE("You have no entries in the queue."),
 	CONFIRM_LEAVE_MESSAGE("Confirm removal of this entry?\n%s"),
@@ -42,40 +36,40 @@ public enum ConstantMessages {
 	REMOVING_CONFIRMATION_MESSAGE("Queue entry with id '%s' removed successfully."),
 
 	// Queue Status
-	YOUR_POSITION_MESSAGE("Your position in the queue: %d"),
+	YOUR_POSITION_MESSAGE("Your position in the queue:"),
 	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next in queue: %s"),
 	QUEUE_IS_EMPTY_MESSAGE("The queue is empty."),
 
 	// Information
 	INFO("%s - %s"),
-	AUTHOR_INFO("Author: @llewelll"),
-	GITHUB_INFO("GitHub: https://github.com/lleWelll/PrinterQueueTelegramBot"),
-	ADMINS_INFO("Admins:\n"),
+	AUTHOR_INFO("<b>Author:</b> @llewelll"),
+	GITHUB_INFO("<b>GitHub:</b> https://github.com/lleWelll/PrinterQueueTelegramBot"),
+	ADMINS_INFO("<b>Admins:</b>\n"),
 
 	// File Upload
-	UPLOAD_STL_FILE_MESSAGE("Please upload a model file in .stl format."),
-	FILE_FORMAT_IS_NOT_SUPPORTED_MESSAGE("File %s is not supported. Use .stl format."),
+	UPLOAD_STL_FILE_MESSAGE("Please upload a model file in <b>'.stl'</b> format."),
+	FILE_FORMAT_IS_NOT_SUPPORTED_MESSAGE("File %s is not supported. <b>'.stl'</b> format."),
 	TRY_TO_UPLOAD_FILE_AGAIN("Please upload the file again."),
 
 	// Commands Syntax
-	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command. Use: %s"),
+	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command.\n%s"),
 	SET_AVAILABILITY_SYNTAX("Usage: /setavailability {printer|plastic} {id} {true|false}\n" +
 			"Example: /setavailability printer 1 true"),
-	ARCHIVED_FILE_SYNTAX("Usage: /archivedfile {archived_queue_id}\n" +
+	ARCHIVED_FILE_SYNTAX("Usage: /archivedfile {archivedqueueid}\n" +
 			"Example: /archivedfile 1"),
-	MESSAGE_COMMAND_SYNTAX_MESSAGE("Usage: /message {queue_id} {text}\n" +
+	MESSAGE_COMMAND_SYNTAX_MESSAGE("Usage: /message {queueid} {text}\n" +
 			"Example: /message 1 Your model is ready."),
-	REMOVE_QUEUE_SYNTAX_MESSAGE("Usage: /remove {queue_id}\n" +
+	REMOVE_QUEUE_SYNTAX_MESSAGE("Usage: /remove {queueid}\n" +
 			"Example: /remove 1"),
-	REMOVE_PRINTER_SYNTAX("Usage: /removeprinter {printer_id}\n" +
+	REMOVE_PRINTER_SYNTAX("Usage: /removeprinter {printerid}\n" +
 			"Example: /removeprinter 1"),
-	REMOVE_PLASTIC_SYNTAX("Usage: /removeplastic {plastic_id}\n" +
+	REMOVE_PLASTIC_SYNTAX("Usage: /removeplastic {plasticid}\n" +
 			"Example: /removeplastic 1"),
 
 	// Modify Entities
-	MODIFY_PRINTER_SYNTAX("Usage: /modifyprinter {printer_id}\n" +
+	MODIFY_PRINTER_SYNTAX("Usage: /modifyprinter {printerid}\n" +
 			"Example: /modifyprinter 1"),
-	MODIFY_PLASTIC_SYNTAX("Usage: /modifyplastic {plastic_id}\n" +
+	MODIFY_PLASTIC_SYNTAX("Usage: /modifyplastic {plasticid}\n" +
 			"Example: /modifyplastic 1"),
 	REMOVE_PRINTER_CONFIRMATION_MESSAGE("Printer successfully removed."),
 	REMOVE_PLASTIC_CONFIRMATION_MESSAGE("Plastic successfully removed."),
@@ -108,8 +102,36 @@ public enum ConstantMessages {
 	GETTING_ARCHIVED_DOCUMENT("Retrieving archived document for queue: %s"),
 
 	// Unknown Commands and Documents
-	UNKNOWN_COMMAND_MESSAGE("Unknown command. Use /help to see available commands."),
-	UNKNOWN_DOCUMENT_MESSAGE("Unsupported document format. Please upload a .stl file.");
+	UNKNOWN_COMMAND_MESSAGE("Unknown command. Use /start to see available commands."),
+	UNKNOWN_DOCUMENT_MESSAGE("Unsupported document format. Please upload a <b>'.stl'</b> file."),
+	ALL_GENERAL_COMMANDS("<b>Available commands:</b>\n" +
+			"/join - Join the queue\n" +
+			"/leave - Leave the queue\n" +
+			"/queue - Show entire queue\n" +
+			"/myposition - Show your position in the queue\n" +
+			"/info - Show information about printers, plastics, admins, and authors"),
+	ALL_ADMINS_COMMANDS("<b>All admin commands:</b>\n" +
+			"<b>Queue Management:</b>\n" +
+			"	/printers - Shows full info about printer\n" +
+			"	/plastic - Shows full info about plastic\n" +
+			"	/archive - Shows all queue archive\n" +
+			"	/allqueue - Shows full about queue\n" +
+			"	/next - Returns first queue entry in selected printer\n" +
+			"	/remove - Removes specified queue entry\n" +
+
+
+			"\n<b>Printers and Plastic Management:</b>\n" +
+			"	/addprinter - Adds new printer in Database\n" +
+			"	/removeprinter - Removes printer from Database\n" +
+			"	/modifyprinter - Modify existing printer\n" +
+			"	/addplastic - Adds new plastic in Database\n" +
+			"	/removeplastic - Removes plastic from Database\n" +
+			"	/setavailable - Changes availability of printer/plastic\n" +
+
+			"\n<b>Other commands:</b>\n" +
+			"	/arhivedfile - Sends you '.stl' file from specified archived queue entry\n" +
+			"	/message - Sends message to user in queue\n"
+	);
 
 	private final String message;
 

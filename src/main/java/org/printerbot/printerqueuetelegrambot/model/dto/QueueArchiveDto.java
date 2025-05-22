@@ -19,20 +19,20 @@ public class QueueArchiveDto {
 
 	public String getQueueInfo() {
 		return new StringBuilder()
-				.append("Printer: ")
+				.append("<b>Printer:</b> ")
 				.append(printer.getPrinterInfo())
-				.append(" model: ")
+				.append(" <b>model:</b> ")
 				.append(stlModelName == null ? "Not uploaded" : stlModelName)
-				.append(" joined: ")
+				.append(" <b>joined:</b> ")
 				.append(getFormattedJoinedAt())
-				.append(" status: ")
+				.append(" <b>status:</b> ")
 				.append(printingStatus)
 				.toString();
 	}
 
 	public String getQueueInfoWithUsername() {
 		return new StringBuilder()
-				.append("User: @")
+				.append("<b>User:</b> @")
 				.append(username)
 				.append(" ")
 				.append(getQueueInfo())
@@ -41,7 +41,7 @@ public class QueueArchiveDto {
 
 	public String getFullQueueInfo() {
 		return new StringBuilder()
-				.append("Id: ")
+				.append("<b>Id:</b> ")
 				.append(id)
 				.append(" ")
 				.append(getQueueInfoWithUsername())

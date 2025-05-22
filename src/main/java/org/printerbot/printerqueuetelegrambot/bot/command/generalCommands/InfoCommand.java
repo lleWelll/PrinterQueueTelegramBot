@@ -29,7 +29,7 @@ public class InfoCommand implements GeneralCommand {
 		List<PlasticDto> allAvailablePlastic = plasticDaoService.getAllAvailablePlastic();
 
 		StringBuilder builder = new StringBuilder()
-				.append("Available Printers:\n");
+				.append("<b>Available Printers:</b>\n");
 		for(var pr : allAvailablePrinters) {
 			builder.append(" • ")
 					.append(ConstantMessages.INFO.getMessage(
@@ -38,7 +38,7 @@ public class InfoCommand implements GeneralCommand {
 			)).append("\n");
 		}
 
-		builder.append("\nAvailable Plastic:\n");
+		builder.append("\n<b>Available Plastic:</b>\n");
 		for (var pl : allAvailablePlastic) {
 			builder.append(" • ")
 					.append(ConstantMessages.INFO.getMessage(

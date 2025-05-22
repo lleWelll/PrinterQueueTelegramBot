@@ -15,17 +15,17 @@ public class PlasticDto {
 
 	public String getPlasticFullInfo() {
 		return new StringBuilder()
-				.append("Id: ")
+				.append("<b>Id:</b> ")
 				.append(id)
-				.append(" brand: ")
+				.append(" <b>brand:</b> ")
 				.append(brand)
-				.append(" type: ")
+				.append(" <b>type:</b> ")
 				.append(type)
-				.append(" color: ")
+				.append(" <b>color:</b> ")
 				.append(color)
-				.append(" available: ")
+				.append(" <b>available:</b> ")
 				.append(available)
-				.append(" description: ")
+				.append(" <b>description:</b> ")
 				.append(description)
 				.toString();
 	}

@@ -19,6 +19,7 @@ public interface Callback {
 		SendMessage sendMessage = new SendMessage();
 		sendMessage.setChatId(String.valueOf(getChatId(update)));
 		sendMessage.setText(answer);
+		sendMessage.setParseMode("HTML");
 		return sendMessage;
 	}
 
