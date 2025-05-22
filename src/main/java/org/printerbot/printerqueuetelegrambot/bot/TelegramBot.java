@@ -9,12 +9,17 @@ import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
 import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads.DocumentHandler;
 import org.printerbot.printerqueuetelegrambot.bot.util.BotStateStorage;
+import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.File;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
@@ -23,6 +28,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 	private final BotProperties properties;
 	private final BotStateStorage botStateStorage;
+	private final FileManager fileManager;
 	private final CommandHandler commandHandler;
 	private final CallbackHandler callbackHandler;
 	private final DocumentHandler documentHandler;
@@ -30,6 +36,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 	public TelegramBot(BotProperties properties,
 					   BotStateStorage botStateStorage,
+					   FileManager fileManager,
 					   CommandHandler commandHandler,
 					   CallbackHandler callbackHandler,
 					   DocumentHandler documentHandler,
@@ -37,6 +44,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 		super(properties.getToken());
 		this.properties = properties;
 		this.botStateStorage = botStateStorage;
+		this.fileManager = fileManager;
 		this.commandHandler = commandHandler;
 		this.callbackHandler = callbackHandler;
 		this.documentHandler = documentHandler;
@@ -45,19 +53,49 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 	@Override
 	public void onUpdateReceived(Update update) {
-		if (update.hasMessage() && update.hasMessage()) {
-			if (botStateStorage.getState(update.getMessage().getChatId()) != BotState.NONE) {
-				sendMessage(expectedCommandHandler.handleCommand(update, getBotState(update)));
-			} else if (update.getMessage().hasDocument()) {
-				sendMessage(documentHandler.handleDocument(update, getFile(update)));
-			} else if (update.getMessage().hasText() && update.getMessage().getText().startsWith("/")) {
-				sendMessage(commandHandler.handleCommand(update));
-			} else {
-				sendMessage(commandHandler.handleUnknownCommand(update));
-			}
+		if (update.hasCallbackQuery()) {
+			handleCallback(update);
+			return;
 		}
-		else if (update.hasCallbackQuery()) {
-			sendMessage(callbackHandler.handleCallback(update));
+		if (update.hasMessage()) {
+			handleMessage(update);
+			return;
+		}
+		sendMessage(commandHandler.handleUnknownCommand(update));
+	}
+
+	private void handleCallback(Update update) {
+		CallbackQuery cq = update.getCallbackQuery();
+		Long chatId = cq.getMessage().getChatId();
+
+		sendMessage(callbackHandler.handleCallback(update));
+
+		if (botStateStorage.getState(chatId) == BotState.SENDING_DOCUMENT) {
+			String lastPath = fileManager.getLastAccessedFilePath();
+			if (lastPath != null) {
+				sendDocument(fileManager.getLastAccessedDocument(chatId.toString()));
+			} else {
+				log.info("Path to file is not found for user: {}", chatId);
+			}
+			botStateStorage.setState(chatId, BotState.NONE);
+		}
+	}
+
+	private void handleMessage(Update update) {
+		Message msg = update.getMessage();
+		Long chatId = msg.getChatId();
+		BotState state = botStateStorage.getState(chatId);
+
+		if (state != BotState.NONE) {
+			sendMessage(expectedCommandHandler.handleCommand(update, getBotState(update)));
+			return;
+		}
+
+		if (msg.hasDocument()) {
+			sendMessage(documentHandler.handleDocument(update, getFile(update)));
+		}
+		else if (msg.hasText() && msg.getText().startsWith("/")) {
+			sendMessage(commandHandler.handleCommand(update));
 		}
 		else {
 			sendMessage(commandHandler.handleUnknownCommand(update));
@@ -71,7 +109,17 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 	private void sendMessage(SendMessage sendMessage) {
 		try {
+			log.info("Sending message to chatId: '{}'\nMessage: \"{}\"", sendMessage.getChatId(), sendMessage.getText());
 			execute(sendMessage);
+		} catch (TelegramApiException e) {
+			log.error(e.getMessage());
+		}
+	}
+
+	private void sendDocument(SendDocument sendDocument) {
+		try {
+			log.info("Sending document to chatId: '{}'\nDocument: \"{}\"", sendDocument.getChatId(), sendDocument.getDocument());
+			execute(sendDocument);
 		} catch (TelegramApiException e) {
 			log.error(e.getMessage());
 		}

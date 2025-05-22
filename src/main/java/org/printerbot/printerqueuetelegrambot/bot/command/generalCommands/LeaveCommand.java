@@ -24,7 +24,7 @@ public class LeaveCommand implements GeneralCommand {
 
 	@Override
 	public SendMessage apply(Update update) {
-		List<QueueDto> queueEntries = queueService.getQueueListByUsername(getChatUsername(update));
+		List<QueueDto> queueEntries = queueService.getQueueListByUsernameWherePrintingStatusIsWaiting(getChatUsername(update));
 		SendMessage sendMessage;
 		if (queueEntries.isEmpty()) {
 			return createSendMessage(update, ConstantMessages.NO_QUEUE_ENTRIES_MESSAGE.getMessage());

@@ -25,7 +25,6 @@ public class NextCommand implements AdminCommand {
 
 	@Override
 	public SendMessage apply(Update update) {
-		Long chatId = getChatId(update);
 		List<PrinterDto> allPrinters = printerDaoService.getAll();
 		SendMessage sendMessage = createSendMessage(update, ConstantMessages.SELECT_PRINTER_MESSAGE.getMessage());
 		addKeyboard(sendMessage, allPrinters);

@@ -40,6 +40,8 @@ public enum ConstantMessages {
 
 	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next Person:"),
 
+	QUEUE_IS_EMPTY_MESSAGE("Queue is empty"),
+
 	INFO("%s - %s"),
 
 	AUTHOR_INFO("Author: @llewelll"),

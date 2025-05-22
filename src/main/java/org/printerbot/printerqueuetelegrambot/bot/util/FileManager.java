@@ -1,12 +1,18 @@
 package org.printerbot.printerqueuetelegrambot.bot.util;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.config.BotProperties;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.File;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -20,6 +26,24 @@ import java.nio.file.StandardCopyOption;
 public class FileManager {
 
 	private final BotProperties botProperties;
+
+	@Setter
+	@Getter
+	private String lastAccessedFilePath;
+
+	public SendDocument getLastAccessedDocument(String chatId) {
+		InputStream inputStream;
+		InputFile inputFile;
+		try {
+			inputStream = new FileInputStream(lastAccessedFilePath);
+			inputFile = new InputFile(inputStream, extractFileNameFromLocalPath(lastAccessedFilePath));
+		} catch (IOException e) {
+			log.error(e.getMessage());
+			throw new RuntimeException(e);
+		}
+
+		return new SendDocument(chatId, inputFile);
+	}
 
 	public void deleteFile(String path) {
 		Path filePath = Path.of(path);
@@ -74,5 +98,10 @@ public class FileManager {
 			counter++;
 		}
 		return newName;
+	}
+
+	private String extractFileNameFromLocalPath(String localPath) {
+		int lastIndexOfSlash = localPath.lastIndexOf("/");
+		return localPath.substring(lastIndexOfSlash);
 	}
 }

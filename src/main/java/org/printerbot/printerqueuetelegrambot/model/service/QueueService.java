@@ -2,9 +2,9 @@ package org.printerbot.printerqueuetelegrambot.model.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.model.dao.PlasticEntity;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
-import org.printerbot.printerqueuetelegrambot.model.dao.QueueEntity;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueArchiveDto;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.enums.Status;
@@ -38,14 +38,30 @@ public class QueueService {
 				.filter(dto -> dto.getPrinter().getId().equals(printerId))
 				.toList();
 
-		QueueDto first = allQueue.get(0);
-		QueueDto second = allQueue.get(1);
+		if (allQueue.isEmpty()) {
+			log.info("No entries in queue for printer {}", printerId);
+			throw new RuntimeException(ConstantMessages.QUEUE_IS_EMPTY_MESSAGE.getMessage());
+		}
 
-		queueDaoService.updateEntity(first.getId(), (entity) -> entity.setPrintingStatus(Status.DONE));
-		queueDaoService.removeById(first.getId());
-		queueArchiveDaoService.save(mapper.toQueueArchiveDto(first));
+		QueueDto current = allQueue.get(0);
+		Status oldStatus = current.getPrintingStatus();
+		Status newStatus = (oldStatus == Status.WAITING)
+				? Status.PRINTING
+				: Status.DONE;
 
-		queueDaoService.updateEntity(second.getId(), (entity) -> entity.setPrintingStatus(Status.PRINTING));
+		queueDaoService.updateEntity(current.getId(),
+				e -> e.setPrintingStatus(newStatus));
+
+		if (newStatus == Status.DONE) {
+			queueDaoService.removeById(current.getId());
+			queueArchiveDaoService.save(mapper.toQueueArchiveDto(current));
+		}
+
+		if (newStatus == Status.DONE && allQueue.size() > 1) {
+			QueueDto second = allQueue.get(1);
+			queueDaoService.updateEntity(second.getId(),
+					e -> e.setPrintingStatus(Status.PRINTING));
+		}
 	}
 
 	public QueueDto getFirst(Long printerId) {
@@ -99,8 +115,10 @@ public class QueueService {
 		queueDaoService.remove(mapper.toQueueEntity(dto));
 	}
 
-	public List<QueueDto> getQueueListByUsername(String username) {
-		return queueDaoService.getByUsername(username);
+	public List<QueueDto> getQueueListByUsernameWherePrintingStatusIsWaiting(String username) {
+		return queueDaoService.getByUsername(username).stream()
+				.filter(entity -> entity.getPrintingStatus() == Status.WAITING)
+				.toList();
 	}
 
 	private boolean isPlasticSupported(PrinterEntity printer, List<Long> plasticIds) {
@@ -108,6 +126,14 @@ public class QueueService {
 				.map(PlasticEntity::getId)
 				.collect(Collectors.toSet());
 		return supportedIdSet.containsAll(plasticIds);
+	}
+
+	private QueueDto getSecondQueue(List<QueueDto> queueDtoList) {
+		if (queueDtoList.size() >= 2) {
+			return queueDtoList.get(1);
+		} else {
+			return null;
+		}
 	}
 
 }
