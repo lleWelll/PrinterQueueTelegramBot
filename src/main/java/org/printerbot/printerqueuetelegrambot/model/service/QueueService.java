@@ -3,6 +3,7 @@ package org.printerbot.printerqueuetelegrambot.model.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.printerbot.printerqueuetelegrambot.model.dao.PlasticEntity;
 import org.printerbot.printerqueuetelegrambot.model.dao.PrinterEntity;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueArchiveDto;
@@ -28,6 +29,8 @@ public class QueueService {
 	private final QueueDaoService queueDaoService;
 
 	private final QueueArchiveDaoService queueArchiveDaoService;
+
+	private final FileManager fileManager;
 
 	private final QueueMapper mapper;
 
@@ -113,6 +116,7 @@ public class QueueService {
 	public void leaveQueue(QueueDto dto) {
 		log.info("User {} leaving queue: {}", dto.getUsername(), dto.getQueueInfo());
 		queueDaoService.remove(mapper.toQueueEntity(dto));
+		fileManager.deleteFile(dto);
 	}
 
 	public List<QueueDto> getQueueListByUsernameWherePrintingStatusIsWaiting(String username) {

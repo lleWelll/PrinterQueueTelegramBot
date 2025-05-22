@@ -34,6 +34,8 @@ public enum ConstantMessages {
 
 	LEAVE_CONFIRMATION_MESSAGE("Good, your queue entry is canceled"),
 
+	REMOVING_CONFIRMATION_MESSAGE("Entry removed"),
+
 	QUEUE_LEAVE_CANCELED("Okay, your leaving is canceled"),
 
 	YOUR_POSITION_MESSAGE("Your position in queue: "),
@@ -60,15 +62,17 @@ public enum ConstantMessages {
 
 	SETAVAILABILITY_COMMAND_SYNTAX_MESSAGE("/setavailability {printer/plastic} {id} {availability:true/false}\nFor example: /setavailability printer 1 true"),
 
-	ARCHIVED_FILE_COMMAND_SYNTAX_MESSAGE("/archivedfile {archivedQueueId}\nFor example, /archivedfile 1"),
+	ARCHIVED_FILE_COMMAND_SYNTAX_MESSAGE("/archivedfile {archived_Queue_Id}\nFor example, /archivedfile 1"),
 
-	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printerId}\nFor example: /removeprinter 1"),
+	REMOVE_QUEUE_SYNTAX_MESSAGE("/remove {queue_id}\nFor example, /remove 1"),
 
-	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plasticId}\nForExample: /removeplastic 1"),
+	REMOVE_PRINTER_COMMAND_SYNTAX_MESSAGE("/removeprinter {printer_Id}\nFor example: /removeprinter 1"),
 
-	MODIFY_PRINTER_COMMAND_SYNTAX_MESSAGE("/modifyprinter {printerId}\nFor example /modifyprinter 1"),
+	REMOVE_PLASTIC_COMMAND_SYNTAX_MESSAGE("/removeplastic {plastic_Id}\nForExample: /removeplastic 1"),
 
-	MODIFY_PLASTIC_COMMAND_SYNTAX_MESSAGE("/modifyplastic {plasticId}\nFor example /modifyplastic 1"),
+	MODIFY_PRINTER_COMMAND_SYNTAX_MESSAGE("/modifyprinter {printer_Id}\nFor example /modifyprinter 1"),
+
+	MODIFY_PLASTIC_COMMAND_SYNTAX_MESSAGE("/modifyplastic {plastic_Id}\nFor example /modifyplastic 1"),
 
 	REMOVE_PRINTER_COMMAND_CONFIRMATION_MESSAGE("Printer removed successfully"),
 

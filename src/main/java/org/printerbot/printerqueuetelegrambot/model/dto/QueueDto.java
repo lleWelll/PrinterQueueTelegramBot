@@ -38,7 +38,7 @@ public class QueueDto {
 
 	public String getQueueInfoWithUsername() {
 		return new StringBuilder()
-				.append("User: ")
+				.append(" username: @")
 				.append(username)
 				.append(" ")
 				.append(getQueueInfo())
@@ -49,8 +49,6 @@ public class QueueDto {
 		return new StringBuilder()
 				.append("Id: ")
 				.append(id)
-				.append(" username: @")
-				.append(username)
 				.append(" ")
 				.append(getQueueInfoWithUsername())
 				.toString();

@@ -84,7 +84,7 @@ public class QueueDaoService implements DaoService<QueueEntity, QueueDto> {
 
 	private QueueEntity findById(Long id) {
 		return queueRepository.findById(id).orElseThrow(
-				() -> new QueueNotFoundException("Queue with id " + id + "is not found")
+				() -> new QueueNotFoundException("Queue with id " + id + " is not found")
 		);
 	}
 }

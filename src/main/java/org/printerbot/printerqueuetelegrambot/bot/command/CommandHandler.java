@@ -35,14 +35,16 @@ public class CommandHandler {
 						  GetAllPrinterInfoCommand getAllPrinterInfoCommand,
 						  GetAllPlasticInfoCommand getAllPlasticInfoCommand,
 						  GetArchiveCommand getAllArchiveCommand,
-						  SetAvailabilityCommand setAvailabilityCommand,
+						  GetFileFromArchiveCommand getFileFromArchiveCommand,
+						  GetAllQueueCommand getAllQueueCommand,
 						  AddPrinterCommand addPrinterCommand,
-						  RemovePrinterCommand removePrinterCommand,
 						  AddPlasticCommand addPlasticCommand,
+						  RemovePrinterCommand removePrinterCommand,
 						  RemovePlasticCommand removePlasticCommand,
+						  SetAvailabilityCommand setAvailabilityCommand,
+						  RemoveQueueCommand removeQueueCommand,
 						  ModifyPrinterCommand modifyPrinterCommand,
 						  NextCommand nextCommand,
-						  GetFileFromArchiveCommand getFileFromArchiveCommand,
 
 						  UnknownCommand unknownCommand,
 						  NoPermissionCommand noPermissionCommand) {
@@ -59,14 +61,18 @@ public class CommandHandler {
 				Map.entry("/printers", getAllPrinterInfoCommand),
 				Map.entry("/plastic", getAllPlasticInfoCommand),
 				Map.entry("/archive", getAllArchiveCommand),
-				Map.entry("/setavailable", setAvailabilityCommand),
+				Map.entry("/allqueue", getAllQueueCommand),
+				Map.entry("/archivedfile", getFileFromArchiveCommand),
+
 				Map.entry("/addprinter", addPrinterCommand),
-				Map.entry("/removeprinter", removePrinterCommand),
 				Map.entry("/addplastic", addPlasticCommand),
+				Map.entry("/setavailable", setAvailabilityCommand),
+				Map.entry("/removeprinter", removePrinterCommand),
 				Map.entry("/removeplastic", removePlasticCommand),
 				Map.entry("/modifyprinter", modifyPrinterCommand),
+
 				Map.entry("/next", nextCommand),
-				Map.entry("/archivedfile", getFileFromArchiveCommand)
+				Map.entry("/remove", removeQueueCommand)
 		);
 		this.whiteList = whiteList;
 		this.unknownCommand = unknownCommand;
