@@ -2,9 +2,9 @@ spring:
   application:
     name: Printer-Queue-Telegram-Bot
   datasource:
-    url: jdbc:mysql://db:3306/printer_queue_db
-    username: root
-    password: root
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -17,12 +17,12 @@ spring:
 
 bot:
   name: "PrinterQueueBot"
-  token: 7865570662:AAHf6lRUrFjycZGFps9PBOHzcGFf_4I51L8
-  stlPath: uploads
+  token: ${BOT_TOKEN}
+  stlPath: ${STL_DIR_PATH}
 
 whitelist:
   admins:
-    - llewelll
+    - ${ADMIN_1}
 
 server:
   port: 8080

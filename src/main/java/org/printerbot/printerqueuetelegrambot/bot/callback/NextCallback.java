@@ -28,6 +28,7 @@ public class NextCallback implements Callback {
 		long printerId = Long.parseLong(data);
 		QueueDto first;
 		try {
+			first = queueService.getFirst(printerId);
 			queueService.next(printerId);
 			first = queueService.getFirst(printerId);
 		} catch (RuntimeException e) {

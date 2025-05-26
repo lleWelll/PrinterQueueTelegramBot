@@ -112,7 +112,7 @@ public class FileManager {
 
 	private String createDirectoryIfNotExists(Path path) {
 		try {
-			return Files.createDirectory(path).toString();
+			return Files.createDirectories(path).toString();
 		} catch (FileAlreadyExistsException e) {
 			log.info("Directory {} already exists, {}", path, e.getMessage());
 			return path.toString();

@@ -27,7 +27,7 @@ public enum ConstantMessages {
 	QUEUE_JOIN_CANCELED("Join request canceled."),
 
 	// Leave Confirmation
-	LEAVE_COMMAND_MESSAGE("You have <b>%d<b> entries in the queue.\n" +
+	LEAVE_COMMAND_MESSAGE("You have <b>%d</b> %s in the queue.\n" +
 			"Enter the number of the entry to cancel:"),
 	NO_QUEUE_ENTRIES_MESSAGE("You have no entries in the queue."),
 	CONFIRM_LEAVE_MESSAGE("Confirm removal of this entry?\n%s"),
@@ -37,7 +37,7 @@ public enum ConstantMessages {
 
 	// Queue Status
 	YOUR_POSITION_MESSAGE("Your position in the queue:"),
-	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next in queue: %s"),
+	NEXT_COMMAND_CONFIRMATION_MESSAGE("Next in queue:"),
 	QUEUE_IS_EMPTY_MESSAGE("The queue is empty."),
 
 	// Information

@@ -3,10 +3,6 @@ services:
     image: mysql:8
     env_file: [secret.env]
     restart: on-failure
-    environment:
-      MYSQL_DATABASE: printer_queue_db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
       interval: 5s
@@ -17,7 +13,7 @@ services:
       - "3306:3306"
 
   app:
-    build: .
+    image: printerbot:latest
     restart: on-failure
     env_file:
       - secret.env
@@ -28,6 +24,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - printer_uploads:/PrinterBot/uploads
 
 volumes:
   mysql_data:
+  printer_uploads:
