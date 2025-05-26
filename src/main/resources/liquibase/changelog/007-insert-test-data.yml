@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-insert-test-data
+      author: lleWell
+      changes:
+        - insert:
+            tableName: plastic
+            columns:
+              - column:
+                  name: plastic_id
+                  value: "1"
+              - column:
+                  name: brand
+                  value: "Test"
+              - column:
+                  name: type
+                  value: "PLA"
+              - column:
+                  name: color
+                  value: "WHITE"
+              - column:
+                  name: available
+                  value: "0"
+              - column:
+                  name: description
+                  value: "This is the test plastic"
+              - column:
+                  name: created_at
+                  valueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: last_update_at
+                  valueComputed: CURRENT_TIMESTAMP
+        - insert:
+            tableName: printers
+            columns:
+              - column:
+                  name: printer_id
+                  value: "1"
+              - column:
+                  name: brand
+                  value: "Test"
+              - column:
+                  name: model
+                  value: "Test"
+              - column:
+                  name: features
+                  value: "This is the test printer"
+              - column:
+                  name: maximum_plastic_quantity
+                  value: "1"
+              - column:
+                  name: available
+                  value: "0"
+              - column:
+                  name: created_at
+                  valueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: last_update_at
+                  valueComputed: CURRENT_TIMESTAMP
+        - insert:
+           tableName: printer_supported_plastic
+           columns:
+             - column:
+                 name: printer_id
+                 value: "1"
+             - column:
+                 name: plastic_id
+                 value: "1"
+
+
+

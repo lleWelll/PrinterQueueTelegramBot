@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.PrinterBot</groupId>
     <artifactId>Printer-Queue-Telegram-Bot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Printer-Queue-Telegram-Bot</name>
     <description>Printer-Queue-Telegram-Bot</description>
     <url/>
@@ -45,6 +45,7 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

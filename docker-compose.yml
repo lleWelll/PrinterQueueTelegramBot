@@ -1,25 +1,33 @@
-version: '3.8'
-
 services:
   db:
-    image: mysql:latest
-    env_file:
-      - secret.env
+    image: mysql:8
+    env_file: [secret.env]
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: printer_queue_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
+      interval: 5s
+      retries: 10
     volumes:
-      - mysql_data:/var/lib/mysql/data
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
   app:
     build: .
+    restart: on-failure
     env_file:
       - secret.env
-    environment:
-      SPRING_DATASOURCE_URL: ${DB_URL}/printer_db
-      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-      STL_DIR_PATH: ${STL_DIR_PATH}
-      ADMIN_1: ${ADMIN_1}
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   mysql_data:

@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class PrinterQueueTelegramBotApplication {
 	public static void main(String[] args)  {
-		ConfigurableApplicationContext context = SpringApplication.run(PrinterQueueTelegramBotApplication.class, args);
+		SpringApplication.run(PrinterQueueTelegramBotApplication.class, args);
 	}
 
 }

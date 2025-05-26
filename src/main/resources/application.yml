@@ -2,9 +2,9 @@ spring:
   application:
     name: Printer-Queue-Telegram-Bot
   datasource:
-    url: ${SPRING_DATASOURCE_URL}/printer_db
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:mysql://db:3306/printer_queue_db
+    username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: validate
@@ -13,17 +13,16 @@ spring:
       hibernate:
         format_sql: true
   liquibase:
-    change-log: classpath:db/changelog-master.yaml
-
+    change-log: classpath:liquibase/changelog-master.yaml
 
 bot:
   name: "PrinterQueueBot"
-  token: "7865570662:AAHf6lRUrFjycZGFps9PBOHzcGFf_4I51L8"
-  stlPath: ${STL_DIR_PATH}
+  token: 7865570662:AAHf6lRUrFjycZGFps9PBOHzcGFf_4I51L8
+  stlPath: uploads
 
 whitelist:
   admins:
-    - ${ADMIN_1}
+    - llewelll
 
 server:
   port: 8080
