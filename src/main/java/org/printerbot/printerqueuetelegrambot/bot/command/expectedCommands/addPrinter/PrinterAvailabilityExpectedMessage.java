@@ -32,7 +32,10 @@ public class PrinterAvailabilityExpectedMessage implements ExpectedCommand {
 		}
 
 		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_MAX_PLASTIC_CAPACITY);
-		return createSendMessage(update, ConstantMessages.ADD_PRINTER_MAX_PLASTIC_MESSAGE.getMessage());
+
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.ADD_PRINTER_MAX_PLASTIC_MESSAGE.getMessage());
+		addCancelKeyboard(sendMessage);
+		return sendMessage;
 	}
 
 	boolean parseAvailability(String value) {

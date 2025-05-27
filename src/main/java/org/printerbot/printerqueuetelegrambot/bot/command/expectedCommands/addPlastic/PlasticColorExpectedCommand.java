@@ -32,6 +32,8 @@ public class PlasticColorExpectedCommand implements ExpectedCommand {
 			return createSyntaxErrorMessage(update, "Another color. This color is not found");
 		}
 		botStateStorage.setState(chatId, BotState.WAITING_PLASTIC_AVAILABILITY);
-		return createSendMessage(update, ConstantMessages.ADD_PLASTIC_AVAILABILITY_MESSAGE.getMessage());
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.ADD_PLASTIC_AVAILABILITY_MESSAGE.getMessage());
+		addCancelKeyboard(sendMessage);
+		return sendMessage;
 	}
 }

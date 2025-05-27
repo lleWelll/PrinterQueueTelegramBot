@@ -24,6 +24,8 @@ public class PrinterFeaturesExpectedCommand implements ExpectedCommand {
 		String features = update.getMessage().getText().trim();
 		printerSessionManager.addFeatures(chatId, features);
 		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_AVAILABILITY);
-		return createSendMessage(update, ConstantMessages.ADD_PRINTER_AVAILABILITY_MESSAGE.getMessage());
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.ADD_PRINTER_AVAILABILITY_MESSAGE.getMessage());
+		addCancelKeyboard(sendMessage);
+		return sendMessage;
 	}
 }

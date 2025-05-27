@@ -92,6 +92,8 @@ public enum ConstantMessages {
 	ADD_PLASTIC_DESCRIPTION_MESSAGE("Enter plastic description:"),
 	ADD_PLASTIC_CONFIRMATION_MESSAGE("Plastic successfully added."),
 
+	ADDING_CANCELED("Canceled"),
+
 	// Availability Update
 	NEW_AVAILABILITY_SET_SUCCESSFULLY("Availability updated successfully."),
 

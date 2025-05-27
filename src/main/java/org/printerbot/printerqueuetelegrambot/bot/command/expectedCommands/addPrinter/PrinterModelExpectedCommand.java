@@ -24,6 +24,8 @@ public class PrinterModelExpectedCommand implements ExpectedCommand {
 		String model = update.getMessage().getText().trim();
 		printerSessionManager.addModel(chatId, model);
 		botStateStorage.setState(chatId, BotState.WAITING_PRINTER_FEATURES);
-		return createSendMessage(update, ConstantMessages.ADD_PRINTER_FEATURES_MESSAGE.getMessage());
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.ADD_PRINTER_FEATURES_MESSAGE.getMessage());
+		addCancelKeyboard(sendMessage);
+		return sendMessage;
 	}
 }

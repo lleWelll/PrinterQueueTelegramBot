@@ -25,6 +25,8 @@ public class PlasticBrandExpectedCommand implements ExpectedCommand {
 		plasticSessionManager.createNewSession(chatId);
 		plasticSessionManager.addBrand(chatId, brand);
 		botStateStorage.setState(chatId, BotState.WAITING_PLASTIC_TYPE);
-		return createSendMessage(update, ConstantMessages.ADD_PLASTIC_TYPE_MESSAGE.getMessage());
+		SendMessage sendMessage = createSendMessage(update, ConstantMessages.ADD_PLASTIC_TYPE_MESSAGE.getMessage());
+		addCancelKeyboard(sendMessage);
+		return sendMessage;
 	}
 }

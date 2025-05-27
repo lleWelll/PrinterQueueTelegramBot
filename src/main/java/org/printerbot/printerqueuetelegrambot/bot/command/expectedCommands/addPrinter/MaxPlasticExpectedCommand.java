@@ -39,7 +39,10 @@ public class MaxPlasticExpectedCommand implements ExpectedCommand {
 				ConstantMessages.ADD_PRINTER_SUPPORTED_PLASTIC_MESSAGE.getMessage();
 
 		botStateStorage.setState(getChatId(update), BotState.WAITING_PRINTER_SUPPORTED_PLASTIC);
-		return createSendMessage(update, answer);
+
+		SendMessage sendMessage = createSendMessage(update, answer);
+		addCancelKeyboard(sendMessage);
+		return sendMessage;
 	}
 
 	private int parseMaxPlastic(String maxPlastic) {

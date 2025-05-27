@@ -25,5 +25,7 @@ public enum CallbackType {
 
 	CANCEL_LEAVE,
 
-	SKIP
+	SKIP,
+
+	CANCEL_ADD
 }

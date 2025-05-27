@@ -24,7 +24,8 @@ public class CallbackHandler {
 						   MyPositionCallback myPositionCallback,
 						   JoinConfirmationCallback joinConfirmationCallback,
 						   PrinterModifyCallback modifyCallback,
-						   NextCallback nextCallback) {
+						   NextCallback nextCallback,
+						   CancelAddCallback cancelAddCallback) {
 		this.callbacks = Map.ofEntries(
 				Map.entry(CallbackType.PRINTER_CHOOSE, choosePrinterCallBack),
 				Map.entry(CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack),
@@ -37,7 +38,8 @@ public class CallbackHandler {
 				Map.entry(CallbackType.PRINTER_CHOOSE_SHOW, showAllQueueCallback),
 				Map.entry(CallbackType.PRINTER_CHOOSE_POSITION, myPositionCallback),
 				Map.entry(CallbackType.PRINTER_MODIFY, modifyCallback),
-				Map.entry(CallbackType.PRINTER_NEXT_CHOOSE, nextCallback)
+				Map.entry(CallbackType.PRINTER_NEXT_CHOOSE, nextCallback),
+				Map.entry(CallbackType.CANCEL_ADD, cancelAddCallback)
 		);
 	}
 
