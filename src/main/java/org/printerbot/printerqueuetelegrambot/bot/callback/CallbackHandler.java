@@ -1,5 +1,6 @@
 package org.printerbot.printerqueuetelegrambot.bot.callback;
 
+import org.aspectj.weaver.ast.Call;
 import org.printerbot.printerqueuetelegrambot.bot.constants.CallbackType;
 import org.printerbot.printerqueuetelegrambot.bot.util.JsonHandler;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.EmptyCallbackException;
@@ -25,7 +26,8 @@ public class CallbackHandler {
 						   JoinConfirmationCallback joinConfirmationCallback,
 						   PrinterModifyCallback modifyCallback,
 						   NextCallback nextCallback,
-						   CancelAddCallback cancelAddCallback) {
+						   CancelAddCallback cancelAddCallback,
+						   SkipPlasticCallback skipPlasticCallback) {
 		this.callbacks = Map.ofEntries(
 				Map.entry(CallbackType.PRINTER_CHOOSE, choosePrinterCallBack),
 				Map.entry(CallbackType.PLASTIC_CHOOSE, choosePlasticCallBack),
@@ -39,7 +41,8 @@ public class CallbackHandler {
 				Map.entry(CallbackType.PRINTER_CHOOSE_POSITION, myPositionCallback),
 				Map.entry(CallbackType.PRINTER_MODIFY, modifyCallback),
 				Map.entry(CallbackType.PRINTER_NEXT_CHOOSE, nextCallback),
-				Map.entry(CallbackType.CANCEL_ADD, cancelAddCallback)
+				Map.entry(CallbackType.CANCEL_ADD, cancelAddCallback),
+				Map.entry(CallbackType.SKIP_PLASTIC, skipPlasticCallback)
 		);
 	}
 

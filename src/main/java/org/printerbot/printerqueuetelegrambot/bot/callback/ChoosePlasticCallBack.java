@@ -27,6 +27,8 @@ public class ChoosePlasticCallBack implements Callback {
 
 	private final UserSessionManager sessionManager;
 
+	private final SelectModelCallback selectModelCallback;
+
 	@Override
 	public SendMessage apply(String data, Update update) {
 		SendMessage sendMessage = null;
@@ -47,12 +49,13 @@ public class ChoosePlasticCallBack implements Callback {
 		}
 
 		if (selected.size() == maxCapacity) {
-			PlasticDto lastPlastic = selected.get(selected.size() - 1);
-			String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(lastPlastic.getPlasticInfo()) +
-					"\n\n" +
-					ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getMessage();
-			sendMessage = createSendMessage(update, answer);
-			addKeyboard(sendMessage);
+//			PlasticDto lastPlastic = selected.get(selected.size() - 1);
+//			String answer = ConstantMessages.CHOOSE_CONFIRMATION_MESSAGE.getMessage(lastPlastic.getPlasticInfo()) +
+//					"\n\n" +
+//					ConstantMessages.UPLOAD_STL_FILE_MESSAGE.getMessage();
+//			sendMessage = createSendMessage(update, answer);
+//			addKeyboard(sendMessage);
+			sendMessage = selectModelCallback.apply("", update);
 		}
 		return sendMessage;
 	}

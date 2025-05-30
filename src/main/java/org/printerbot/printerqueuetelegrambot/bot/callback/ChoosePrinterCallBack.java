@@ -58,6 +58,7 @@ public class ChoosePrinterCallBack implements Callback {
 			InlineKeyboardButton button = createButton(plastic.getPlasticInfo(), CallbackType.PLASTIC_CHOOSE, plastic.getId().toString());
 			rows.add(List.of(button));
 		}
+		rows.add(List.of(createButton("Skip", CallbackType.SKIP_PLASTIC ,"Skip")));
 		rows.add(List.of(createButton("Cancel", CallbackType.CANCEL_JOIN, "No")));
 		message.setReplyMarkup(new InlineKeyboardMarkup(rows));
 	}
