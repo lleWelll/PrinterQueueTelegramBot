@@ -49,6 +49,7 @@ public class CommandHandler {
 						  MessageCommand messageCommand,
 						  AddAdminCommand addAdminCommand,
 						  RemoveAdminCommand removeAdminCommand,
+						  AdminGuideCommand adminGuideCommand,
 
 						  UnknownCommand unknownCommand,
 						  NoPermissionCommand noPermissionCommand) {
@@ -68,6 +69,7 @@ public class CommandHandler {
 				Map.entry("/allqueue", getAllQueueCommand),
 				Map.entry("/archivedfile", getFileFromArchiveCommand),
 				Map.entry("/file", getfileCommand),
+				Map.entry("/guide", adminGuideCommand),
 
 				Map.entry("/addprinter", addPrinterCommand),
 				Map.entry("/addplastic", addPlasticCommand),

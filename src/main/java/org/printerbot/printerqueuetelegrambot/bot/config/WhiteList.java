@@ -17,7 +17,7 @@ public class WhiteList {
 	private List<String> admins;
 
 	public boolean isUserAdmin(String username) {
-		return admins.contains(username.toLowerCase());
+		return admins.contains(username);
 	}
 
 	public boolean addNewAdmin(String username) {

@@ -132,9 +132,8 @@ public enum ConstantMessages {
 			"	/plastic - Shows full info about plastic\n" +
 			"	/archive - Shows all queue archive\n" +
 			"	/allqueue - Shows full about queue\n" +
-			"	/next - Returns first queue entry in selected printer\n" +
+			"	/next - Returns first queue entry in selected printer, sends you uploaded file and notifies user about it's turn\n" +
 			"	/remove - Removes specified queue entry\n" +
-
 
 			"\n<b>Printers and Plastic Management:</b>\n" +
 			"	/addprinter - Adds new printer in Database\n" +
@@ -145,8 +144,37 @@ public enum ConstantMessages {
 			"	/setavailable - Changes availability of printer/plastic\n" +
 
 			"\n<b>Other commands:</b>\n" +
+			"	/guide - Sends you basic admin guide about to use this bot\n" +
 			"	/arhivedfile - Sends you '.stl' file from specified archived queue entry\n" +
-			"	/message - Sends message to user in queue\n"
+			"	/file - Sends you '.stl file from specified queue entry\n" +
+			"	/message - Sends message to user in queue\n" +
+			"	/addadmin - adds new admin in system\n" +
+			"	/removeadmin - removes admin from system"
+	),
+
+	ADMIN_GUIDE("<b>Admin Guide:</b>\n" +
+		"\n<b>Get Started</b>\n" +
+		"To start using this bot you need:\n" +
+		"	1. Add all plastic in system (/addplastic)\n" +
+		"	2. Add all printers in system (/addprinter)\nNote that, you can edit printers later (/modifyprinter command)\n" +
+		"\n<b>Database Structure:</b>\n" +
+		"Database of bot consist of 4 main tables:\n" +
+		"	1. printers - table with info about printers\n" +
+		"	2. plastic - table with info about plastic\n" +
+		"	3. queue - main table that contains queue data (username, printer, plastic and uploaded model)\n" +
+		"	4. archived_queue - table that contains old queue entries (username, printer, plastic and uploaded model)\n" +
+		"\n<b>Admin Commands:</b>\n" +
+		"In some commands it needed to provide Ids from database, to see it use:\n" +
+		"	/allqueue - to see all queue with id\n" +
+		"	/archive - to see past queue with id\n" +
+		"	/printers - to see all printers with id\n" +
+		"	/plastic - to see all plastic with id\n" +
+		"Command /next moves queue. It gets first queue entry from database.\n" +
+		"If Printing status of first queue entry is 'PRINTING' this entry gets into archived_queue.\n" +
+		"Also if first queue entry contains uploaded 'stl' model, command will send you this file.\n" +
+		"\n" +
+		"You can add or remove admins with commands /addadmin and /removeadmin\n" +
+		"To see all commands use /start command"
 	);
 
 	private final String message;
