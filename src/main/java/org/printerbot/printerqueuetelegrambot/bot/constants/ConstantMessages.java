@@ -6,13 +6,16 @@ public enum ConstantMessages {
 	HELLO_MESSAGE("Hello %s. I am a bot to manage the 3D printer queue.\n\n"),
 
 	ERROR("Oops, something went wrong. Please try again."),
+	ADD_ADMIN_ERROR("Something went wrong, maybe this user is already admin"),
+	REMOVE_ADMIN_ERROR("Something went wrong, maybe this user is not an admin"),
 
 	// Printer and Plastic Selection
 	SELECT_PRINTER_MESSAGE("Select a printer:"),
 	SELECT_PLASTIC_MESSAGE("Select a plastic type (Maximum for chosen printer - %s):"),
 	CHOOSE_CONFIRMATION_MESSAGE("You selected %s."),
-
 	CHOOSE_PRINTER_MODIFY_PROPERTY("Select what property to modify:"),
+	ADD_ADMIN_CONFIRMATION_MESSAGE("New admin '%s' added to whitelist"),
+	REMOVE_ADMIN_CONFIRMATION_MESSAGE("Admin '%s' removed from whitelist"),
 
 	// Join Confirmation
 	CONFIRM_JOIN_MESSAGE("Confirm joining the queue:\n" +
@@ -67,6 +70,8 @@ public enum ConstantMessages {
 			"Example: /removeprinter 1"),
 	REMOVE_PLASTIC_SYNTAX("/removeplastic {plasticid}\n" +
 			"Example: /removeplastic 1"),
+	ADD_ADMIN_SYNTAX("/addadmin {username} (you should add user's tag without @)\nExample: /addadmin llewelll"),
+	REMOVE_ADMIN_SYNTAX("/removeadmin {username} (you should add user's tag without @)\nExample: /removeadmin llewelll"),
 
 	// Modify Entities
 	MODIFY_PRINTER_SYNTAX("/modifyprinter {printerid}\n" +
@@ -100,7 +105,8 @@ public enum ConstantMessages {
 	NEW_AVAILABILITY_SET_SUCCESSFULLY("Availability updated successfully."),
 
 	// Rights and Errors
-	NOT_ENOUGH_RIGHTS_MESSAGE("You do not have permission to use this command."),
+	NOT_ENOUGH_RIGHTS_MESSAGE("You don't have permission to use this command."),
+	NOT_ENOUGH_RIGHTS_TO_REMOVE_MAIN_ADMIN("You don't have permission to remove this admin"),
 
 	// Archived File Retrieval
 	GETTING_ARCHIVED_DOCUMENT("Retrieving archived file for queue: %s"),
