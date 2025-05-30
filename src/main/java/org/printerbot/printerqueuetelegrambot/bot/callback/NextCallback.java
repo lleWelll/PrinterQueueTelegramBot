@@ -6,10 +6,12 @@ import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
 import org.printerbot.printerqueuetelegrambot.bot.util.BotStateStorage;
 import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
+import org.printerbot.printerqueuetelegrambot.bot.util.MessageBuffer;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;
 import org.printerbot.printerqueuetelegrambot.model.service.QueueService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
@@ -23,6 +25,8 @@ public class NextCallback implements Callback {
 
 	private final BotStateStorage botStateStorage;
 
+	private final MessageBuffer messageBuffer;
+
 	@Override
 	public SendMessage apply(String data, Update update) {
 		long printerId = Long.parseLong(data);
@@ -31,6 +35,7 @@ public class NextCallback implements Callback {
 			first = queueService.getFirst(printerId);
 			queueService.next(printerId);
 			first = queueService.getFirst(printerId);
+			messageBuffer.addMessage(new SendMessage(first.getChatId().toString(), ConstantMessages.NOTIFY_USER.getMessage()));
 		} catch (RuntimeException e) {
 			log.error(e.getMessage());
 			return createSendMessage(update, ConstantMessages.QUEUE_IS_EMPTY_MESSAGE.getMessage());

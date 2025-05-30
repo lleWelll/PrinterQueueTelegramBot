@@ -8,5 +8,7 @@ public enum PlasticType {
 	TPE,
 	NYLON,
 	PC,
-	HIPS
+	HIPS,
+	PA,
+	PEEK
 }

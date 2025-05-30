@@ -103,6 +103,9 @@ public enum ConstantMessages {
 	// Archived File Retrieval
 	GETTING_ARCHIVED_DOCUMENT("Retrieving archived document for queue: %s"),
 
+	// User Messages
+	NOTIFY_USER("It's your turn to print, if you didn't upload your 'stl' file, contact with admin"),
+
 	// Unknown Commands and Documents
 	UNKNOWN_COMMAND_MESSAGE("Unknown command. Use /start to see available commands."),
 	UNKNOWN_DOCUMENT_MESSAGE("Unsupported document format. Please upload a <b>'.stl'</b> file."),

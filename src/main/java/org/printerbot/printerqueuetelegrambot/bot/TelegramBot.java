@@ -77,6 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 		sendMessage(callbackHandler.handleCallback(update));
 		getFile(chatId);
+		sendAllMessages();
 	}
 
 	private void handleMessage(Update update) {
