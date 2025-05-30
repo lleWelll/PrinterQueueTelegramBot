@@ -1,9 +1,10 @@
-package org.printerbot.printerqueuetelegrambot.bot.document;
+package org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.callback.JoinConfirmationCallback;
 import org.printerbot.printerqueuetelegrambot.bot.constants.ConstantMessages;
+import org.printerbot.printerqueuetelegrambot.bot.document.DocumentCommand;
 import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.UserSessionManager;
 import org.printerbot.printerqueuetelegrambot.model.dto.QueueDto;

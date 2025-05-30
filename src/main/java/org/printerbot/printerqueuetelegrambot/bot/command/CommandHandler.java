@@ -36,6 +36,7 @@ public class CommandHandler {
 						  GetAllPlasticInfoCommand getAllPlasticInfoCommand,
 						  GetArchiveCommand getAllArchiveCommand,
 						  GetFileFromArchiveCommand getFileFromArchiveCommand,
+						  FileCommand getfileCommand,
 						  GetAllQueueCommand getAllQueueCommand,
 						  AddPrinterCommand addPrinterCommand,
 						  AddPlasticCommand addPlasticCommand,
@@ -64,6 +65,7 @@ public class CommandHandler {
 				Map.entry("/archive", getAllArchiveCommand),
 				Map.entry("/allqueue", getAllQueueCommand),
 				Map.entry("/archivedfile", getFileFromArchiveCommand),
+				Map.entry("/file", getfileCommand),
 
 				Map.entry("/addprinter", addPrinterCommand),
 				Map.entry("/addplastic", addPlasticCommand),

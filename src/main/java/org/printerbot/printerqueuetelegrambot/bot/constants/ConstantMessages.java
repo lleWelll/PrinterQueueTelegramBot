@@ -53,23 +53,25 @@ public enum ConstantMessages {
 
 	// Commands Syntax
 	INCORRECT_COMMAND_SYNTAX_MESSAGE("Incorrect command.\n%s"),
-	SET_AVAILABILITY_SYNTAX("Usage: /setavailability {printer|plastic} {id} {true|false}\n" +
+	SET_AVAILABILITY_SYNTAX("/setavailability {printer|plastic} {id} {true|false}\n" +
 			"Example: /setavailability printer 1 true"),
-	ARCHIVED_FILE_SYNTAX("Usage: /archivedfile {archivedqueueid}\n" +
+	ARCHIVED_FILE_SYNTAX("/archivedfile {archivedqueueid}\n" +
 			"Example: /archivedfile 1"),
-	MESSAGE_COMMAND_SYNTAX_MESSAGE("Usage: /message {queueid} {text}\n" +
+	FILE_SYNTAX("/file {queueid}\n" +
+			"Example: /file 1"),
+	MESSAGE_COMMAND_SYNTAX_MESSAGE("/message {queueid} {text}\n" +
 			"Example: /message 1 Your model is ready."),
-	REMOVE_QUEUE_SYNTAX_MESSAGE("Usage: /remove {queueid}\n" +
+	REMOVE_QUEUE_SYNTAX_MESSAGE("/remove {queueid}\n" +
 			"Example: /remove 1"),
-	REMOVE_PRINTER_SYNTAX("Usage: /removeprinter {printerid}\n" +
+	REMOVE_PRINTER_SYNTAX("/removeprinter {printerid}\n" +
 			"Example: /removeprinter 1"),
-	REMOVE_PLASTIC_SYNTAX("Usage: /removeplastic {plasticid}\n" +
+	REMOVE_PLASTIC_SYNTAX("/removeplastic {plasticid}\n" +
 			"Example: /removeplastic 1"),
 
 	// Modify Entities
-	MODIFY_PRINTER_SYNTAX("Usage: /modifyprinter {printerid}\n" +
+	MODIFY_PRINTER_SYNTAX("/modifyprinter {printerid}\n" +
 			"Example: /modifyprinter 1"),
-	MODIFY_PLASTIC_SYNTAX("Usage: /modifyplastic {plasticid}\n" +
+	MODIFY_PLASTIC_SYNTAX("/modifyplastic {plasticid}\n" +
 			"Example: /modifyplastic 1"),
 	REMOVE_PRINTER_CONFIRMATION_MESSAGE("Printer successfully removed."),
 	REMOVE_PLASTIC_CONFIRMATION_MESSAGE("Plastic successfully removed."),
@@ -101,7 +103,10 @@ public enum ConstantMessages {
 	NOT_ENOUGH_RIGHTS_MESSAGE("You do not have permission to use this command."),
 
 	// Archived File Retrieval
-	GETTING_ARCHIVED_DOCUMENT("Retrieving archived document for queue: %s"),
+	GETTING_ARCHIVED_DOCUMENT("Retrieving archived file for queue: %s"),
+
+	// File Retrieval from queue
+	GETTING_DOCUMENT("Retrieving file for queue: %s"),
 
 	// User Messages
 	NOTIFY_USER("It's your turn to print, if you didn't upload your 'stl' file, contact with admin"),

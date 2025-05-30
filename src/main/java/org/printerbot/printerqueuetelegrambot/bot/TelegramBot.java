@@ -5,9 +5,8 @@ import org.printerbot.printerqueuetelegrambot.bot.callback.CallbackHandler;
 import org.printerbot.printerqueuetelegrambot.bot.command.CommandHandler;
 import org.printerbot.printerqueuetelegrambot.bot.command.ExpectedCommandHandler;
 import org.printerbot.printerqueuetelegrambot.bot.config.BotProperties;
-import org.printerbot.printerqueuetelegrambot.bot.config.WhiteList;
 import org.printerbot.printerqueuetelegrambot.bot.constants.BotState;
-import org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads.DocumentHandler;
+import org.printerbot.printerqueuetelegrambot.bot.document.DocumentHandler;
 import org.printerbot.printerqueuetelegrambot.bot.util.BotStateStorage;
 import org.printerbot.printerqueuetelegrambot.bot.util.FileManager;
 import org.printerbot.printerqueuetelegrambot.bot.util.MessageBuffer;
@@ -20,7 +19,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component

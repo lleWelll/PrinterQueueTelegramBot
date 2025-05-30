@@ -24,11 +24,11 @@ public class UserSessionManager {
 	}
 
 	public void deleteSession(Long chatId) {
-		log.info("Deleting user {} session", chatId);
 		if (! queueSession.containsKey(chatId)) {
-			log.info("user {} session does not exist", chatId);
+			log.info("user {} session does not exist, nothing to delete", chatId);
 			return;
 		}
+		log.info("Deleting user {} session", chatId);
 		queueSession.remove(chatId);
 	}
 

@@ -1,8 +1,9 @@
-package org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads;
+package org.printerbot.printerqueuetelegrambot.bot.document;
 
 import lombok.extern.slf4j.Slf4j;
 import org.printerbot.printerqueuetelegrambot.bot.document.DocumentCommand;
-import org.printerbot.printerqueuetelegrambot.bot.document.StlDocumentCommand;
+import org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads.StlDocumentCommand;
+import org.printerbot.printerqueuetelegrambot.bot.document.documuntCommads.UnknownDocumentCommand;
 import org.printerbot.printerqueuetelegrambot.model.exceptions.FileFormatException;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
